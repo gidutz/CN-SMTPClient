@@ -32,6 +32,8 @@ public class ServerRun {
 
 	private static ServerSocket serverSocket;
 
+	public static String mainPage = "main.html";
+
 	/**
 	 * @param args
 	 */

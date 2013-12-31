@@ -11,7 +11,7 @@ public class ClientHandler implements Runnable {
 	private Socket clientSocket;
 
 	/* --! connection time out for the socket -- */
-	private static final int CONNECTION_TIMESOUT = 5000;
+	private static final int CONNECTION_TIMESOUT = 30*1000;
 
 	// why 857? because i can!
 
@@ -30,16 +30,11 @@ public class ClientHandler implements Runnable {
 			clientSocket.setSoTimeout(CONNECTION_TIMESOUT);
 			HttpParser parser = new HttpParser(clientSocket.getInputStream());
 			
-
-
-			// All because you asked to log everything...
-			System.out.println("method=" + parser.getMethod());
-			System.out.println("url=" + parser.getRequestURL());
-			System.out.println("headers = "
-					+ parser.getHeaders());
-			System.out.println("vars = " + parser.getParams());
-			System.out.println(clientSocket.getOutputStream());
-			System.out.println(parser.getHeaders().toString());
+			logRequest(parser);
+			/*
+			 *if the user logs in, then generate cookie 
+			 */
+			
 			HttpResponder responder = new HttpResponder(new File(parser.getRequestURL()),false,parser.getParams(),clientSocket.getOutputStream());
 			// make HTTP response
 			responder.echoResponse();
@@ -61,4 +56,13 @@ public class ClientHandler implements Runnable {
 		System.out.println("Connection eliminated with " + clientSocket);
 	}
 
+	
+	private void logRequest(HttpParser parser){
+		System.out.println("method=" + parser.getMethod());
+		System.out.println("url=" + parser.getRequestURL());
+		System.out.println("headers = "
+				+ parser.getHeaders());
+		System.out.println("vars = " + parser.getParams());
+		System.out.println(parser.getHeaders().toString());
+	}
 }

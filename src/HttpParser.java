@@ -114,31 +114,17 @@ public class HttpParser {
 
 			/* builds the url path */
 			if (method.equals("GET") || method.equals("POST")) {
+			
 				if (path.startsWith("/")) {
 					path = path.substring(1);
 
 				}
-				path = ServerRun.root + path;
-				File page = new File(path);
-				if (page.isDirectory()) {
-					path = path + ServerRun.defaultPage;
-					page = new File(path);
-				}
-
-				if (page.getAbsoluteFile().isAbsolute()) { // trying to prevent
-															// surfing outside
-					// TODO:check if the server root path is the start of the
-					// requested path
-					responseCode = 401;
-				} else if (!page.exists()) {
-					path = path + ServerRun.$404page;
-
-					responseCode = 404;
-				}
-				// parses the additional parameters from the request body
 				if (method.equals("POST")) {
 					parsePostVars();
 				}
+				responseCode = redirect();
+				// parses the additional parameters from the request body
+			
 			}
 			// Returns the unimplemented methods
 		} else if (versionCode[0] == 1 && versionCode[1] >= 1) {
@@ -186,8 +172,8 @@ public class HttpParser {
 	private void parsePostVars() throws IOException {
 		String line, prms[], temp[];
 		int length = Integer.parseInt(getHeader("content-length"));
-		char [] data = new char[length];
-		 reader.read(data);
+		char[] data = new char[length];
+		reader.read(data);
 		line = new String(data);
 		prms = line.split("&");
 		for (int i = 0; i < prms.length; i++) {
@@ -249,6 +235,46 @@ public class HttpParser {
 	 */
 	public String getParam(String key) {
 		return (String) params.get(key);
+	}
+
+	private int redirect() {
+
+		// change absolute path to relative path
+		if (path.startsWith("http://" + getHeader("host"))) {
+			path = path.substring(("http://" + getHeader("host")).length() + 1);
+		}
+
+		path = ServerRun.root + path;
+		File page = new File(path);
+		if (page.isDirectory()) {
+			path = path + ServerRun.defaultPage;
+			page = new File(path);
+		}
+		
+		if (getHeader("Cookie")==null){
+			if (path.equals(ServerRun.root+"main.html")&&getParam("username")!=null){
+				//notify the responder to set cookie;
+				path = ServerRun.root + ServerRun.mainPage;
+				page = new File(path);
+				return 302;
+			}else{
+				path = ServerRun.root + ServerRun.defaultPage;
+				page = new File(path);
+				return 302;
+
+			}
+		}
+		if (page.getAbsoluteFile().isAbsolute()) {
+			// TODO:check if the server root path is the start of
+
+			return 401;
+		} else if (!page.exists()) {
+			path = path + ServerRun.$404page;
+
+			return 404;
+		}
+
+		return statusCode;
 	}
 
 	/**
