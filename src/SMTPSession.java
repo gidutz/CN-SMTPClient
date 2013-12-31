@@ -2,9 +2,13 @@
  * SMTPSession - Class for sending e-mails using SMTP protocol.
  */
  
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.StringReader;
+import java.net.Socket;
+import java.util.Date;
  
 public class SMTPSession
 {
@@ -82,7 +86,7 @@ public class SMTPSession
     protected String sendCommand(String commandString)
     throws IOException
     {
-        out.write(commandString + "\n");
+        out.write(commandString + "\r\n");
         out.flush();
         String response = getResponse();
         return response;
