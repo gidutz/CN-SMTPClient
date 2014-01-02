@@ -1,28 +1,24 @@
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
-
-import javax.imageio.ImageIO;
 
 public class HttpResponder {
 	private int responseCode;
-	private PrintWriter out;
+	private PrintStream out;
 	private final String CRLF = "\r\n";
-	private OutputStream outputStream;
 	private File page;
-	private  final int CHUNK_SIZE = 1024;
+	private final int CHUNK_SIZE = 1024;
 	private boolean chunked;
 	private Hashtable<String, String> params;
+
 	/**
 	 * This class is instanced to an object that accepts a parsed HTTP request
 	 * and the client output stream and generates a response accordingly
@@ -33,12 +29,12 @@ public class HttpResponder {
 	 *            the client socoket's output stream
 	 * @throws IOException
 	 */
-	public HttpResponder(File page, boolean chunked,Hashtable<String, String> params,OutputStream outputStream)
+	public HttpResponder(File page, boolean chunked,
+			Hashtable<String, String> params, OutputStream outputStream)
 			throws IOException {
 		this.page = page;
 		this.chunked = chunked;
-		this.outputStream = outputStream;
-		this.out = new PrintWriter(outputStream);
+		this.out = new PrintStream(outputStream);
 		this.responseCode = 200;
 		this.params = params;
 
@@ -47,18 +43,17 @@ public class HttpResponder {
 	/**
 	 * major method of this class, according to the response code, generates a
 	 * request and prints it
+	 * 
+	 * @throws FileNotFoundException
 	 */
-	public void echoResponse() {
-		if (chunked){
+	public void echoResponse() throws FileNotFoundException {
+		if (chunked) {
 			printChunkedHeaders();
 			printResponse(page, CHUNK_SIZE);
-		}else{
+		} else {
 			printHeaders(page);
 			printResponse(page);
 		}
-		
-		File page;
-		
 
 	}
 
@@ -70,99 +65,26 @@ public class HttpResponder {
 	 * @param chunkSize
 	 */
 	private void printResponse(File page, int chunkSize) {
-		String contentType = "text/html";//TODO:Changed;
-		FileInputStream fis = null;
+		InputStream file = null;
+		int length;
 
-		// if the type is html page
-		if (contentType.equals("text/html")
-				|| contentType.equals("application/octet-stream")) {
-
+		try {
+			file = new FileInputStream(page);
 			byte[] chunk = new byte[chunkSize];
-
-			try {
-				outputStream.close();
-				fis = new FileInputStream(page);
-				int length;
-				// read until the end of the stream.
-				while ((length = fis.read(chunk)) > 0) {
-					out.println(Integer.toHexString(length));
-					out.println(new String(chunk, "utf-8"));
-					out.flush();
-					chunk = new byte[chunkSize];
-				}
-				out.println(CRLF);
+			while ((length = file.read(chunk)) > 0) {
+				out.println(Integer.toHexString(length));
+				out.println(new String(chunk, "utf-8"));
 				out.flush();
-				fis.close();
-			} catch (FileNotFoundException e) {
-
-			} catch (IOException e) {
-
-			} finally {
-				try {
-					fis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 
-			// Handle image IO
-		} else if (contentType.equals("image/jpeg")
-				|| contentType.equals("image/png")
-				|| contentType.equals("image/gif")) {
-			if (contentType.contains("jpeg") || contentType.contains("jpg")) {
-				contentType = "jpg";
-			} else {
-				contentType = contentType.substring(6);
-				System.out.println(contentType);
-
-			}
+		} catch (IOException e) {
+			System.err.println(e);
+		} finally {
 			try {
-
-				BufferedImage originalImage = ImageIO.read(page);
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(originalImage, contentType, baos);
-				baos.flush();
-				byte[] imageInByte = baos.toByteArray();
-				out.print(Integer.toHexString(imageInByte.length));
-				outputStream.write(imageInByte);
-				outputStream.close();
-				out.flush();
-
+				if (file != null)
+					file.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				out.close();
-
-			}
-
-			// Handle ICO IO
-		} else if (contentType.equals("image/x-icon")) {
-			try {
-				fis = new FileInputStream(page);
-
-				byte[] bFile = new byte[(int) page.length()];
-				// read until the end of the stream.
-				while (fis.available() != 0) {
-					fis.read(bFile, 0, bFile.length);
-					out.print(Integer.toHexString(bFile.length));
-					outputStream.write(bFile);
-				}
-				outputStream.flush();
-				outputStream.close();
-				out.flush();
-
-			} catch (FileNotFoundException e) {
-			} catch (IOException e) {
-
-			} finally {
-				try {
-					fis.close();
-					out.close();
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
 			}
 		}
 
@@ -171,90 +93,24 @@ public class HttpResponder {
 	/*
 	 * prints the response for a GET requets (non-chunked)
 	 */
-	private void printResponse(File page) {
-		String contentType = "text/html";//TODO:Changed
-
-		FileInputStream fis = null;
-		Scanner fileStream = null;
-		if (contentType.equals("text/html")
-				|| contentType.equals("application/octet-stream")) {
+	private void printResponse(File page) throws FileNotFoundException {
+		InputStream file = null;
+		try {
+			file = new FileInputStream(page);
+			byte[] buffer = new byte[1000];
+			while (file.available() > 0)
+				out.write(buffer, 0, file.read(buffer));
+		} catch (IOException e) {
+			System.err.println(e);
+		} finally {
 			try {
-				fis = new FileInputStream(page);
-				fileStream = new Scanner(fis);
-				// read until the end of the stream.
-				while (fileStream.hasNext()) {
-					out.print(fileStream.nextLine());
-				}
-				out.flush();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					fileStream.close();
-					fis.close();
-				} catch (IOException e) {
-				}
-
-			}
-			
-			//
-		} else if (contentType.equals("image/jpeg")
-				|| contentType.equals("image/png")
-				|| contentType.equals("image/gif")) {
-			if (contentType.contains("jpeg") || contentType.contains("jpg")) {
-				contentType = "jpg";
-			} else {
-				contentType = contentType.substring(6);
-				System.out.println(contentType);
-
-			}
-			try {
-
-				BufferedImage originalImage = ImageIO.read(page);
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(originalImage, contentType, baos);
-				baos.flush();
-				byte[] imageInByte = baos.toByteArray();
-				outputStream.write(imageInByte);
-				outputStream.close();
-				out.flush();
-
+				if (file != null)
+					file.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				out.close();
-
 			}
-		} else if (contentType.equals("image/x-icon")) {
-			try {
-
-				fis = new FileInputStream(page);
-				byte[] bFile = new byte[(int) page.length()];
-				// read until the end of the stream.
-				while (fis.available() != 0) {
-					fis.read(bFile, 0, bFile.length);
-					outputStream.write(bFile);
-				}
-				outputStream.flush();
-				outputStream.close();
-				out.flush();
-
-			} catch (FileNotFoundException e) {
-				// do something
-			} catch (IOException e) {
-				// do something
-
-			} finally {
-				try {
-					fis.close();
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-
 		}
+
 	}
 
 	// Prints GET response
@@ -262,7 +118,7 @@ public class HttpResponder {
 		StringBuilder headers = new StringBuilder();
 		headers.append("HTTP/1.1 " + this.responseCode + getResponseStatus()
 				+ CRLF);
-		//headers.append("Type:" + request.getContentType() + CRLF);
+		// headers.append("Type:" + request.getContentType() + CRLF);
 		headers.append("charset:utf-8" + CRLF);
 		headers.append("content-length: " + page.length() + CRLF);
 		headers.append(CRLF);
@@ -276,7 +132,7 @@ public class HttpResponder {
 		StringBuilder headers = new StringBuilder();
 		headers.append("HTTP/1.1 " + this.responseCode + getResponseStatus()
 				+ CRLF);
-		//headers.append("Type:" + request.getContentType() + CRLF);
+		// headers.append("Type:" + request.getContentType() + CRLF);
 		headers.append("charset:utf-8" + CRLF);
 		headers.append("Transfer-Encoding: chunked " + CRLF);
 		headers.append(CRLF);
@@ -293,7 +149,7 @@ public class HttpResponder {
 		StringBuilder result = new StringBuilder();
 		result.append("<html>");
 		result.append("<table border=\"0\">");
-		
+
 		Iterator<Entry<String, String>> it = params.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String> pairs = (Map.Entry<String, String>) it
@@ -307,7 +163,7 @@ public class HttpResponder {
 		StringBuilder headers = new StringBuilder();
 		headers.append("HTTP/1.1 " + this.responseCode + getResponseStatus()
 				+ CRLF);
-		//headers.append("Type:" + request.getContentType() + CRLF);
+		// headers.append("Type:" + request.getContentType() + CRLF);
 		headers.append("charset:utf-8" + CRLF);
 		headers.append("content-length: " + result.length() + CRLF);
 		headers.append(CRLF);
@@ -332,7 +188,7 @@ public class HttpResponder {
 		StringBuilder headers = new StringBuilder();
 		headers.append("HTTP/1.1 " + this.responseCode + getResponseStatus()
 				+ CRLF);
-		//headers.append("Type:" + request.getContentType() + CRLF);
+		// headers.append("Type:" + request.getContentType() + CRLF);
 		headers.append("charset:utf-8" + CRLF);
 		headers.append("content-length: " + result.length() + CRLF);
 		headers.append(CRLF);
