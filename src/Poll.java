@@ -8,23 +8,13 @@ public class Poll extends Email {
 	TreeMap<String, Integer> results;
 
 	public Poll(String owner, Calendar creation_date, Calendar due_date,
-			String recipient, String title, String data) {
-		super(owner, creation_date, due_date, recipient, title, data);
+			String recipient, String title, String data, String sender) {
+		super(owner, creation_date, due_date, recipient, title, data,  sender);
 		this.recipients = new ArrayList<String>();
 		recipients.add(recipient);
 		this.results = new TreeMap<String, Integer>();
 	}
 
-	public Poll(String owner, Calendar creation_date, Calendar due_date,
-			String[] recipients, String title, String data) {
-		super(owner, creation_date, due_date, null, title, data);
-		this.recipients = new ArrayList<String>();
-
-		for (String recipient : recipients) {
-			this.recipients.add(recipient);
-
-		}
-	}
 
 	public void updateVote() {
 

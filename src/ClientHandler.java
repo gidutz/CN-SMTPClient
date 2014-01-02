@@ -35,7 +35,7 @@ public class ClientHandler implements Runnable {
 			 *if the user logs in, then generate cookie 
 			 */
 			
-			HttpResponder responder = new HttpResponder(new File(parser.getRequestURL()),false,parser.getParams(),clientSocket.getOutputStream());
+			HttpResponder responder = new HttpResponder(parser,clientSocket.getOutputStream());
 			// make HTTP response
 			responder.echoResponse();
 

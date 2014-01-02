@@ -29,14 +29,13 @@ public class HttpResponder {
 	 *            the client socoket's output stream
 	 * @throws IOException
 	 */
-	public HttpResponder(File page, boolean chunked,
-			Hashtable<String, String> params, OutputStream outputStream)
+	public HttpResponder(HttpParser parser, OutputStream outputStream)
 			throws IOException {
-		this.page = page;
-		this.chunked = chunked;
+		this.page = new File (parser.getRequestURL());
+		this.chunked = parser.getHeader("chunked")!=null;
 		this.out = new PrintStream(outputStream);
-		this.responseCode = 200;
-		this.params = params;
+		this.responseCode = parser.getStatusCode();
+		this.params = parser.getParams();
 
 	}
 

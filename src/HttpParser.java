@@ -18,7 +18,6 @@ public class HttpParser {
 	private int[] versionCode;
 	private BufferedReader reader;
 	private int statusCode;
-	private InputStream socketInputStream;
 
 	/**
 	 * Constructs a new HTTP parser based on input from the client Socket
@@ -28,7 +27,6 @@ public class HttpParser {
 	 */
 	public HttpParser(InputStream socketInputStream) throws IOException {
 
-		this.socketInputStream = socketInputStream;
 		this.reader = new BufferedReader(new InputStreamReader(
 				socketInputStream));
 		this.method = null;
@@ -63,7 +61,7 @@ public class HttpParser {
 		}
 
 		// Makes sure the version code looks like HTTP/1.*
-		if (cmd[2].indexOf("HTTP/") == 0
+		if (!cmd[2].startsWith("HTTP/1.")
 				&& cmd[2].indexOf('.') > "HTTP/.".length() - 1) {
 			temp = cmd[2].substring(5).split("\\.");
 
@@ -252,6 +250,9 @@ public class HttpParser {
 		}
 		
 		if (getHeader("Cookie")==null){
+			//TODO:if task complete ->
+			//TODO: if poll receive
+			
 			if (path.equals(ServerRun.root+"main.html")&&getParam("username")!=null){
 				//notify the responder to set cookie;
 				path = ServerRun.root + ServerRun.mainPage;
