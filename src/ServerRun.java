@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
 
@@ -39,6 +39,10 @@ public class ServerRun {
 	public static String SMTP_PASSWORD = "password";
 	public static String SMTP_SEVER = "compnet.idc.ac.il";
 	public static int SMTP_PORT = 25;
+	
+	public static ArrayList<Task> taskList;
+	public static ArrayList<Reminder> reminderList;
+	public static ArrayList<Poll> pollList;
 
 	/**
 	 * @param args
@@ -49,23 +53,17 @@ public class ServerRun {
 		connectionLimiter = new Semaphore(maxThreads);
 		try {
 			serverSocket = new ServerSocket(port);
-			
+
 			/*
 			 * 
-			 * For Debug!
-			Email task = new Reminder("blabla", Calendar.getInstance(),
-					Calendar.getInstance(), new String[] { "Alon239@gmail.com",
-							"gidutz@gmail.com" }, "",
-					"if u can read this, lab 2 is almost done",
-					"gidutz@gmail.com");
-			SMTPClient client = new SMTPClient(SMTP_SEVER, SMTP_PORT, true);
-			try {
-				client.sendMessage(task);
-			} catch (SMTPExeption e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
+			 * For Debug! Email task = new Reminder("blabla",
+			 * Calendar.getInstance(), Calendar.getInstance(), new String[] {
+			 * "Alon239@gmail.com", "gidutz@gmail.com" }, "",
+			 * "if u can read this, lab 2 is almost done", "gidutz@gmail.com");
+			 * SMTPClient client = new SMTPClient(SMTP_SEVER, SMTP_PORT, true);
+			 * try { client.sendMessage(task); } catch (SMTPExeption e) { //
+			 * TODO Auto-generated catch block e.printStackTrace(); }
+			 */
 			while (true) {
 				connectionLimiter.acquire();
 				Socket clientSocket = serverSocket.accept();
