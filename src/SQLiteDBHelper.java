@@ -137,8 +137,9 @@ public class SQLiteDBHelper {
 	 * @return
 	 */
 	public EmailArrayList<Task> getAllTasks() {
+		EmailArrayList<Task> reminders = new EmailArrayList<Task>(this);
 
-		return null;
+		return reminders;
 	}
 
 	/**
@@ -148,8 +149,9 @@ public class SQLiteDBHelper {
 	 * @return
 	 */
 	public EmailArrayList<Reminder> getAllReminders() {
-
-		return null;
+		EmailArrayList<Reminder> reminders = new EmailArrayList<Reminder>(this);
+		
+		return reminders;
 	}
 
 	/**
@@ -159,7 +161,8 @@ public class SQLiteDBHelper {
 	 * @return
 	 */
 	public EmailArrayList<Poll> getAllPolls() {
+		EmailArrayList<Poll> reminders = new EmailArrayList<Poll>(this);
 
-		return null;
+		return reminders;
 	}
 }

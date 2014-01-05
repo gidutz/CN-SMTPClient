@@ -3,11 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import org.apache.commons.codec.binary.Base64;
-
-import sun.tools.tree.DoStatement;
 
 public class SMTPSession {
 

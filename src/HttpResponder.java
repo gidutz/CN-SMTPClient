@@ -10,8 +10,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.sun.org.apache.xml.internal.security.keys.content.RetrievalMethod;
-
 public class HttpResponder {
 	private int responseCode;
 	private PrintStream out;
