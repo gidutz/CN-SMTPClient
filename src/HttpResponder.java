@@ -31,13 +31,12 @@ public class HttpResponder {
 	 *            the client socoket's output stream
 	 * @throws IOException
 	 */
-	public HttpResponder(HttpParser parser, OutputStream outputStream)
+	public HttpResponder(String path, int responseCode , OutputStream outputStream)
 			throws IOException {
-		this.page = new File(parser.getRequestURL());
-		this.chunked = parser.getHeader("chunked") != null;
+		this.page = new File(path);
+		this.chunked = false;
 		this.out = new PrintStream(outputStream);
-		this.responseCode = parser.getStatusCode();
-		this.params = parser.getParams();
+		this.responseCode = responseCode;
 
 	}
 

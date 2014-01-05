@@ -7,7 +7,7 @@ import java.util.Map;
 public class SQLiteDBHelper {
 	Connection c;
 
-	public void openDaatabase() {
+	public void openDaatabase(String dbPath, String dbName) {
 		Connection c = null;
 		Statement stmt = null;
 		try {
@@ -73,8 +73,7 @@ public class SQLiteDBHelper {
 				String sql = "CREATE TABLE reminders "
 						+ "(ID INT PRIMARY KEY     NOT NULL,"
 						+ " recp      TEXT    NOT NULL, "
-						+ " date      TEXT    NOT NULL, "
-						+ " title     TEXT, "
+						+ " date      TEXT    NOT NULL, " + " title     TEXT, "
 						+ " timestap  REAL)";
 				stmt.executeUpdate(sql);
 
@@ -88,5 +87,79 @@ public class SQLiteDBHelper {
 				System.exit(0);
 			}
 		}
+	}
+
+	/**
+	 * Adds the email according to its type to the correct table return 1 upon
+	 * success or 0 if fails
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public int add(Email email) {
+		if (email instanceof Task) {
+			// TODO: add to task database/table?
+			return 1;
+		} else if (email instanceof Reminder) {
+			// TODO: add to Reminder database/table
+			return 1;
+		} else if (email instanceof Poll) {
+			// TODO: add to Polls database/table
+			return 1;
+		}
+		return 0;
+	}
+
+	/**
+	 * Deletes an Email from the table returns 1 upon success or 0 if fails
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public int remove(Email email) {
+		if (email instanceof Task) {
+			// TODO: remove from task database/table?
+			return 1;
+		} else if (email instanceof Reminder) {
+			// TODO: remove from Reminder database/table
+			return 1;
+		} else if (email instanceof Poll) {
+			// TODO: remove from Polls database/table
+			return 1;
+		}
+		return 0;
+	}
+
+	/**
+	 * Returns an array of all the Tasks
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public EmailArrayList<Task> getAllTasks() {
+
+		return null;
+	}
+
+	/**
+	 * Returns an array of all the reminders
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public EmailArrayList<Reminder> getAllReminders() {
+
+		return null;
+	}
+
+	/**
+	 * Returns an array of all the polls
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public EmailArrayList<Poll> getAllPolls() {
+
+		return null;
 	}
 }

@@ -39,20 +39,39 @@ public class ServerRun {
 	public static String SMTP_PASSWORD = "password";
 	public static String SMTP_SEVER = "compnet.idc.ac.il";
 	public static int SMTP_PORT = 25;
-	
-	public static ArrayList<Task> taskList;
-	public static ArrayList<Reminder> reminderList;
-	public static ArrayList<Poll> pollList;
+
+	public static EmailArrayList<Task> taskList;
+	public static EmailArrayList<Reminder> reminderList;
+	public static EmailArrayList<Poll> pollList;
+	public static SQLiteDBHelper db;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		loadSettigs();
-		System.out.println("Listening on port = " + port);
-		connectionLimiter = new Semaphore(maxThreads);
+
 		try {
+
+			loadSettigs();
+		} catch (NullPointerException e) {
+			System.err.println("Cannot find config.ini. Server must shut down");
+			System.exit(2);
+		}
+
+		try {
+			db = new SQLiteDBHelper();
+			loadDB();
+		} catch (Exception e) {
+			// TODO: cannot locate DB!
+		}
+
+		try {
+			connectionLimiter = new Semaphore(maxThreads);
+
 			serverSocket = new ServerSocket(port);
+			System.out.println("Listening on port = " + port);
+
+			startHandlingEmails();
 
 			/*
 			 * 
@@ -98,6 +117,22 @@ public class ServerRun {
 
 		}
 
+	}
+
+	private static void startHandlingEmails() {
+		Thread tasksHendler = new Thread(new TasksHandler(taskList));
+		Thread pollsHandler = new Thread(new PollsHandler(pollList));
+		Thread remindersHandler = new Thread(new RemindersHandler(reminderList));
+
+		tasksHendler.start();
+		pollsHandler.start();
+		remindersHandler.start();
+	}
+
+	private static void loadDB() {
+		taskList = db.getAllTasks();
+		pollList = db.getAllPolls();
+		reminderList = db.getAllReminders();
 	}
 
 	/**

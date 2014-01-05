@@ -28,14 +28,15 @@ public class ClientHandler implements Runnable {
 		System.out.println(clientSocket);
 		try {
 			clientSocket.setSoTimeout(CONNECTION_TIMESOUT);
-			HttpParser parser = new HttpParser(clientSocket.getInputStream());
+			HttpParser request = new HttpParser(clientSocket.getInputStream());
 			
-			logRequest(parser);
+			logRequest(request);
 			/*
 			 *if the user logs in, then generate cookie 
 			 */
-			
-			HttpResponder responder = new HttpResponder(parser,clientSocket.getOutputStream());
+			String path = redirect(request);
+			int responseCode = 200;
+			HttpResponder responder = new HttpResponder( path,  responseCode,clientSocket.getOutputStream());
 			// make HTTP response
 			responder.echoResponse();
 
@@ -64,5 +65,52 @@ public class ClientHandler implements Runnable {
 				+ parser.getHeaders());
 		System.out.println("vars = " + parser.getParams());
 		System.out.println(parser.getHeaders().toString());
+	}
+	
+	private String redirect(HttpParser request) {
+		String path=request.getRequestURL();
+		if (path.startsWith("/")) {
+			path = path.substring(1);
+
+		}
+		// change absolute path to relative path
+		if (path.startsWith("http://" + request.getHeader("host"))) {
+			path = path.substring(("http://" + request.getHeader("host")).length() + 1);
+		}
+
+		path = ServerRun.root + path;
+		File page = new File(path);
+		if (page.isDirectory()) {
+			path = path + ServerRun.defaultPage;
+			page = new File(path);
+		}
+		
+		if (request.getHeader("Cookie")==null){
+			//TODO:if task complete ->
+			//TODO: if poll receive
+			
+			if (path.equals(ServerRun.root+"main.html")&&request.getParam("username")!=null){
+				//notify the responder to set cookie;
+				path = ServerRun.root + ServerRun.mainPage;
+				page = new File(path);
+				return path;
+			}else{
+				path = ServerRun.root + ServerRun.defaultPage;
+				page = new File(path);
+				return path;
+
+			}
+		}
+		if (page.getAbsoluteFile().isAbsolute()) {
+			// TODO:check if the server root path is the start of
+
+			return path;
+		} else if (!page.exists()) {
+			path = path + ServerRun.$404page;
+
+			return path;
+		}
+
+		return path;
 	}
 }

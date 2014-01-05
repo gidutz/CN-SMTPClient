@@ -1,7 +1,14 @@
-import java.util.ArrayList;
 
-public abstract class EmailHandler implements Runnable {
-	ArrayList<Email> emails = new ArrayList<Email>();
+public abstract class EmailHandler<E> implements Runnable {
+	
+	EmailArrayList<Email> emails;
+	@SuppressWarnings("unchecked")
+	public EmailHandler(EmailArrayList<E> emails) {
+		this.emails = (EmailArrayList<Email>) emails;
+	}
+
+
+
 	private final long PAUSE = 500L;
 
 	@Override
