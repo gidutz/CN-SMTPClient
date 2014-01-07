@@ -1,0 +1,27 @@
+<html>
+<head>
+
+<script>
+  function processForm()
+  {
+    var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    u = unescape(temp[1]);
+	var temp = parameters[1].split("=");
+	id = unescape(temp[1]);
+    alert("WELOCOME:"+u+" ID:"+id+"."); //Dialog with the text you put on the textbox
+  }	
+  processForm();
+</script>
+</head>
+<body>
+<center><h3>Enter new Reamainder values:</h3></center>
+<form name="input" action="submit_reminder.html" method="get">
+Remainder title: <input type="text" name="user"> <br>
+Due time: <input type="text" name="user" value="HH:MM DD/MM/YYYY"><br>
+Remainder content: <input type="text" name="user"><br>
+<input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

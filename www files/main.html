@@ -1,0 +1,50 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="anoceanofsky.css" />
+<title>An Ocean of Sky by Bryant Smith</title>
+
+<script>
+  function processForm()
+  {
+    var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    u = unescape(temp[1]);
+	var temp = parameters[1].split("=");
+	id = unescape(temp[1]);
+    alert("WELOCOME:"+u+" ID:"+id+"."); //Dialog with the text you put on the textbox
+  }	
+  processForm();
+</script>
+
+
+</head>
+
+<body>
+    <div id="page">
+        <div class="topNaviagationLink"><a href="main.html">Home</a></div>
+        <div class="topNaviagationLink"><a href="Remainders.html" target="inner">Remainders</a></div>
+		<div class="topNaviagationLink"><a href="index.html" target="inner">Tasks</a></div>
+        <div class="topNaviagationLink"><a href="index.html target="inner"">New Mail</a></div>
+        <div class="topNaviagationLink"><a href="index.html" target="inner">Chat Room</a></div>
+	    <div class="topNaviagationLink"><a href="index.html" target="inner">Contact Us</a></div>
+	</div>
+    <div id="mainPicture">
+    	<div class="picture">
+        	<div id="headerTitle">רשתות תקשורת, מעבדה 2.</div>
+            <div id="headerSubtext">גדי ואלון.</div>
+        </div>
+    </div>
+        <div class="contentBox">
+    	<div class="innerBox">
+        	<div class="contentTitle">Wellcom!</div>
+          <div class="contentText"> <iframe width="600" name="inner"></iframe> </div>
+
+
+
+    </div>
+        <div id="footer"><a href="http://www.aszx.net">web development</a> by <a href="http://www.bryantsmith.com">bryant smith</a></div>
+</body>
+</html>
