@@ -9,7 +9,7 @@ public class ClientHandler implements Runnable {
     private Socket clientSocket;
 
     /* --! connection time out for the socket -- */
-    private static final int CONNECTION_TIMESOUT = 30 * 1000;
+    private static final int CONNECTION_TIMEOUT = 30 * 1000;
 
     // why 857? because i can!
 
@@ -25,7 +25,7 @@ public class ClientHandler implements Runnable {
     public void run() {
         System.out.println(clientSocket);
         try {
-            clientSocket.setSoTimeout(CONNECTION_TIMESOUT);
+            clientSocket.setSoTimeout(CONNECTION_TIMEOUT);
             HttpParser request = new HttpParser(clientSocket.getInputStream());
 
             logRequest(request);
@@ -82,20 +82,68 @@ public class ClientHandler implements Runnable {
             path = path + ServerRun.defaultPage;
             page = new File(path);
         }
-        // TODO:if task_reply?task= ->
-        // TODO: if poll_reply?
+
 
         if (request.getHeader("Cookie") == null) {
-            if (!path.contains("/images/") && !path.contains("/css/"))
+            if (!path.contains("/images/") && !path.contains("/css/")) {
                 path = ServerRun.root + ServerRun.defaultPage;
+
+            } else if (path.endsWith("task_reply.html")) {
+                //TODO: handle task reply
+
+            } else if (path.endsWith("poll_reply.html")) {
+                //TODO:handle poll reply
+            }
             page = new File(path);
 
-        } else {
-            // if list.html?type=reminders ->get the user from the cookie
-            // if list.html?type=tasks ->get the user from the cookie
-            // if list.html?type=polls->get the user from the cookie
-            // if delete?id= delete and reload
-            // if
+        } else { //There is a cookie with a user name
+                String[] cookie = request.getHeader("Cookie").split("=");
+                String user = cookie[1];
+                String id = null;
+            if (path.endsWith("index.html")) {
+                path = ServerRun.root + ServerRun.mainPage;
+            }else  if (path.endsWith("tasks.html")) {
+                if ((id = request.getParam("id")) != null) {
+                    deleteEmail(id);
+
+                } else {
+                    path = generateTasks(user);
+                }
+            } else if (path.endsWith("reminders.html")) {
+                if ((id = request.getParam("id")) != null) {
+                    deleteEmail(id);
+
+                } else {
+                    path = generateReminders(user);
+                }
+            } else if (path.endsWith("polls.html")) {
+                if ((id = request.getParam("id")) != null) {
+                    deleteEmail(id);
+
+                } else {
+                    path = generatePolls(user);
+                }
+            } else if (path.endsWith("submit_reminder.html")) {
+                if (request.getParam("id").equalsIgnoreCase("new")) {
+                    //TODO: create new reminder and redirect to the list;
+                } else {
+                    //TODO: update the reminder whose id = getParam("id")
+                }
+
+            } else if (path.endsWith("submit_task.html")) {
+                if (request.getParam("id").equalsIgnoreCase("new")) {
+                    //TODO: create new reminder and redirect to the list;
+                } else {
+                    //TODO: update the reminder whose id = getParam("id")
+                }
+            } else if (path.endsWith("submit_poll.html")) {
+                if (request.getParam("id").equalsIgnoreCase("new")) {
+                    //TODO: create new reminder and redirect to the list;
+                } else {
+                    //TODO: update the reminder whose id = getParam("id")
+                }
+            }
+
 
         }
 
@@ -103,12 +151,38 @@ public class ClientHandler implements Runnable {
             // TODO:check if the server root path is the start of
 
             return path;
-        } else if (!page.exists()) {
+        } else if (!(new File(path)).exists()) {
             path = path + ServerRun.$404page;
-
-            return path;
         }
 
         return path;
     }
+
+    private String generateReminders(String user) {
+
+        //TODO: Create file reminders and return it as path
+        return "reminders.html";
+
+    }
+
+    private String generatePolls(String user) {
+        //TODO: Create file reminders and return it as path
+
+        return "reminders.html";
+
+    }
+
+
+    private String generateTasks(String user) {
+        //TODO: Create file reminders and return it as path
+        return "reminders.html";
+
+    }
+
+
+    private void deleteEmail(String id) {
+
+        //Delete the poll and
+    }
+
 }

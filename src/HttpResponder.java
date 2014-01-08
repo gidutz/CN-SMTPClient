@@ -17,8 +17,7 @@ public class HttpResponder {
 	 * This class is instanced to an object that accepts a parsed HTTP request
 	 * and the client output stream and generates a response accordingly
 	 * 
-	 * @param parsedRequest
-	 *            an object representing the parsed HTTP request
+
 	 * @param outputStream
 	 *            the client socoket's output stream
 	 * @throws IOException
@@ -153,7 +152,7 @@ public class HttpResponder {
 		StringBuilder headers = new StringBuilder();
 		headers.append("HTTP/1.1 " + this.responseCode + getResponseStatus()
 				+ CRLF);
-		// headers.append("Type:" + request.getContentType() + CRLF);
+		 headers.append("Content-Type:" + getContentType(page.getName()) + CRLF);
 		headers.append("charset:utf-8" + CRLF);
 		headers.append("content-length: " + result.length() + CRLF);
 		headers.append(CRLF);
@@ -187,5 +186,22 @@ public class HttpResponder {
 		}
 		return q.echoMessagesHTML();
 	}
-
+    public String getContentType(String path) {
+        if (path == null) {
+            return null;
+        }
+        if (path.endsWith(".htm") || path.endsWith(".html")) {
+            return "text/html";
+        } else if (path.endsWith(".gif")) {
+            return "image/gif";
+        } else if (path.endsWith(".jpg") || path.endsWith(".jpeg")) {
+            return "image/jpeg";
+        } else if (path.endsWith(".png")) {
+            return "image/png";
+        } else if (path.endsWith(".ico")) {
+            return "image/x-icon";
+        } else {
+            return "application/octet-stream";
+        }
+    }
 }
