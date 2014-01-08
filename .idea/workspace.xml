@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientHandler.java" afterPath="$PROJECT_DIR$/src/ClientHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/config.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CN-SMTPClient.iml" afterPath="$PROJECT_DIR$/CN-SMTPClient.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Email.java" afterPath="$PROJECT_DIR$/src/Email.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HttpResponder.java" afterPath="$PROJECT_DIR$/src/HttpResponder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Poll.java" afterPath="$PROJECT_DIR$/src/Poll.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Reminder.java" afterPath="$PROJECT_DIR$/src/Reminder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SMTPSession.java" afterPath="$PROJECT_DIR$/src/SMTPSession.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQLiteDBHelper.java" afterPath="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerRun.java" afterPath="$PROJECT_DIR$/src/ServerRun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Task.java" afterPath="$PROJECT_DIR$/src/Task.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CN-SMTPClient.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,11 +85,104 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SMTPSession.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SMTPSession.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="38" selection-start="191" selection-end="191" vertical-scroll-proportion="0.19823788" vertical-offset="0" max-vertical-offset="3435">
+            <state line="145" column="13" selection-start="3527" selection-end="3527" vertical-scroll-proportion="0.0" vertical-offset="1855" max-vertical-offset="3435">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Task.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Task.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Poll.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Poll.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="31" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="960">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SQLiteDBHelper.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="302" column="0" selection-start="10435" selection-end="10435" vertical-scroll-proportion="0.73568285" vertical-offset="386" max-vertical-offset="840">
+              <folding>
+                <element signature="method#openDatabase#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#add#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="e#10538#10544#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Reminder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Reminder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="25" selection-start="560" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Email.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Email.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="0" selection-start="1316" selection-end="1827" vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1770">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Email#0;class#Email#0" expanded="false" />
+                <element signature="method#Email#1;class#Email#0" expanded="false" />
+                <element signature="method#Email#2;class#Email#0" expanded="false" />
+                <element signature="docComment;method#Email#3;class#Email#0" expanded="false" />
+                <element signature="method#Email#3;class#Email#0" expanded="false" />
+                <element signature="e#3009#3010#0" expanded="true" />
+                <element signature="e#3034#3035#0" expanded="true" />
+                <element signature="e#3066#3067#0" expanded="true" />
+                <element signature="e#3094#3095#0" expanded="true" />
+                <element signature="e#3136#3137#0" expanded="true" />
+                <element signature="e#3172#3173#0" expanded="true" />
+                <element signature="e#3209#3210#0" expanded="true" />
+                <element signature="e#3240#3241#0" expanded="true" />
+                <element signature="e#3348#3349#0" expanded="true" />
+                <element signature="e#3376#3377#0" expanded="true" />
+                <element signature="e#3407#3408#0" expanded="true" />
+                <element signature="e#3434#3435#0" expanded="true" />
+                <element signature="e#3626#3627#0" expanded="true" />
+                <element signature="e#3659#3660#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerRun.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="133" column="0" selection-start="3970" selection-end="3970" vertical-scroll-proportion="-46.423077" vertical-offset="788" max-vertical-offset="2640">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,6 +196,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/SMTPSession.java" />
+        <option value="$PROJECT_DIR$/src/ServerRun.java" />
+        <option value="$PROJECT_DIR$/src/Reminder.java" />
+        <option value="$PROJECT_DIR$/src/Task.java" />
+        <option value="$PROJECT_DIR$/src/Email.java" />
+        <option value="$PROJECT_DIR$/src/Poll.java" />
+        <option value="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
@@ -126,6 +241,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -161,7 +277,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -171,11 +286,22 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.RunServer">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -210,19 +336,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -248,6 +361,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -303,13 +429,48 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
-    <list size="0" />
+    <configuration default="false" name="RunServer" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ServerRun" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="CN-SMTPClient" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.RunServer" />
+    </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="" />
@@ -320,31 +481,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="788" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32962447" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962447" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32962447" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -370,7 +531,37 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="38" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3435">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/SQLiteDBHelper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="45" selection-start="1536" selection-end="1544" vertical-scroll-proportion="0.53744495" vertical-offset="191" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="13" selection-start="76" selection-end="76" vertical-scroll-proportion="0.09911894" vertical-offset="0" max-vertical-offset="454">
           <folding />
         </state>
       </provider>
@@ -382,10 +573,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="0" selection-start="3970" selection-end="3970" vertical-scroll-proportion="-46.423077" vertical-offset="788" max-vertical-offset="2640">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="38" selection-start="191" selection-end="191" vertical-scroll-proportion="0.19823788" vertical-offset="0" max-vertical-offset="3435">
+        <state line="145" column="13" selection-start="3527" selection-end="3527" vertical-scroll-proportion="0.0" vertical-offset="1855" max-vertical-offset="3435">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Reminder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="25" selection-start="560" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Email.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="1316" selection-end="1827" vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1770">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Email#0;class#Email#0" expanded="false" />
+            <element signature="method#Email#1;class#Email#0" expanded="false" />
+            <element signature="method#Email#2;class#Email#0" expanded="false" />
+            <element signature="docComment;method#Email#3;class#Email#0" expanded="false" />
+            <element signature="method#Email#3;class#Email#0" expanded="false" />
+            <element signature="e#3009#3010#0" expanded="true" />
+            <element signature="e#3034#3035#0" expanded="true" />
+            <element signature="e#3066#3067#0" expanded="true" />
+            <element signature="e#3094#3095#0" expanded="true" />
+            <element signature="e#3136#3137#0" expanded="true" />
+            <element signature="e#3172#3173#0" expanded="true" />
+            <element signature="e#3209#3210#0" expanded="true" />
+            <element signature="e#3240#3241#0" expanded="true" />
+            <element signature="e#3348#3349#0" expanded="true" />
+            <element signature="e#3376#3377#0" expanded="true" />
+            <element signature="e#3407#3408#0" expanded="true" />
+            <element signature="e#3434#3435#0" expanded="true" />
+            <element signature="e#3626#3627#0" expanded="true" />
+            <element signature="e#3659#3660#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Poll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="31" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="960">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="0" selection-start="10435" selection-end="10435" vertical-scroll-proportion="0.73568285" vertical-offset="1001" max-vertical-offset="1455">
+          <folding>
+            <element signature="method#openDatabase#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#add#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="e#10538#10544#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -406,7 +678,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited>Detection</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -446,6 +718,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

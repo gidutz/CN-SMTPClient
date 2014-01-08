@@ -3,13 +3,13 @@ import java.util.Calendar;
 public class Reminder extends Email {
 
 	public Reminder(String owner, Calendar creation_date, Calendar due_date,
-			String recipient, String title, String data, String sender) {
+			String recipient, String title, String data ) {
 		super(owner, creation_date, due_date, recipient, title, data);
 		this.recipients.add(owner);
 	}
 
 	public Reminder(String owner, Calendar creation_date, Calendar due_date,
-			String[] recipients, String title, String data, String sender) {
+			String[] recipients, String title, String data) {
 		super(owner, creation_date, due_date, recipients, title, data);
 		this.recipients.add(owner);
 	}
