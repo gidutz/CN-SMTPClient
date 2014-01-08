@@ -86,7 +86,7 @@ public class SMTPSession {
 		 * Send the email, must be synchronized
 		 */
 		synchronized (email) {
-			doCommand(MAIL_FROM, email.getSender());
+			doCommand(MAIL_FROM, email.getOwner());
 			for (String recipient : email.getRecipients()) {
 				doCommand(MAIL_TO, recipient);
 			}

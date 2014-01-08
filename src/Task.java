@@ -6,7 +6,7 @@ public class Task extends Email {
 
 	public Task(String owner, Calendar creation_date, Calendar due_date,
 			String recipient, String title, String data, String sender) {
-		super(owner, creation_date, due_date, recipient, title, data, sender);
+		super(owner, creation_date, due_date, recipient, title, data);
 		this.completed = false;
 	}
 

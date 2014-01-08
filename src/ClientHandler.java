@@ -11,7 +11,7 @@ public class ClientHandler implements Runnable {
 	private Socket clientSocket;
 
 	/* --! connection time out for the socket -- */
-	private static final int CONNECTION_TIMESOUT = 30*1000;
+	private static final int CONNECTION_TIMESOUT = 30 * 1000;
 
 	// why 857? because i can!
 
@@ -29,14 +29,15 @@ public class ClientHandler implements Runnable {
 		try {
 			clientSocket.setSoTimeout(CONNECTION_TIMESOUT);
 			HttpParser request = new HttpParser(clientSocket.getInputStream());
-			
+
 			logRequest(request);
 			/*
-			 *if the user logs in, then generate cookie 
+			 * if the user logs in, then generate cookie
 			 */
 			String path = redirect(request);
 			int responseCode = 200;
-			HttpResponder responder = new HttpResponder( path,  responseCode,clientSocket.getOutputStream());
+			HttpResponder responder = new HttpResponder(path, responseCode,
+					clientSocket.getOutputStream());
 			// make HTTP response
 			responder.echoResponse();
 
@@ -57,25 +58,24 @@ public class ClientHandler implements Runnable {
 		System.out.println("Connection eliminated with " + clientSocket);
 	}
 
-	
-	private void logRequest(HttpParser parser){
+	private void logRequest(HttpParser parser) {
 		System.out.println("method=" + parser.getMethod());
 		System.out.println("url=" + parser.getRequestURL());
-		System.out.println("headers = "
-				+ parser.getHeaders());
+		System.out.println("headers = " + parser.getHeaders());
 		System.out.println("vars = " + parser.getParams());
 		System.out.println(parser.getHeaders().toString());
 	}
-	
+
 	private String redirect(HttpParser request) {
-		String path=request.getRequestURL();
+		String path = request.getRequestURL();
 		if (path.startsWith("/")) {
 			path = path.substring(1);
 
 		}
 		// change absolute path to relative path
 		if (path.startsWith("http://" + request.getHeader("host"))) {
-			path = path.substring(("http://" + request.getHeader("host")).length() + 1);
+			path = path.substring(("http://" + request.getHeader("host"))
+					.length() + 1);
 		}
 
 		path = ServerRun.root + path;
@@ -84,23 +84,23 @@ public class ClientHandler implements Runnable {
 			path = path + ServerRun.defaultPage;
 			page = new File(path);
 		}
-		
-		if (request.getHeader("Cookie")==null){
-			//TODO:if task complete ->
-			//TODO: if poll receive
-			
-			if (path.equals(ServerRun.root+"main.html")&&request.getParam("username")!=null){
-				//notify the responder to set cookie;
-				path = ServerRun.root + ServerRun.mainPage;
-				page = new File(path);
-				return path;
-			}else{
-				path = ServerRun.root + ServerRun.defaultPage;
-				page = new File(path);
-				return path;
+		// TODO:if task_reply?task= ->
+		// TODO: if poll_reply?
 
-			}
+		if (request.getHeader("Cookie") == null) {
+
+			path = ServerRun.root + ServerRun.defaultPage;
+			page = new File(path);
+
+		} else {
+			// if list.html?type=reminders ->get the user from the cookie
+			// if list.html?type=tasks ->get the user from the cookie
+			// if list.html?type=polls->get the user from the cookie
+			// if delete?id= delete and reload
+			// if
+			
 		}
+
 		if (page.getAbsoluteFile().isAbsolute()) {
 			// TODO:check if the server root path is the start of
 

@@ -23,6 +23,7 @@ public class HttpParser {
 	private int[] versionCode;
 	private BufferedReader reader;
 	private int statusCode;
+	private String query;
 
 	/**
 	 * Constructs a new HTTP parser based on input from the client Socket
@@ -96,8 +97,8 @@ public class HttpParser {
 				// signs like &gt
 				path = URLDecoder.decode(cmd[1].substring(0, queryIndex),
 						"UTF-8");
-				prms = cmd[1].substring(queryIndex + 1).split("&");
-
+				query = cmd[1].substring(queryIndex + 1);
+				prms = query.split("&");
 				params = new Hashtable<String, String>();
 				for (int i = 0; i < prms.length; i++) {
 					temp = prms[i].split("=");
@@ -118,7 +119,6 @@ public class HttpParser {
 			/* builds the url path */
 			if (method.equals("GET") || method.equals("POST")) {
 
-			
 				if (method.equals("POST")) {
 					parsePostVars();
 				}
@@ -206,7 +206,9 @@ public class HttpParser {
 		else
 			return null;
 	}
-
+	public String getQuery(){
+		return this.query;
+	}
 	/**
 	 * retuns a hash-table of all the headers
 	 * 
