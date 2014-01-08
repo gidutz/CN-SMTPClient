@@ -130,7 +130,7 @@ public class ServerRun {
 
     private static void loadDB() {
 
-        db.openDaatabase("","emails");
+        db.openDatabase("","emails");
 
         taskList = db.getAllTasks();
 

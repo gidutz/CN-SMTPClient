@@ -24,7 +24,7 @@ public class SQLiteDBHelper {
     private final String FIELD_ANSWER_10 = "ans_10";
     Connection c;
 
-    public void openDatabase(String dbPath, String dbName) {
+    public  synchronized void openDatabase(String dbPath, String dbName) {
         Connection c = null;
         Statement stmt = null;
         try {
@@ -71,7 +71,7 @@ public class SQLiteDBHelper {
      * @param tableName
      * @param fields
      */
-    public void createTable(String tableName, HashMap<String, String> fields) {
+    public synchronized void createTable(String tableName, HashMap<String, String> fields) {
 
         Statement stmt = null;
         try {
@@ -105,7 +105,7 @@ public class SQLiteDBHelper {
      * @param email
      * @return
      */
-    public int add(Email email) {
+    public synchronized int add(Email email) {
         String table = null;
         if (email instanceof Task) {
             table = "tasks";
@@ -164,7 +164,7 @@ public class SQLiteDBHelper {
      * @param email
      * @return
      */
-    public int remove(Email email) {
+    public synchronized int remove(Email email) {
         String table = null;
         if (email instanceof Task) {
             table = "tasks";
@@ -203,7 +203,7 @@ public class SQLiteDBHelper {
      * @param
      * @return
      */
-    public EmailArrayList<Task> getAllTasks() {
+    public  synchronized EmailArrayList<Task> getAllTasks() {
         EmailArrayList<Task> tasks = new EmailArrayList<Task>(this);
         Connection c = null;
         Statement stmt = null;
@@ -251,7 +251,7 @@ public class SQLiteDBHelper {
      *
      * @return
      */
-    public EmailArrayList<Reminder> getAllReminders() {
+    public synchronized EmailArrayList<Reminder> getAllReminders() {
         EmailArrayList<Reminder> reminders = new EmailArrayList<Reminder>(this);
         Connection c = null;
         Statement stmt = null;
@@ -300,7 +300,7 @@ public class SQLiteDBHelper {
      * @param
      * @return
      */
-    public EmailArrayList<Poll> getAllPolls() {
+    public synchronized  EmailArrayList<Poll> getAllPolls() {
         EmailArrayList<Poll> polls = new EmailArrayList<Poll>(this);
 
         Connection c = null;
