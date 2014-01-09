@@ -13,7 +13,7 @@ public abstract class Email {
     ArrayList<String> recipients;
     final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yy HH:MM");
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public Email(String owner, Calendar creation_date, Calendar due_date,
                  String recipient, String title, String data) {
@@ -80,9 +80,7 @@ public abstract class Email {
         }
         hash += 3 * creation_date.get(Calendar.DAY_OF_YEAR) + 11
                 * creation_date.get(Calendar.HOUR_OF_DAY) + 13
-                * creation_date.get(Calendar.MINUTE) + 17
-                * creation_date.get(Calendar.SECOND);
-
+                * creation_date.get(Calendar.MINUTE) + 17;
         return hash;
     }
 

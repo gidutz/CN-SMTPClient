@@ -85,7 +85,7 @@ public class SQLiteDBHelper {
                 sql.append(entry.getKey() + " " + entry.getValue() + ", ");
             }
             sql.deleteCharAt(sql.lastIndexOf(","));
-            sql.append(")");
+            sql.append(");");
 
             stmt.executeUpdate(sql.toString());
             stmt.close();

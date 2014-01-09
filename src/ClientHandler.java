@@ -108,7 +108,7 @@ public class ClientHandler implements Runnable {
                 } catch (NumberFormatException e) {
                     System.err.println("Cannot mark task as complete");
                 } catch (Exception e) {
-                    System.err.println("Porobably the task was not found");
+                    System.err.println("Probably the task was not found");
 
                 }
 
@@ -149,14 +149,14 @@ public class ClientHandler implements Runnable {
                 Reminder reminder = null;
                 try {
                     String owner = user;
-                    String[] recipients = request.getParam("recipients").split(";");
+                    String recipient = user;
                     Calendar creationDate = Calendar.getInstance();
                     Calendar dueDate = Calendar.getInstance();
                     Date date = (Email.DATE_FORMAT).parse(request.getParam("due_date") + " " + request.getParam("due_time"));
                     dueDate.setTime(date);
                     String title = request.getParam("title");
                     String data = request.getParam("data");
-                    reminder = new Reminder(owner, creationDate, dueDate, recipients, title, data,false);
+                    reminder = new Reminder(owner, creationDate, dueDate, recipient, title, data, false);
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.reminders.add(reminder);
                     } else {
@@ -177,7 +177,9 @@ public class ClientHandler implements Runnable {
                 try {
                     String owner = user;
                     String[] recipients = request.getParam("recipients").split(";");
+                    //TODO:change this!!!!!!!!!
                     Calendar creationDate = Calendar.getInstance();
+
                     Calendar dueDate = Calendar.getInstance();
                     Date date = (Email.DATE_FORMAT).parse(request.getParam("due_date") + " " + request.getParam("due_time"));
                     dueDate.setTime(date);
@@ -250,6 +252,8 @@ public class ClientHandler implements Runnable {
                     date = email.getDue_date().getTime();
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
+
+                    //TODO: only enable deletion if in progress
                     sb.append("<td><a href=\"tasks.html?id=del\">Delete</a></td>");
                     sb.append("</tr>");
                     writer.println(sb.toString());
