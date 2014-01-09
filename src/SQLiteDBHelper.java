@@ -24,7 +24,7 @@ public class SQLiteDBHelper {
     private final String FIELD_ANSWER_10 = "ans_10";
     Connection c;
 
-    public  synchronized void openDatabase(String dbPath, String dbName) {
+    public synchronized void openDatabase(String dbPath, String dbName) {
         Connection c = null;
         Statement stmt = null;
         try {
@@ -82,9 +82,9 @@ public class SQLiteDBHelper {
             sql.append("CREATE TABLE IF NOT EXISTS " + tableName);
             sql.append("(");
             for (Map.Entry<String, String> entry : fields.entrySet()) {
-                sql.append(entry.getKey() + " " + entry.getValue());
+                sql.append(entry.getKey() + " " + entry.getValue() + ", ");
             }
-
+            sql.deleteCharAt(sql.lastIndexOf(","));
             sql.append(")");
 
             stmt.executeUpdate(sql.toString());
@@ -132,16 +132,16 @@ public class SQLiteDBHelper {
             sql.append(FIELD_COMPLETED + ",");
             sql.append(FIELD_DATA + ")");
             sql.append("VALUES (");
-            sql.append(email.getId() + ",");
-            sql.append(email.getOwner() + ",");
-            sql.append(email.getRecipientsString() + ",");
+            sql.append("\"" + email.getId() + "\",");
+            sql.append("\"" + email.getOwner() + "\",");
+            sql.append("\"" + email.getRecipientsString() + "\",");
             Date date = email.getCreation_date().getTime();
-            sql.append(Email.DATE_FORMAT.format(date) + ",");
+            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
             date = email.getDue_date().getTime();
-            sql.append(Email.DATE_FORMAT.format(date) + ",");
-            sql.append(email.getTitle() + ",");
-            sql.append(email.isComplete() + ",");
-            sql.append(email.getData() + ")");
+            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
+            sql.append("\"" + email.getTitle() + "\",");
+            sql.append("\"" + email.isComplete() + "\",");
+            sql.append("\"" + email.getData() + "\")");
 
             sql.append(";");
 
@@ -203,7 +203,7 @@ public class SQLiteDBHelper {
      * @param
      * @return
      */
-    public  synchronized EmailArrayList<Task> getAllTasks() {
+    public synchronized EmailArrayList<Task> getAllTasks() {
         EmailArrayList<Task> tasks = new EmailArrayList<Task>(this);
         Connection c = null;
         Statement stmt = null;
@@ -262,7 +262,7 @@ public class SQLiteDBHelper {
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tasks;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM reminders;");
             while (rs.next()) {
                 try {
                     String owner = rs.getString(FIELD_OWNER);
@@ -300,7 +300,7 @@ public class SQLiteDBHelper {
      * @param
      * @return
      */
-    public synchronized  EmailArrayList<Poll> getAllPolls() {
+    public synchronized EmailArrayList<Poll> getAllPolls() {
         EmailArrayList<Poll> polls = new EmailArrayList<Poll>(this);
 
         Connection c = null;

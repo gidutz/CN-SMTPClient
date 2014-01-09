@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www files/main.html" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientHandler.java" afterPath="$PROJECT_DIR$/src/ClientHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HttpResponder.java" afterPath="$PROJECT_DIR$/src/HttpResponder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EmailArrayList.java" afterPath="$PROJECT_DIR$/src/EmailArrayList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EmailHandler.java" afterPath="$PROJECT_DIR$/src/EmailHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQLiteDBHelper.java" afterPath="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerRun.java" afterPath="$PROJECT_DIR$/src/ServerRun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CN-SMTPClient.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,6 +64,38 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/EmailArrayList.java" line="18" class="EmailArrayList" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/EmailArrayList.java" line="13" class="EmailArrayList" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -68,55 +105,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HttpResponder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HttpResponder.java">
+      <file leaf-file-name="SQLiteDBHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="0" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.0" vertical-offset="1208" max-vertical-offset="3135">
-              <folding />
+            <state line="157" column="0" selection-start="5770" selection-end="5770" vertical-scroll-proportion="0.0" vertical-offset="2116" max-vertical-offset="3795">
+              <folding>
+                <element signature="docComment;method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="docComment;method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="e#8926#8936#0" expanded="true" />
+                <element signature="docComment;method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+                <element signature="e#10763#10769#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HttpParser.java">
+      <file leaf-file-name="JDBC.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/JDBC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="31" selection-start="6724" selection-end="6724" vertical-scroll-proportion="0.0" vertical-offset="3705" max-vertical-offset="4140">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrintStream.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/PrintStream.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="11" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1650">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="File.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/File.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="11" selection-start="825" selection-end="825" vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="2355">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnixFileSystem.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/UnixFileSystem.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="28" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="1275">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="19" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" vertical-offset="174" max-vertical-offset="555">
+            <state line="63" column="0" selection-start="1968" selection-end="1968" vertical-scroll-proportion="0.0" vertical-offset="526" max-vertical-offset="990">
               <folding />
             </state>
           </provider>
@@ -125,7 +136,7 @@
       <file leaf-file-name="ClientHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="36" selection-start="3481" selection-end="3481" vertical-scroll-proportion="0.61904764" vertical-offset="1343" max-vertical-offset="2895">
+            <state line="43" column="0" selection-start="1160" selection-end="1160" vertical-scroll-proportion="0.25621414" vertical-offset="511" max-vertical-offset="5295">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -133,29 +144,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Socket.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/net/Socket.class">
+      <file leaf-file-name="EmailHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="32" selection-start="3309" selection-end="3309" vertical-scroll-proportion="0.0" vertical-offset="1148" max-vertical-offset="2280">
+            <state line="35" column="0" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0" vertical-offset="164" max-vertical-offset="885">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClassLoader.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/ClassLoader.class">
+      <file leaf-file-name="EmailArrayList.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="17" selection-start="3127" selection-end="3127" vertical-scroll-proportion="0.0" vertical-offset="793" max-vertical-offset="2835">
+            <state line="20" column="0" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0" vertical-offset="166" max-vertical-offset="960">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="String.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/String.class">
+      <file leaf-file-name="ServerRun.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="15" selection-start="4015" selection-end="4015" vertical-scroll-proportion="0.0" vertical-offset="1493" max-vertical-offset="3135">
-              <folding />
+            <state line="135" column="0" selection-start="4028" selection-end="4028" vertical-scroll-proportion="0.0" vertical-offset="1891" max-vertical-offset="2595">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -178,14 +191,17 @@
         <option value="$PROJECT_DIR$/src/Task.java" />
         <option value="$PROJECT_DIR$/src/Email.java" />
         <option value="$PROJECT_DIR$/src/Poll.java" />
-        <option value="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
-        <option value="$PROJECT_DIR$/src/ServerRun.java" />
         <option value="$PROJECT_DIR$/src/HttpResponder.java" />
+        <option value="$PROJECT_DIR$/src/ServerRun.java" />
+        <option value="$PROJECT_DIR$/src/EmailHandler.java" />
+        <option value="$PROJECT_DIR$/src/EmailArrayList.java" />
         <option value="$PROJECT_DIR$/src/ClientHandler.java" />
+        <option value="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-5" />
     <option name="y" value="22" />
     <option name="width" value="1440" />
     <option name="height" value="788" />
@@ -216,7 +232,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -252,6 +267,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -461,8 +477,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="788" extended-state="6" />
-    <editor active="true" />
+    <frame x="-5" y="22" width="1440" height="788" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -470,7 +486,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991655" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40055633" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -480,8 +496,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15694444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37413073" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23365785" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -510,6 +526,78 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/HttpResponder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="0" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HttpParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="276" column="31" selection-start="6724" selection-end="6724" vertical-scroll-proportion="0.0" vertical-offset="4140" max-vertical-offset="4425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/PrintStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="11" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/File.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="11" selection-start="826" selection-end="826" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="2370">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/UnixFileSystem.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="28" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1290">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="19" selection-start="960" selection-end="960" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="36" selection-start="3481" selection-end="3481" vertical-scroll-proportion="0.0" vertical-offset="1343" max-vertical-offset="2895">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/net/Socket.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="32" selection-start="3274" selection-end="3274" vertical-scroll-proportion="0.0" vertical-offset="1290" max-vertical-offset="2295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/ClassLoader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="17" selection-start="3127" selection-end="3127" vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="2850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="15" selection-start="4015" selection-end="4015" vertical-scroll-proportion="0.0" vertical-offset="1635" max-vertical-offset="3150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
@@ -535,23 +623,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/SQLiteDBHelper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="45" selection-start="1536" selection-end="1544" vertical-scroll-proportion="0.53744495" vertical-offset="191" max-vertical-offset="660">
-          <folding />
-        </state>
+        <state line="30" column="45" selection-start="1536" selection-end="1544" vertical-scroll-proportion="0.53744495" vertical-offset="191" max-vertical-offset="660" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/config.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="76" selection-end="76" vertical-scroll-proportion="0.09911894" vertical-offset="0" max-vertical-offset="454">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="750">
-          <folding />
-        </state>
+        <state line="3" column="13" selection-start="76" selection-end="76" vertical-scroll-proportion="0.09911894" vertical-offset="0" max-vertical-offset="454" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
@@ -570,41 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Reminder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="25" selection-start="560" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Email.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="1316" selection-end="1827" vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1770">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Email#0;class#Email#0" expanded="false" />
-            <element signature="method#Email#1;class#Email#0" expanded="false" />
-            <element signature="method#Email#2;class#Email#0" expanded="false" />
-            <element signature="docComment;method#Email#3;class#Email#0" expanded="false" />
-            <element signature="method#Email#3;class#Email#0" expanded="false" />
-            <element signature="e#3009#3010#0" expanded="true" />
-            <element signature="e#3034#3035#0" expanded="true" />
-            <element signature="e#3066#3067#0" expanded="true" />
-            <element signature="e#3094#3095#0" expanded="true" />
-            <element signature="e#3136#3137#0" expanded="true" />
-            <element signature="e#3172#3173#0" expanded="true" />
-            <element signature="e#3209#3210#0" expanded="true" />
-            <element signature="e#3240#3241#0" expanded="true" />
-            <element signature="e#3348#3349#0" expanded="true" />
-            <element signature="e#3376#3377#0" expanded="true" />
-            <element signature="e#3407#3408#0" expanded="true" />
-            <element signature="e#3434#3435#0" expanded="true" />
-            <element signature="e#3626#3627#0" expanded="true" />
-            <element signature="e#3659#3660#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Poll.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="31" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="960">
@@ -612,87 +654,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="25" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" vertical-offset="899" max-vertical-offset="1590">
-          <folding>
-            <element signature="method#openDatabase#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="docComment;method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="method#add#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="docComment;method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="docComment;method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="docComment;method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="docComment;method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
-            <element signature="e#10632#10638#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="0" selection-start="3969" selection-end="3969" vertical-scroll-proportion="-39.807693" vertical-offset="960" max-vertical-offset="2640">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/Locale.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="35" selection-start="2680" selection-end="2680" vertical-scroll-proportion="0.0" vertical-offset="688" max-vertical-offset="1965">
-          <folding />
-        </state>
+        <state line="55" column="35" selection-start="2680" selection-end="2680" vertical-scroll-proportion="0.0" vertical-offset="688" max-vertical-offset="1965" />
       </provider>
     </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/sun/misc/Launcher.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="44" selection-start="1916" selection-end="1916" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1215">
-          <folding />
-        </state>
+        <state line="46" column="44" selection-start="1916" selection-end="1916" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1215" />
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/ClassLoader.class">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Thread.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="17" selection-start="3127" selection-end="3127" vertical-scroll-proportion="0.0" vertical-offset="793" max-vertical-offset="2835">
-          <folding />
-        </state>
+        <state line="206" column="0" selection-start="7920" selection-end="7920" vertical-scroll-proportion="0.33678755" vertical-offset="2945" max-vertical-offset="3495" />
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/net/Socket.class">
+    <entry file="file://$PROJECT_DIR$/src/HttpResponder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="32" selection-start="3309" selection-end="3309" vertical-scroll-proportion="0.0" vertical-offset="1148" max-vertical-offset="2280">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="19" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" vertical-offset="174" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/String.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="15" selection-start="4015" selection-end="4015" vertical-scroll-proportion="0.0" vertical-offset="1493" max-vertical-offset="3135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/UnixFileSystem.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="28" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="1275">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/File.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="11" selection-start="825" selection-end="825" vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="2355">
+        <state line="93" column="0" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.0" vertical-offset="1208" max-vertical-offset="3135">
           <folding />
         </state>
       </provider>
@@ -704,30 +683,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Thread.class">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/File.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="0" selection-start="7920" selection-end="7920" vertical-scroll-proportion="0.33678755" vertical-offset="2945" max-vertical-offset="3495">
+        <state line="22" column="11" selection-start="826" selection-end="826" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="2370">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/io/UnixFileSystem.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="28" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1290">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="19" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/net/Socket.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="32" selection-start="3309" selection-end="3309" vertical-scroll-proportion="0.0" vertical-offset="1290" max-vertical-offset="2295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/ClassLoader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="17" selection-start="3127" selection-end="3127" vertical-scroll-proportion="0.0" vertical-offset="793" max-vertical-offset="2835">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="15" selection-start="4015" selection-end="4015" vertical-scroll-proportion="0.0" vertical-offset="1493" max-vertical-offset="3135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0" vertical-offset="164" max-vertical-offset="885">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/HttpParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="31" selection-start="6724" selection-end="6724" vertical-scroll-proportion="0.0" vertical-offset="3705" max-vertical-offset="4140">
+        <state line="237" column="0" selection-start="5815" selection-end="5815" vertical-scroll-proportion="0.0" vertical-offset="3196" max-vertical-offset="4140">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HttpResponder.java">
+    <entry file="file://$PROJECT_DIR$/src/Reminder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="0" selection-start="2104" selection-end="2104" vertical-scroll-proportion="0.0" vertical-offset="1208" max-vertical-offset="3135">
+        <state line="12" column="0" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Email.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0" vertical-offset="286" max-vertical-offset="1890">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Email#0;class#Email#0" expanded="false" />
+            <element signature="method#Email#2;class#Email#0" expanded="false" />
+            <element signature="docComment;method#Email#3;class#Email#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/Conn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.0" vertical-offset="69" max-vertical-offset="6150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/RS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="0" selection-start="4330" selection-end="4330" vertical-scroll-proportion="0.0" vertical-offset="1374" max-vertical-offset="7635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/JDBC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="1968" selection-end="1968" vertical-scroll-proportion="0.0" vertical-offset="534" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="0" selection-start="4028" selection-end="4028" vertical-scroll-proportion="0.0" vertical-offset="1891" max-vertical-offset="2595">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="157" column="0" selection-start="5770" selection-end="5770" vertical-scroll-proportion="0.0" vertical-offset="2116" max-vertical-offset="3795">
+          <folding>
+            <element signature="docComment;method#createTable#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#remove#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#getAllTasks#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="docComment;method#getAllReminders#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="e#8926#8936#0" expanded="true" />
+            <element signature="docComment;method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="method#getAllPolls#0;class#SQLiteDBHelper#0" expanded="false" />
+            <element signature="e#10763#10769#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0" vertical-offset="166" max-vertical-offset="960">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="36" selection-start="3481" selection-end="3481" vertical-scroll-proportion="0.61904764" vertical-offset="1343" max-vertical-offset="2895">
+        <state line="43" column="0" selection-start="1160" selection-end="1160" vertical-scroll-proportion="0.25621414" vertical-offset="511" max-vertical-offset="5295">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

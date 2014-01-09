@@ -32,6 +32,8 @@ public abstract class EmailHandler<E> implements Runnable {
 
 	public abstract void handelEmail(Email email);
 
+
+
 	private void checkStatus() {
 
 		try {

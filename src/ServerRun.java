@@ -87,7 +87,7 @@ public class ServerRun {
                 connectionLimiter.acquire();
                 Socket clientSocket = serverSocket.accept();
                 Thread handleConnection = new Thread(new ClientHandler(
-                        clientSocket));
+                        clientSocket,taskList,reminderList,pollList));
                 System.out
                         .println("Connection established, total connections = "
                                 + (maxThreads - connectionLimiter
@@ -104,7 +104,6 @@ public class ServerRun {
 
             System.exit(2);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             System.exit(1);
 
@@ -133,8 +132,6 @@ public class ServerRun {
         db.openDatabase("","emails");
 
         taskList = db.getAllTasks();
-
-
         pollList = db.getAllPolls();
         reminderList = db.getAllReminders();
     }
