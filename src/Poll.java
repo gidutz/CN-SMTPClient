@@ -41,6 +41,11 @@ public class Poll extends Email {
         return this.checkStatus();
     }
 
+    @Override
+    public void setCompleted(boolean status) {
+        this.completed = status;
+    }
+
     /**
      * return true only if all the recipients have answered the poll
      *

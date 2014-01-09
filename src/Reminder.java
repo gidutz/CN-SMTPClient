@@ -3,21 +3,36 @@ import java.util.Calendar;
 public class Reminder extends Email {
 
 	public Reminder(String owner, Calendar creation_date, Calendar due_date,
-			String recipient, String title, String data ) {
-		super(owner, creation_date, due_date, recipient, title, data);
+			String recipient, String title, String data,boolean completed ) {
+		super(owner, creation_date, due_date, recipient, title, data,completed);
 		this.recipients.add(owner);
 	}
 
+    /**
+     * Constructs a Reminder
+     * @param owner
+     * @param creation_date
+     * @param due_date
+     * @param recipients
+     * @param title
+     * @param data
+     */
 	public Reminder(String owner, Calendar creation_date, Calendar due_date,
-			String[] recipients, String title, String data) {
-		super(owner, creation_date, due_date, recipients, title, data);
+			String[] recipients, String title, String data, boolean completed) {
+		super(owner, creation_date, due_date, recipients, title, data, completed);
 		this.recipients.add(owner);
 	}
 
-	@Override
+    /**
+     * Returns the completion status of the reminder
+     * @return
+     */
 	public boolean isComplete() {
-		// TODO Auto-generated method stub
-		return this.isExpired();
+		return this.completed;
 	}
+
+    public void setCompleted(boolean status) {
+        this.completed = status;
+    }
 
 }

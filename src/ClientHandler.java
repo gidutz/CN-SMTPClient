@@ -156,7 +156,7 @@ public class ClientHandler implements Runnable {
                     dueDate.setTime(date);
                     String title = request.getParam("title");
                     String data = request.getParam("data");
-                    reminder = new Reminder(owner, creationDate, dueDate, recipients, title, data);
+                    reminder = new Reminder(owner, creationDate, dueDate, recipients, title, data,false);
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.reminders.add(reminder);
                     } else {
@@ -243,15 +243,15 @@ public class ClientHandler implements Runnable {
                     StringBuilder sb = new StringBuilder();
 
                     sb.append("<tr><td>");
-                    sb.append(email.getId() + "<td>");
-                    sb.append("<td>" + email.getTitle() + "<td>");
+                    sb.append(email.getId() + "</td>");
+                    sb.append("<td>" + email.getTitle() + "</td>");
                     Date date = email.getCreation_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     date = email.getDue_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
-                    sb.append("<td>" + (email.completed ? "completed" : "in progress") + "<td>");
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
+                    sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
                     sb.append("<td><a href=\"tasks.html?id=del\">Delete</a></td>");
-                    sb.append("<tr>");
+                    sb.append("</tr>");
                     writer.println(sb.toString());
                 }
 

@@ -1,33 +1,41 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Properties;
-import java.util.concurrent.Semaphore;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
- *
  * @author Alon Jackson and Gad Benram
- *
  */
 public class ServerRun {
 
-    /** Maximum number of Threads allowed on this server */
+    /**
+     * Maximum number of Threads allowed on this server
+     */
     protected static int maxThreads;
 
-    /** Port to listen on */
+    /**
+     * Port to listen on
+     */
     protected static int port;
 
-    /** semaphore to handle connections queuing */
+    /**
+     * semaphore to handle connections queuing
+     */
     protected static Semaphore connectionLimiter;
 
-    /** the default page name */
+    /**
+     * the default page name
+     */
     protected static String defaultPage;
 
-    /** the root directory */
+    /**
+     * the root directory
+     */
     protected static String root;
 
-    /** 404 page */
+    /**
+     * 404 page
+     */
     protected static String $404page = "404.html";
 
     private static ServerSocket serverSocket;
@@ -38,7 +46,7 @@ public class ServerRun {
     public static String SMTP_PASSWORD = "password";
     public static String SMTP_SEVER = "compnet.idc.ac.il";
     public static int SMTP_PORT = 25;
-
+    public static boolean AUTHENTICATE = true;
     public static EmailArrayList<Task> taskList;
     public static EmailArrayList<Reminder> reminderList;
     public static EmailArrayList<Poll> pollList;
@@ -74,7 +82,7 @@ public class ServerRun {
             startHandlingEmails();
 
 			/*
-			 * 
+             *
 			 * For Debug! Email task = new Reminder("blabla",
 			 * Calendar.getInstance(), Calendar.getInstance(), new String[] {
 			 * "Alon239@gmail.com", "gidutz@gmail.com" }, "",
@@ -87,7 +95,7 @@ public class ServerRun {
                 connectionLimiter.acquire();
                 Socket clientSocket = serverSocket.accept();
                 Thread handleConnection = new Thread(new ClientHandler(
-                        clientSocket,taskList,reminderList,pollList));
+                        clientSocket, taskList, reminderList, pollList));
                 System.out
                         .println("Connection established, total connections = "
                                 + (maxThreads - connectionLimiter
@@ -129,7 +137,7 @@ public class ServerRun {
 
     private static void loadDB() {
 
-        db.openDatabase("","emails");
+        db.openDatabase("", "emails");
 
         taskList = db.getAllTasks();
         pollList = db.getAllPolls();

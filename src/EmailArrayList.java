@@ -24,7 +24,6 @@ public class EmailArrayList<E> extends ArrayList<Email> {
     }
 
     /**
-     *
      * @param id
      * @return The email with the specifed id, or null if not found
      */
@@ -45,6 +44,37 @@ public class EmailArrayList<E> extends ArrayList<Email> {
             if (arg0 instanceof Email) {
                 Email email = (Email) arg0;
                 dbSuccess = dbHelper.remove(email);
+            }
+            return ((dbSuccess == 1) && arraySuccess);
+        }
+    }
+
+    public Email remove(int id) {
+        int dbSuccess = 0;
+        boolean arraySuccess = false;
+        Email email = null;
+        synchronized (dbHelper) {
+
+            for ( Email temp : this) {
+                if (email.getId() == id) {
+                    arraySuccess = super.remove(temp);
+                    dbSuccess = dbHelper.remove(temp);
+                    email = temp;
+                    break;
+                }
+            }
+        }
+        return email;
+
+    }
+
+    public boolean update(Object arg0) {
+        synchronized (dbHelper) {
+            boolean arraySuccess = super.remove(arg0);
+            int dbSuccess = 0;
+            if (arg0 instanceof Email) {
+                Email email = (Email) arg0;
+                dbSuccess = dbHelper.updateEmail(email);
             }
             return ((dbSuccess == 1) && arraySuccess);
         }

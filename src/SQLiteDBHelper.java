@@ -246,6 +246,64 @@ public class SQLiteDBHelper {
         return tasks;
     }
 
+    public int updateEmail(Email email) {
+        String table = null;
+        if (email instanceof Task) {
+            table = "tasks";
+        } else if (email instanceof Reminder) {
+            table = "reminders";
+        } else if (email instanceof Poll) {
+            table = "polls";
+        } else {
+            return 0;
+        }
+
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+
+            Statement stmt = c.createStatement();
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE " + table + " SET ");
+            sql.append(FIELD_OWNER + "=");
+            sql.append("\"" + email.getOwner() + "\",");
+
+            sql.append(FIELD_RECP + "=");
+            sql.append("\"" + email.getRecipientsString() + "\",");
+
+            sql.append(FIELD_CREATION + "=");
+            Date date = email.getCreation_date().getTime();
+            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
+
+            sql.append(FIELD_DUE + "=");
+            date = email.getDue_date().getTime();
+            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
+
+            sql.append(FIELD_TITLE + "=");
+            sql.append("\"" + email.getTitle() + "\",");
+
+            sql.append(FIELD_COMPLETED + "=");
+            sql.append("\"" + email.isComplete() + "\",");
+
+            sql.append(FIELD_DATA + "= ");
+
+            sql.append("\"" + email.getData() + "\" ");
+            sql.append("WHERE id = " + email.getId());
+
+            sql.append(";");
+
+            stmt.executeUpdate(sql.toString());
+            System.out.println("Record Updated!");
+
+            stmt.close();
+            c.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+        return 1;
+    }
+
     /**
      * Returns an array of all the reminders
      *
@@ -275,8 +333,8 @@ public class SQLiteDBHelper {
                     dueDate.setTime(date);
                     String title = rs.getString(FIELD_TITLE);
                     String data = rs.getString(FIELD_DATA);
-
-                    Reminder reminder = new Reminder(owner, creationDate, dueDate, recipients, title, data);
+                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                    Reminder reminder = new Reminder(owner, creationDate, dueDate, recipients, title, data, completed);
                     reminders.add(reminder);
                 } catch (Exception e) {
                     System.err.println("cannot add reminder");

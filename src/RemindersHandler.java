@@ -1,15 +1,27 @@
-
 public class RemindersHandler extends EmailHandler<Reminder> {
 
-	public RemindersHandler(EmailArrayList<Reminder> emails) {
-		super(emails);
-		// TODO Auto-generated constructor stub
-	}
+    public RemindersHandler(EmailArrayList<Reminder> emails) {
+        super(emails);
+    }
 
-	@Override
-	public void handelEmail(Email email) {
-		// TODO Auto-generated method stub
+    @Override
+    public synchronized void handelEmail(Email email) {
+        Reminder reminder = (Reminder) email;
+        if (!reminder.isComplete()) {
+//            try {
 
-	}
+                reminder.setCompleted(true);
+                emails.update(email);
+                SMTPSession smtpSession = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
+              //  smtpSession.sendMessage(reminder);
+//            } catch (SMTPExeption smtpExeption) {
+//                smtpExeption.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
+
+
+    }
 
 }
