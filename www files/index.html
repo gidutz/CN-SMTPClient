@@ -58,12 +58,22 @@
                  window.location.href ="main.html";
          }
          
-         </script>
-<script>
+	function validateEmail(email) 
+	{ 
+	filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (filter.test(email.value)) {
+	// Yay! valid
+	return true;
+	}
+	else
+	{
+	alert("Please enter a valid Email.");
+	return false;
+	}
+	}
 
 
 	$(document).ready(function(){
- 
 	$("#submit1").hover(
 	function() {
 	$(this).animate({"opacity": "0"}, "slow");
@@ -73,8 +83,15 @@
 	});
  	});
 
-function post(u,p) {
+	function submitfunc() {
+	alert("sdfds");
+	
 	checkCookie(u);
+	
+	
+	if validateEmail(u)
+	{
+	
 	method = "post";
 
 	// Create the form object
@@ -101,6 +118,7 @@ function post(u,p) {
 
 	document.body.appendChild(form); // inject the form object into the body section
 	form.submit();
+	}
 }
 
 </script>
@@ -120,7 +138,7 @@ function post(u,p) {
 				<div id="username_inputleft"></div>
 
 				<div id="username_inputmiddle">
-				<form name="input" action="main.html" method="get">
+				<form name="input" action="main.html" method="get" onsubmit="submitfunc()">
 					<input type="text" name="u" id="url" value="Email" onclick="this.value = ''">
 					<img id="url_user" src="./images/mailicon.png" alt="">
 
@@ -147,8 +165,8 @@ function post(u,p) {
 
 			<div id="submit">
 
-				<input type="image" src="./images/submit_hover.png" id="submit1" value="Sign In" onClick="post(u,p)">
-				<input type="image" src="./images/submit.png" id="submit2" value="Sign In">
+				<input type="image" src="./images/submit_hover.png" id="submit1" value="Sign In" onClick="post()">
+				<input type="image" src="./images/submit.png" id="submit2" value="Sign In" onClick="post()">
 				</form>	
 			</div>
 
