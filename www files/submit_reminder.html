@@ -1,3 +1,15 @@
+<script>
+  function processForm()
+  {
+    var parameters = location.search.substring(1).split("&");
+	alert(parameters);
+    var temp = parameters[0].split("=");
+    id = unescape(temp[1]);
+    alert("WELOCOME ID:"+id+"."); //Dialog with the text you put on the textbox
+  }	
+  processForm();
+  
+</script>
 Operation Failed! :/
 <br>
 <a href="remainders.html">back</a>
