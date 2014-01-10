@@ -151,4 +151,6 @@ public abstract class Email {
     }
     public abstract void setCompleted(boolean status);
 
+    public abstract  boolean wasSent ();
+
 }

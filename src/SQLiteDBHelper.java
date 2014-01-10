@@ -11,6 +11,7 @@ public class SQLiteDBHelper {
     private final String FIELD_TITLE = "title";
     private final String FIELD_DATA = "data";
     private final String FIELD_COMPLETED = "completed";
+    private final String FIELD_SENT = "sent";
     private final String FIELD_ANSWER = "ans_";
     private final String FIELD_ANSWER_1 = "ans_1";
     private final String FIELD_ANSWER_2 = "ans_2";
@@ -36,7 +37,7 @@ public class SQLiteDBHelper {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
             System.out.println("Opened database successfully");
 
             HashMap<String, String> fields = new HashMap<String, String>();
@@ -48,6 +49,7 @@ public class SQLiteDBHelper {
             fields.put(FIELD_DUE, "TEXT");
             fields.put(FIELD_TITLE, "TEXT");
             fields.put(FIELD_DATA, "TEXT");
+            fields.put(FIELD_SENT, "TEXT");
             fields.put(FIELD_COMPLETED, "TEXT");
             fields.put(FIELD_ANSWER_1, "TEXT");
             fields.put(FIELD_ANSWER_2, "TEXT");
@@ -82,7 +84,7 @@ public class SQLiteDBHelper {
 
         Statement stmt = null;
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
 
             stmt = c.createStatement();
             StringBuilder sql = new StringBuilder();
@@ -125,7 +127,7 @@ public class SQLiteDBHelper {
         }
 
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
 
             Statement stmt = c.createStatement();
             StringBuilder sql = new StringBuilder();
@@ -137,6 +139,7 @@ public class SQLiteDBHelper {
             sql.append(FIELD_DUE + ",");
             sql.append(FIELD_TITLE + ",");
             sql.append(FIELD_COMPLETED + ",");
+            sql.append(FIELD_SENT + ",");
             sql.append(FIELD_DATA + ")");
             sql.append("VALUES (");
             sql.append("\"" + email.getId() + "\",");
@@ -148,6 +151,7 @@ public class SQLiteDBHelper {
             sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
             sql.append("\"" + email.getTitle() + "\",");
             sql.append("\"" + email.isComplete() + "\",");
+            sql.append("\"" + email.wasSent() + "\",");
             sql.append("\"" + email.getData() + "\")");
 
             sql.append(";");
@@ -182,7 +186,7 @@ public class SQLiteDBHelper {
         }
 
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
 
             Statement stmt = c.createStatement();
             StringBuilder sql = new StringBuilder();
@@ -207,7 +211,6 @@ public class SQLiteDBHelper {
     /**
      * Returns an array of all the Tasks
      *
-     *
      * @param tasksList@return
      */
     public synchronized EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
@@ -215,7 +218,7 @@ public class SQLiteDBHelper {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
             c.setAutoCommit(false);
             System.out.println("Loading tasks... (this may take a while)");
 
@@ -234,7 +237,8 @@ public class SQLiteDBHelper {
                     String title = rs.getString(FIELD_TITLE);
                     String data = rs.getString(FIELD_DATA);
                     boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
-                    Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed);
+                    boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
+                    Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed, sent);
                     tasksList.loadFromDisk(task);
                 } catch (Exception e) {
                     System.err.println("cannot add task");
@@ -265,7 +269,7 @@ public class SQLiteDBHelper {
         }
 
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
 
             Statement stmt = c.createStatement();
             StringBuilder sql = new StringBuilder();
@@ -313,8 +317,8 @@ public class SQLiteDBHelper {
     /**
      * Returns an array of all the reminders
      *
-     * @return
      * @param reminderList
+     * @return
      */
     public synchronized EmailArrayList<Reminder> getAllReminders(EmailArrayList<Reminder> reminderList) {
 
@@ -331,15 +335,19 @@ public class SQLiteDBHelper {
             Reminder reminder;
             while (rs.next()) {
                 try {
+                    String owner = rs.getString(FIELD_OWNER);
                     Calendar creationDate = Calendar.getInstance();
                     Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
                     creationDate.setTime(date);
                     Calendar dueDate = Calendar.getInstance();
                     date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
                     dueDate.setTime(date);
-                    reminder = new Reminder(rs.getString(FIELD_OWNER), creationDate, dueDate,
-                            rs.getString(FIELD_RECP).split(";"), rs.getString(FIELD_TITLE),
-                            rs.getString(FIELD_DATA), rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true"));
+                    String title = rs.getString(FIELD_TITLE);
+                    String data = rs.getString(FIELD_DATA);
+                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                    reminder = new Reminder(owner, creationDate, dueDate,
+                            owner, title,
+                            data, completed);
                     reminderList.loadFromDisk(reminder);
                 } catch (Exception e) {
                     System.err.println("cannot add reminder");
@@ -360,7 +368,6 @@ public class SQLiteDBHelper {
     /**
      * Returns an array of all the polls
      *
-     *
      * @param pollList@return
      */
     public synchronized EmailArrayList<Poll> getAllPolls(EmailArrayList<Poll> pollList) {
@@ -370,7 +377,7 @@ public class SQLiteDBHelper {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
             c.setAutoCommit(false);
             System.out.println("Loading polls... (This may take a while) ");
 
@@ -389,6 +396,7 @@ public class SQLiteDBHelper {
                     String title = rs.getString(FIELD_TITLE);
                     String data = rs.getString(FIELD_DATA);
                     boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                    boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
 
                     int[] results = new int[10];
                     for (int i = 1; i <= 10; i++) {
@@ -396,7 +404,7 @@ public class SQLiteDBHelper {
                         results[i] = result;
                     }
 
-                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, results);
+                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, results, sent);
                     pollList.loadFromDisk(poll);
                 } catch (Exception e) {
                     System.err.println("cannot add poll");

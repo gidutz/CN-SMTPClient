@@ -45,9 +45,9 @@ public class ServerRun {
     public static String SMTP_SEVER = "compnet.idc.ac.il";
     public static int SMTP_PORT = 25;
     public static boolean AUTHENTICATE = true;
-
+    public static String DB_PATH = "./test.db";
     public static SQLiteDBHelper db;
-
+    public  static String SERVER_NAME = "localhost";
     /**
      * @param args
      */
@@ -65,10 +65,7 @@ public class ServerRun {
         serverRun.start();
 
 
-
     }
-
-
 
 
     /**

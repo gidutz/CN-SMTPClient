@@ -39,7 +39,7 @@ public abstract class EmailHandler<E> implements Runnable {
 		try {
 			synchronized (emails) {
 				for (Email email : emails) {
-					if (email.isExpired()&&!email.isComplete()) {
+					if (email.isExpired()) {
 						handelEmail(email);
 					}
 				}

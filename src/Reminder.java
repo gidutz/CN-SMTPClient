@@ -35,4 +35,9 @@ public class Reminder extends Email {
         this.completed = status;
     }
 
+    @Override
+    public boolean wasSent() {
+        return false;
+    }
+
 }

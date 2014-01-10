@@ -60,7 +60,7 @@ public class SMTPSession {
         return response;
     }
 
-    public synchronized void sendMessage(Email email) throws IOException, SMTPExeption {
+    public synchronized void sendMessage(Email email) throws IOException, SMTPException {
         if (this.socket == null) {
             connect();
         }
@@ -94,7 +94,7 @@ public class SMTPSession {
     }
 
     private int doCommand(int command, String param) throws IOException,
-            SMTPExeption {
+            SMTPException {
         return doCommand(command, param, null);
     }
 
@@ -102,10 +102,10 @@ public class SMTPSession {
      * @param command
      * @return
      * @throws IOException
-     * @throws SMTPExeption
+     * @throws SMTPException
      */
     private int doCommand(int command, String param, Email email) throws IOException,
-            SMTPExeption {
+            SMTPException {
         String statement = null;
 
         param = (param == null) ? "" : param;
@@ -121,7 +121,7 @@ public class SMTPSession {
                     response = getResponse();
                     System.out.println(response);
                     if (!response.startsWith("250")) {
-                        throw new SMTPExeption(
+                        throw new SMTPException(
                                 "problem communication with the server");
                     }
                 } while (!response.startsWith("250 "));// with a space after 250
@@ -134,7 +134,7 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("334")) {
-                    throw new SMTPExeption("Authentication Failed");
+                    throw new SMTPException("Authentication Failed");
                 }
 
             case AUTHEN_USER:
@@ -143,7 +143,7 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("334")) {
-                    throw new SMTPExeption("Authentication Failed");
+                    throw new SMTPException("Authentication Failed");
                 }
             case AUTHEN_PASS:
                 statement = Base64.encodeBase64String(ServerRun.SMTP_PASSWORD.getBytes());
@@ -151,7 +151,7 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("235")) {
-                    throw new SMTPExeption("Authentication Failed");
+                    throw new SMTPException("Authentication Failed");
                 }
                 break;
 
@@ -161,7 +161,7 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("250")) {
-                    throw new SMTPExeption("Cannot send mail");
+                    throw new SMTPException("Cannot send mail");
                 }
                 break;
             case MAIL_FROM:
@@ -170,7 +170,7 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("250")) {
-                    throw new SMTPExeption("Cannot send mail");
+                    throw new SMTPException("Cannot send mail");
                 }
                 break;
             case MAIL_CONTENT:
@@ -179,14 +179,14 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("354")) {
-                    throw new SMTPExeption("Cannot send mail");
+                    throw new SMTPException("Cannot send mail");
                 }
                 statement = prepareMail(email);
                 sendStatement(statement);
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("250")) {
-                    throw new SMTPExeption("Cannot send mail");
+                    throw new SMTPException("Cannot send mail");
                 }
                 break;
             case QUIT:
@@ -194,7 +194,7 @@ public class SMTPSession {
                 response = getResponse();
                 System.out.println(response);
                 if (!response.startsWith("221")) {
-                    throw new SMTPExeption("Cannot disconnect");
+                    throw new SMTPException("Cannot disconnect");
                 }
                 break;
         }

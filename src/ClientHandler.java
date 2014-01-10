@@ -185,7 +185,7 @@ public class ClientHandler implements Runnable {
                     dueDate.setTime(date);
                     String title = request.getParam("title");
                     String data = request.getParam("data");
-                    task = new Task(owner, creationDate, dueDate, recipient, title, data, false);
+                    task = new Task(owner, creationDate, dueDate, recipient, title, data, false, false);
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.tasks.add(task);
                     } else {
@@ -222,6 +222,11 @@ public class ClientHandler implements Runnable {
         return path;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     private String generateReminders(String user) {
         String path = null;
         try {
@@ -323,20 +328,62 @@ public class ClientHandler implements Runnable {
 
     }
 
-
+    /**
+     *
+     * @param user
+     * @return
+     */
     private String generateTasksPage(String user) {
+        //TODO: make sure only uncompleted tasks may be edited
+
         String path = null;
         try {
-            path = ServerRun.root + "/" + user + "/tasks.html";
+
+
+            path = ServerRun.root + "/" + user + "/polls.html";
             File page = new File(path);
             page.getParentFile().mkdirs();
             page.createNewFile();
             PrintWriter writer = new PrintWriter(path, "UTF-8");
-            writer.println("The first line");
-            writer.println("The second line");
+            String headline = "<table border=\"0\"><tr><td><b>#</td><td><b>task " +
+                    "title</td><td><b>Creation time</td>" +
+                    "<td><b>Due time</td> <td><b>Status</td>" +
+                    "<td><a href=\"task_editor.html?id=new\">New</a></td>" +
+                    "</tr>";
+
+            writer.println(headline);
+            headline = null;
+            for (Object obj : tasks) {
+                Task email = (Task) obj;
+                if (email.getOwner().equals(user)) {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.append("<tr><td>");
+                    sb.append(email.getId() + "<td>");
+                    sb.append("<td>" + email.getTitle() + "<td>");
+                    Date date = email.getCreation_date().getTime();
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
+                    date = email.getDue_date().getTime();
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
+                    String status;
+                    if (email.isComplete()){
+                        status = "completed";
+                    }else if (email.isExpired()){
+                        status = "time is due";
+                    }else{
+                        status = "in progress...";
+                    }
+                    sb.append("<td>" + status + "<td>");
+                    sb.append("<td><a href=\"tasks.html?id=del\">Delete</a></td>");
+                    sb.append("<tr>");
+                    writer.println(sb.toString());
+                }
+
+            }
+            writer.println("</table>");
             writer.close();
         } catch (IOException e) {
-            System.err.println("cannot create tasks file");
+            System.err.println("cannot create polls file");
             e.printStackTrace();
 
         }

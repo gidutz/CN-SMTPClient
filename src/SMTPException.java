@@ -1,7 +1,7 @@
 
-public class SMTPExeption extends Exception {
+public class SMTPException extends Exception {
 
-	public SMTPExeption(String string) {
+	public SMTPException(String string) {
 		super(string);
 	}
 
