@@ -1,5 +1,4 @@
 import java.io.*;
-import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -38,7 +37,6 @@ public class ServerRun {
      */
     protected static String $404page = "404.html";
 
-    private static ServerSocket serverSocket;
 
     public static String mainPage = "main.html";
 
@@ -47,9 +45,7 @@ public class ServerRun {
     public static String SMTP_SEVER = "compnet.idc.ac.il";
     public static int SMTP_PORT = 25;
     public static boolean AUTHENTICATE = true;
-    public static EmailArrayList<Task> taskList;
-    public static EmailArrayList<Reminder> reminderList;
-    public static EmailArrayList<Poll> pollList;
+
     public static SQLiteDBHelper db;
 
     /**
@@ -64,85 +60,16 @@ public class ServerRun {
             System.err.println("Cannot find config.ini. Server must shut down");
             System.exit(2);
         }
+        connectionLimiter = new Semaphore(maxThreads);
+        Thread serverRun = new Thread(new Runner());
+        serverRun.start();
 
-        try {
-            db = new SQLiteDBHelper();
 
-            loadDB();
-        } catch (Exception e) {
-            // TODO: cannot locate DB!
-        }
-
-        try {
-            connectionLimiter = new Semaphore(maxThreads);
-
-            serverSocket = new ServerSocket(port);
-            System.out.println("Listening on port = " + port);
-
-            startHandlingEmails();
-
-			/*
-             *
-			 * For Debug! Email task = new Reminder("blabla",
-			 * Calendar.getInstance(), Calendar.getInstance(), new String[] {
-			 * "Alon239@gmail.com", "gidutz@gmail.com" }, "",
-			 * "if u can read this, lab 2 is almost done", "gidutz@gmail.com");
-			 * SMTPClient client = new SMTPClient(SMTP_SEVER, SMTP_PORT, true);
-			 * try { client.sendMessage(task); } catch (SMTPExeption e) { //
-			 * TODO Auto-generated catch block e.printStackTrace(); }
-			 */
-            while (true) {
-                connectionLimiter.acquire();
-                Socket clientSocket = serverSocket.accept();
-                Thread handleConnection = new Thread(new ClientHandler(
-                        clientSocket, taskList, reminderList, pollList));
-                System.out
-                        .println("Connection established, total connections = "
-                                + (maxThreads - connectionLimiter
-                                .availablePermits()));
-                handleConnection.start();
-
-            }
-
-        } catch (IOException e) {
-            System.err.println(e);
-            System.out
-                    .println("\r\nOh no, the server is down, please to call Shraga "
-                            + "\nhttp://www.youtube.com/watch?v=BaMTbN6Iz3g");
-
-            System.exit(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            System.exit(1);
-
-        } finally {
-            try {
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
 
     }
 
-    private static void startHandlingEmails() {
-        Thread tasksHendler = new Thread(new TasksHandler(taskList));
-        Thread pollsHandler = new Thread(new PollsHandler(pollList));
-        Thread remindersHandler = new Thread(new RemindersHandler(reminderList));
-        tasksHendler.start();
-        pollsHandler.start();
-        remindersHandler.start();
-    }
 
-    private static void loadDB() {
 
-        db.openDatabase("", "emails");
-
-        taskList = db.getAllTasks();
-        pollList = db.getAllPolls();
-        reminderList = db.getAllReminders();
-    }
 
     /**
      * loads proprtires from a cobfiguration file

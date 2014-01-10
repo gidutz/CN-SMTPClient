@@ -8,8 +8,15 @@ public class EmailArrayList<E> extends ArrayList<Email> {
         this.dbHelper = dbHelper;
     }
 
+    public  synchronized  boolean loadFromDisk(Email arg0){
+        synchronized (dbHelper) {
+            boolean arraySuccess = super.add(arg0);
+
+            return  arraySuccess;
+        }
+    }
     @Override
-    public boolean add(Email arg0) {
+    public synchronized boolean add(Email arg0) {
 
         synchronized (dbHelper) {
             boolean arraySuccess = super.add(arg0);
@@ -37,7 +44,7 @@ public class EmailArrayList<E> extends ArrayList<Email> {
     }
 
     @Override
-    public boolean remove(Object arg0) {
+    public synchronized boolean remove(Object arg0) {
         synchronized (dbHelper) {
             boolean arraySuccess = super.remove(arg0);
             int dbSuccess = 0;
@@ -49,13 +56,13 @@ public class EmailArrayList<E> extends ArrayList<Email> {
         }
     }
 
-    public Email remove(int id) {
+    public synchronized Email remove(int id) {
         int dbSuccess = 0;
         boolean arraySuccess = false;
         Email email = null;
         synchronized (dbHelper) {
 
-            for ( Email temp : this) {
+            for (Email temp : this) {
                 if (email.getId() == id) {
                     arraySuccess = super.remove(temp);
                     dbSuccess = dbHelper.remove(temp);
@@ -68,7 +75,7 @@ public class EmailArrayList<E> extends ArrayList<Email> {
 
     }
 
-    public boolean update(Object arg0) {
+    public synchronized boolean update(Object arg0) {
         synchronized (dbHelper) {
             boolean arraySuccess = super.remove(arg0);
             int dbSuccess = 0;
@@ -83,6 +90,6 @@ public class EmailArrayList<E> extends ArrayList<Email> {
     /**
      *
      */
-    private static final long serialVersionUID = 3183656292450348037L;
+    private static final long serialVersionUID = (long) (144563 * Math.random());
 
 }

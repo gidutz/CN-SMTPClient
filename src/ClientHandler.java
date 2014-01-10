@@ -13,9 +13,9 @@ public class ClientHandler implements Runnable {
     /* --! connection time out for the socket -- */
     private static final int CONNECTION_TIMEOUT = 30 * 1000;
 
-    EmailArrayList tasks;
-    EmailArrayList reminders;
-    EmailArrayList polls;
+    volatile EmailArrayList tasks;
+    volatile EmailArrayList reminders;
+    volatile EmailArrayList polls;
 
     public ClientHandler(Socket clientSocket, EmailArrayList tasks, EmailArrayList reminders, EmailArrayList polls) {
 
@@ -134,6 +134,7 @@ public class ClientHandler implements Runnable {
             } else if (path.endsWith("remainders.html")) {
                 if ((id = request.getParam("id")) != null) {
                     deleteEmail(id);
+                    path = generateReminders(user);
 
                 } else {
                     path = generateReminders(user);
@@ -176,8 +177,7 @@ public class ClientHandler implements Runnable {
                 Task task = null;
                 try {
                     String owner = user;
-                    String[] recipients = request.getParam("recipients").split(";");
-                    //TODO:change this!!!!!!!!!
+                    String recipient = request.getParam("recipients");
                     Calendar creationDate = Calendar.getInstance();
 
                     Calendar dueDate = Calendar.getInstance();
@@ -185,7 +185,7 @@ public class ClientHandler implements Runnable {
                     dueDate.setTime(date);
                     String title = request.getParam("title");
                     String data = request.getParam("data");
-                    task = new Task(owner, creationDate, dueDate, recipients[0], title, data, false);
+                    task = new Task(owner, creationDate, dueDate, recipient, title, data, false);
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.tasks.add(task);
                     } else {
@@ -225,7 +225,7 @@ public class ClientHandler implements Runnable {
     private String generateReminders(String user) {
         String path = null;
         try {
-            path = ServerRun.root + "/" + user + "/polls.html";
+            path = ServerRun.root + "/" + user + "/reminders.html";
             File page = new File(path);
             page.getParentFile().mkdirs();
             page.createNewFile();
