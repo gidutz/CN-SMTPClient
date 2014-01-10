@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Poll extends Email {
-    private boolean sent ;
+    private boolean sent;
     ArrayList<String> recipients;
     int[] results;
 
@@ -15,8 +15,9 @@ public class Poll extends Email {
         this.results = new int[10];
         this.sent = sent;
     }
+
     public Poll(String owner, Calendar creation_date, Calendar due_date,
-                String recipient, String title, String data, boolean completed, int[]results, boolean sent) {
+                String recipient, String title, String data, boolean completed, int[] results, boolean sent) {
         super(owner, creation_date, due_date, recipient, title, data);
         this.completed = completed;
         this.recipients = new ArrayList<String>();
@@ -25,13 +26,15 @@ public class Poll extends Email {
         this.sent = sent;
 
     }
+
     public Poll(String owner, Calendar creation_date, Calendar due_date,
-                String recipients[], String title, String data, boolean completed, int[]results, boolean sent) {
-        super(owner, creation_date, due_date, recipients, title, data,completed);
+                String recipients[], String title, String data, boolean completed, int[] results, boolean sent) {
+        super(owner, creation_date, due_date, recipients, title, data, completed);
         this.results = results;
         this.sent = sent;
 
     }
+
     public void updateVote(int result) {
         this.results[result]++;
 
@@ -63,11 +66,28 @@ public class Poll extends Email {
      */
     public boolean checkStatus() {
         int sumReplies = 0;
-        for (int i =0; i<this.results.length;i++){
+        for (int i = 0; i < this.results.length; i++) {
             sumReplies += results[i];
         }
         //sum all the fileds and check if the sum equals the size of the recipients array
-        return sumReplies>=recipients.size();
+        return sumReplies >= recipients.size();
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String getData() {
+        StringBuilder dataBuilder = new StringBuilder();
+        dataBuilder.append(this.data);
+        dataBuilder.append("\n");
+        for (int i = 1; i <= 10; i++) {
+
+            dataBuilder.append("http://" + ServerRun.SERVER_NAME + "/polly_reply?id=" + id + "&ans=" + i);
+            dataBuilder.append("\n");
+
+        }
+        return dataBuilder.toString();
+    }
 }

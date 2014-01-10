@@ -14,6 +14,7 @@ public abstract class Email {
     final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    final String CRLF = "\r\n";
 
     public Email(String owner, Calendar creation_date, Calendar due_date,
                  String recipient, String title, String data) {

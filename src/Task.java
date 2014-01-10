@@ -6,14 +6,11 @@ public class Task extends Email {
 
     public Task(String owner, Calendar creation_date, Calendar due_date,
                 String recipient, String title, String data, boolean completed, boolean sent) {
-        super(owner, creation_date, due_date, recipient, title, data);
+        super(owner, creation_date, due_date, "", title, data);
         this.completed = completed;
-        StringBuilder dataBuilder = new StringBuilder();
-        dataBuilder.append(this.data);
-        dataBuilder.append("\n To mark Completion click here:");
-        dataBuilder.append("\n ");
-        dataBuilder.append("http://" + ServerRun.SERVER_NAME + ":" + ServerRun.port);
         this.sent = sent;
+        this.recipients = new ArrayList<String>();
+        recipients.add(recipient);
     }
 
     /**
@@ -28,11 +25,52 @@ public class Task extends Email {
     public void setCompleted(boolean status) {
         this.completed = status;
     }
-    public void setSendStatus (Boolean sent){
+
+    /**
+     * returns if the task was sent
+     *
+     * @param sent
+     */
+    public void setSendStatus(Boolean sent) {
+
         this.sent = sent;
     }
-    public boolean wasSent (){
+
+    public boolean wasSent() {
         return this.sent;
     }
 
+    /**
+     * Returns the user-defined email starts with "Title:"
+     *
+     * @return
+     */
+    @Override
+    public String getTitle() {
+        if (!this.title.startsWith("Task:"))
+            this.title = "Task:" + this.title;
+        return this.title;
+    }
+
+    /**
+     * Appends poll information if not added yet
+     *
+     * @return
+     */
+    @Override
+    public String getData() {
+        StringBuilder dataBuilder = null;
+
+        if (!data.startsWith("Task from ")) {
+            dataBuilder = new StringBuilder();
+
+            dataBuilder.append("Task from " + owner + CRLF);
+            dataBuilder.append(this.data);
+            dataBuilder.append(CRLF +"To mark Completion click here:");
+            dataBuilder.append(CRLF);
+            dataBuilder.append("http://" + ServerRun.SERVER_NAME + ":" + ServerRun.port);
+        }
+
+        return dataBuilder == null ? data : dataBuilder.toString();
+    }
 }

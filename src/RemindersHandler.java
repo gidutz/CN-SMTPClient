@@ -11,7 +11,6 @@ public class RemindersHandler extends EmailHandler<Reminder> {
         Reminder reminder = (Reminder) email;
         if (!reminder.isComplete()) {
             try {
-
                 SMTPSession smtpSession = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
                 smtpSession.sendMessage(reminder);
                 reminder.setCompleted(true);

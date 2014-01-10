@@ -134,10 +134,10 @@ public class ClientHandler implements Runnable {
             } else if (path.endsWith("remainders.html")) {
                 if ((id = request.getParam("id")) != null) {
                     deleteEmail(id);
-                    path = generateReminders(user);
+                    path = generateRemindersPage(user);
 
                 } else {
-                    path = generateReminders(user);
+                    path = generateRemindersPage(user);
                 }
             } else if (path.endsWith("polls.html")) {
                 if ((id = request.getParam("id")) != null) {
@@ -165,7 +165,7 @@ public class ClientHandler implements Runnable {
                         this.reminders.add(reminder);
 
                     }
-                    path = generateReminders(user);
+                    path = generatePollsPage(user);
 
                 } catch (ParseException e) {
                     System.err.println("cannot parse date correctly");
@@ -186,6 +186,10 @@ public class ClientHandler implements Runnable {
                     String title = request.getParam("title");
                     String data = request.getParam("data");
                     task = new Task(owner, creationDate, dueDate, recipient, title, data, false, false);
+
+                    //Send the Task Immediately!
+                    SMTPSession session = new SMTPSession(ServerRun.SMTP_SEVER,ServerRun.SMTP_PORT,ServerRun.AUTHENTICATE);
+                    session.sendMessage(task);
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.tasks.add(task);
                     } else {
@@ -193,11 +197,16 @@ public class ClientHandler implements Runnable {
                         this.tasks.add(task);
 
                     }
-                    path = generateReminders(user);
+
+                    path = generateTasksPage(user);
 
                 } catch (ParseException e) {
                     System.err.println("cannot parse date correctly");
 
+                } catch (SMTPException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
             } else if (path.endsWith("submit_poll.html")) {
@@ -227,7 +236,7 @@ public class ClientHandler implements Runnable {
      * @param user
      * @return
      */
-    private String generateReminders(String user) {
+    private String generateRemindersPage(String user) {
         String path = null;
         try {
             path = ServerRun.root + "/" + user + "/reminders.html";

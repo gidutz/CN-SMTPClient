@@ -294,8 +294,10 @@ public class SQLiteDBHelper {
             sql.append(FIELD_COMPLETED + "=");
             sql.append("\"" + email.isComplete() + "\",");
 
-            sql.append(FIELD_DATA + "= ");
+            sql.append(FIELD_SENT + "=");
+            sql.append("\"" + email.wasSent() + "\",");
 
+            sql.append(FIELD_DATA + "= ");
             sql.append("\"" + email.getData() + "\" ");
             sql.append("WHERE id = " + email.getId());
 

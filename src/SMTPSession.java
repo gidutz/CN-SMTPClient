@@ -2,6 +2,7 @@ import org.apache.commons.codec.binary.*;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class SMTPSession {
 
@@ -212,8 +213,12 @@ public class SMTPSession {
         message.append(CRLF);
         message.append("Date: " + Email.DATE_FORMAT.format(email.getCreation_date().getTime()) + CRLF);
         message.append("Subject: " + email.getTitle() + CRLF);
-        message.append(email.getData());
-        message.append(CRLF);
+        Scanner scanner= new Scanner(email.getData());
+        while (scanner.hasNextLine()){
+            message.append(scanner.nextLine());
+            message.append(CRLF);
+
+        }
         message.append(".");
 
         return message.toString();
