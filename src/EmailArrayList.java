@@ -3,6 +3,10 @@ import java.util.*;
 public class EmailArrayList<E> extends ArrayList<Email> {
     SQLiteDBHelper dbHelper;
 
+    public SQLiteDBHelper getDbHelper() {
+        return dbHelper;
+    }
+
     public EmailArrayList(SQLiteDBHelper dbHelper) {
         super();
         this.dbHelper = dbHelper;
@@ -63,7 +67,7 @@ public class EmailArrayList<E> extends ArrayList<Email> {
         synchronized (dbHelper) {
 
             for (Email temp : this) {
-                if (email.getId() == id) {
+                if (temp.getId() == id) {
                     arraySuccess = super.remove(temp);
                     dbSuccess = dbHelper.remove(temp);
                     email = temp;

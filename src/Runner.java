@@ -6,9 +6,9 @@ import java.util.concurrent.*;
  * Created by gidutz on 1/10/14.
  */
 public class Runner implements Runnable {
-    public volatile EmailArrayList<Task> tasksList;
-    public volatile EmailArrayList<Reminder> reminderList;
-    public volatile EmailArrayList<Poll> pollList;
+    public static volatile EmailArrayList<Task> tasksList;
+    public static volatile EmailArrayList<Reminder> reminderList;
+    public static volatile EmailArrayList<Poll> pollList;
     public SQLiteDBHelper db;
 
     public void run() {
@@ -85,9 +85,9 @@ public class Runner implements Runnable {
     }
 
     private void startHandlingEmails() {
-        Thread tasksHandler = new Thread(new TasksHandler(tasksList));
-        Thread pollsHandler = new Thread(new PollsHandler(pollList));
-        Thread remindersHandler = new Thread(new RemindersHandler(reminderList));
+        Thread tasksHandler = new Thread(new TasksHandler(tasksList,db));
+        Thread pollsHandler = new Thread(new PollsHandler(pollList,db));
+        Thread remindersHandler = new Thread(new RemindersHandler(reminderList,db));
         tasksHandler.start();
         pollsHandler.start();
         remindersHandler.start();

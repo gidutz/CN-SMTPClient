@@ -2,8 +2,8 @@ import java.io.*;
 
 public class RemindersHandler extends EmailHandler<Reminder> {
 
-    public RemindersHandler(EmailArrayList<Reminder> emails) {
-        super(emails);
+    public RemindersHandler(EmailArrayList<Reminder> emails, SQLiteDBHelper db) {
+        super(emails, db);
     }
 
     @Override
@@ -24,5 +24,16 @@ public class RemindersHandler extends EmailHandler<Reminder> {
 
 
     }
+
+    @Override
+    protected void loadFromDatabase() {
+        EmailArrayList<Reminder> remindersList = new EmailArrayList<Reminder>(db);
+        remindersList = db.getAllReminders(remindersList);
+        emails.clear();
+        for (Email email : remindersList) {
+            emails.loadFromDisk(email);
+        }
+    }
+
 
 }

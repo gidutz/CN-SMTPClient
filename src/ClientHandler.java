@@ -126,14 +126,14 @@ public class ClientHandler implements Runnable {
                 path = ServerRun.root + ServerRun.mainPage;
             } else if (path.endsWith("tasks.html")) {
                 if ((id = request.getParam("id")) != null) {
-                    deleteEmail(id);
-
+                    deleteTask(id);
+                    path = generateTasksPage(user);
                 } else {
                     path = generateTasksPage(user);
                 }
             } else if (path.endsWith("remainders.html")) {
                 if ((id = request.getParam("id")) != null) {
-                    deleteEmail(id);
+                    deleteReminder(id);
                     path = generateRemindersPage(user);
 
                 } else {
@@ -141,8 +141,8 @@ public class ClientHandler implements Runnable {
                 }
             } else if (path.endsWith("polls.html")) {
                 if ((id = request.getParam("id")) != null) {
-                    deleteEmail(id);
-
+                    deletePoll(id);
+                    path = generatePollsPage(user);
                 } else {
                     path = generatePollsPage(user);
                 }
@@ -188,7 +188,7 @@ public class ClientHandler implements Runnable {
                     task = new Task(owner, creationDate, dueDate, recipient, title, data, false, false);
 
                     //Send the Task Immediately!
-                    SMTPSession session = new SMTPSession(ServerRun.SMTP_SEVER,ServerRun.SMTP_PORT,ServerRun.AUTHENTICATE);
+                    SMTPSession session = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
                     session.sendMessage(task);
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.tasks.add(task);
@@ -232,7 +232,6 @@ public class ClientHandler implements Runnable {
     }
 
     /**
-     *
      * @param user
      * @return
      */
@@ -268,7 +267,9 @@ public class ClientHandler implements Runnable {
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
 
                     //TODO: only enable deletion if in progress
-                    sb.append("<td><a href=\"tasks.html?id=del\">Delete</a></td>");
+                    sb.append("<td><a href=\"reminders.html?id=");
+                    sb.append(email.getId());
+                    sb.append("\">Delete</a></td>");
                     sb.append("</tr>");
                     writer.println(sb.toString());
                 }
@@ -320,7 +321,9 @@ public class ClientHandler implements Runnable {
                     date = email.getDue_date().getTime();
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "<td>");
-                    sb.append("<td><a href=\"tasks.html?id=del\">Delete</a></td>");
+                    sb.append("<td><a href=\"polls.html?id=");
+                    sb.append(email.getId());
+                    sb.append("\">Delete</a></td>");
                     sb.append("<tr>");
                     writer.println(sb.toString());
                 }
@@ -338,7 +341,6 @@ public class ClientHandler implements Runnable {
     }
 
     /**
-     *
      * @param user
      * @return
      */
@@ -349,7 +351,7 @@ public class ClientHandler implements Runnable {
         try {
 
 
-            path = ServerRun.root + "/" + user + "/polls.html";
+            path = ServerRun.root + "/" + user + "/tasks.html";
             File page = new File(path);
             page.getParentFile().mkdirs();
             page.createNewFile();
@@ -375,15 +377,17 @@ public class ClientHandler implements Runnable {
                     date = email.getDue_date().getTime();
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
                     String status;
-                    if (email.isComplete()){
+                    if (email.isComplete()) {
                         status = "completed";
-                    }else if (email.isExpired()){
+                    } else if (email.isExpired()) {
                         status = "time is due";
-                    }else{
+                    } else {
                         status = "in progress...";
                     }
                     sb.append("<td>" + status + "<td>");
-                    sb.append("<td><a href=\"tasks.html?id=del\">Delete</a></td>");
+                    sb.append("<td><a href=\"tasks.html?id=");
+                    sb.append(email.getId());
+                    sb.append("\">Delete</a></td>");
                     sb.append("<tr>");
                     writer.println(sb.toString());
                 }
@@ -400,9 +404,18 @@ public class ClientHandler implements Runnable {
     }
 
 
-    private void deleteEmail(String id) {
+    private void deleteTask(String id) {
+        tasks.remove(Integer.parseInt(id));
 
-        //Delete the poll and
     }
 
+    private void deleteReminder(String id) {
+        reminders.remove(Integer.parseInt(id));
+
+    }
+
+    private void deletePoll(String id) {
+        polls.remove(Integer.parseInt(id));
+
+    }
 }

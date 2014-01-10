@@ -6,8 +6,8 @@ public class TasksHandler extends EmailHandler<Task> {
     /**
      * @param taskList
      */
-    public TasksHandler(EmailArrayList<Task> taskList) {
-        super(taskList);
+    public TasksHandler(EmailArrayList<Task> taskList, SQLiteDBHelper db) {
+        super(taskList, db);
     }
 
     /**
@@ -22,7 +22,7 @@ public class TasksHandler extends EmailHandler<Task> {
                 SMTPSession smtpSession = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
                 StringBuilder data = new StringBuilder();
 
-                data.append( "The task you gave " + task.getRecipient());
+                data.append("The task you gave " + task.getRecipient());
                 data.append(" is out dated and incomplete! :( you should fire him. ");
                 data.append(CRLF + "original message was:");
                 data.append(task.getData());
@@ -42,7 +42,7 @@ public class TasksHandler extends EmailHandler<Task> {
                 SMTPSession smtpSession = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
                 StringBuilder data = new StringBuilder();
 
-                data.append( "The task you gave " + task.getRecipient());
+                data.append("The task you gave " + task.getRecipient());
                 data.append(" is complete!");
                 data.append(CRLF + "original message was:");
                 data.append(task.getData());
@@ -59,5 +59,15 @@ public class TasksHandler extends EmailHandler<Task> {
 
         }
 
+    }
+
+    @Override
+    protected void loadFromDatabase() {
+        EmailArrayList<Task> tasksList = new EmailArrayList<Task>(db);
+        tasksList = db.getAllTasks(tasksList);
+        emails.clear();
+        for (Email email : tasksList) {
+            emails.loadFromDisk(email);
+        }
     }
 }

@@ -1,13 +1,16 @@
 public abstract class EmailHandler<E> implements Runnable {
 
     EmailArrayList<Email> emails;
-    final  String CRLF = "\r\n";
+    final String CRLF = "\r\n";
+    SQLiteDBHelper db;
+
     @SuppressWarnings("unchecked")
-    public EmailHandler(EmailArrayList<E> emails) {
+    public EmailHandler(EmailArrayList<E> emails, SQLiteDBHelper db) {
         this.emails = (EmailArrayList<Email>) emails;
+        this.db = db;
     }
 
-    private final long PAUSE = 1500L;
+    private final long PAUSE = 3000L;
 
     @Override
     public void run() {
@@ -35,7 +38,7 @@ public abstract class EmailHandler<E> implements Runnable {
 
     private void checkStatus() {
 
-
+        loadFromDatabase();
         synchronized (emails) {
             for (Email email : emails) {
                 if (email.isExpired()) {
@@ -49,5 +52,8 @@ public abstract class EmailHandler<E> implements Runnable {
 
 
     }
+
+    protected abstract void loadFromDatabase();
+
 
 }

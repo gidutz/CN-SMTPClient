@@ -190,10 +190,10 @@ public class SQLiteDBHelper {
 
             Statement stmt = c.createStatement();
             StringBuilder sql = new StringBuilder();
-            sql.append("DELETE FROM " + table + "WHERE id=");
+            sql.append("DELETE FROM " + table + " WHERE id=\"");
 
             sql.append(email.getId());
-            sql.append(";");
+            sql.append("\";");
 
             stmt.executeUpdate(sql.toString());
             System.out.println("Record Inserted!");
@@ -206,54 +206,6 @@ public class SQLiteDBHelper {
         }
 
         return 1;
-    }
-
-    /**
-     * Returns an array of all the Tasks
-     *
-     * @param tasksList@return
-     */
-    public synchronized EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
-        Connection c = null;
-        Statement stmt = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-            c.setAutoCommit(false);
-            System.out.println("Loading tasks... (this may take a while)");
-
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tasks;");
-            while (rs.next()) {
-                try {
-                    String owner = rs.getString(FIELD_OWNER);
-                    String[] recipients = rs.getString(FIELD_RECP).split(";");
-                    Calendar creationDate = Calendar.getInstance();
-                    Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
-                    creationDate.setTime(date);
-                    Calendar dueDate = Calendar.getInstance();
-                    date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
-                    dueDate.setTime(date);
-                    String title = rs.getString(FIELD_TITLE);
-                    String data = rs.getString(FIELD_DATA);
-                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
-                    boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
-                    Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed, sent);
-                    tasksList.loadFromDisk(task);
-                } catch (Exception e) {
-                    System.err.println("cannot add task");
-                }
-
-
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
-        }
-        System.out.println("Tasks loaded successfully");
-
-        return tasksList;
     }
 
     public int updateEmail(Email email) {
@@ -315,6 +267,54 @@ public class SQLiteDBHelper {
 
         return 1;
     }
+    /**
+     * Returns an array of all the Tasks
+     *
+     * @param tasksList@return
+     */
+    public synchronized EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+            c.setAutoCommit(false);
+            //System.out.println("Loading tasks... (this may take a while)");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tasks;");
+            while (rs.next()) {
+                try {
+                    String owner = rs.getString(FIELD_OWNER);
+                    String[] recipients = rs.getString(FIELD_RECP).split(";");
+                    Calendar creationDate = Calendar.getInstance();
+                    Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
+                    creationDate.setTime(date);
+                    Calendar dueDate = Calendar.getInstance();
+                    date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
+                    dueDate.setTime(date);
+                    String title = rs.getString(FIELD_TITLE);
+                    String data = rs.getString(FIELD_DATA);
+                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                    boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
+                    Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed, sent);
+                    tasksList.loadFromDisk(task);
+                } catch (Exception e) {
+                    System.err.println("cannot add task");
+                }
+
+
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+        }
+       // System.out.println("Tasks loaded successfully");
+
+        return tasksList;
+    }
+
 
     /**
      * Returns an array of all the reminders
@@ -330,7 +330,7 @@ public class SQLiteDBHelper {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:./test.db");
             c.setAutoCommit(false);
-            System.out.println("Loading reminders... (this may take a while)");
+            //System.out.println("Loading reminders... (this may take a while)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM reminders;");
@@ -362,7 +362,7 @@ public class SQLiteDBHelper {
             c.close();
         } catch (Exception e) {
         }
-        System.out.println("Loaded reminders successfully");
+        //System.out.println("Loaded reminders successfully");
 
         return reminderList;
     }
@@ -381,7 +381,7 @@ public class SQLiteDBHelper {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
             c.setAutoCommit(false);
-            System.out.println("Loading polls... (This may take a while) ");
+            //System.out.println("Loading polls... (This may take a while) ");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM polls;");
@@ -419,7 +419,7 @@ public class SQLiteDBHelper {
             c.close();
         } catch (Exception e) {
         }
-        System.out.println("Polls loaded successfully");
+        //System.out.println("Polls loaded successfully");
 
 
         return pollList;
