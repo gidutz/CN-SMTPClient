@@ -13,7 +13,7 @@
   
   function checkMail()
   {
-	var email = document.getElementById('idid');
+	var email = document.getElementById('reci');
 	filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if (!(filter.test(email.value)))
 	{
@@ -26,6 +26,12 @@
 		//var form = document.createElement("form");
 		//form.setAttribute("method", method);
 		//form.setAttribute("action", "main.html");
+		var parameters = location.search.substring(1).split("&");
+		var temp = parameters[0].split("=");
+		id = unescape(temp[1]);
+		var hiddenField = document.getElementById('idid');
+		hiddenField.setAttribute("value", id);
+		
 		frm.submit();
 	}
 	//action="submit_task.html"
@@ -36,9 +42,10 @@
 <body>
 <center><h3>Enter task values:</h3></center>
 <form name="input" method="get" id="formform">
+<input type="hidden" name="id" id="idid">
 Task title: <input type="text" name="title"> <br>
 Task content: <input type="text" name="data"><br>
-Task recipient: <input type="text" name="recipients" id="idid"><br>
+Task recipient: <input type="text" name="recipients" id="reci"><br>
 Due date: <input type="text" name="due_date" value="DD/MM/YYYY"><br>
 Due time: <input type="text" name="due_time" value="HH:MM"><br>
 <input type="submit" value="Submit" onClick="checkMail()" onSubmit="checkMail()" id="subsub">
