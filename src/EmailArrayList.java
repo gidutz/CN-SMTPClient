@@ -7,18 +7,34 @@ public class EmailArrayList<E> extends ArrayList<Email> {
         return dbHelper;
     }
 
+    /**
+     * @param dbHelper
+     */
     public EmailArrayList(SQLiteDBHelper dbHelper) {
         super();
         this.dbHelper = dbHelper;
     }
 
-    public  synchronized  boolean loadFromDisk(Email arg0){
+    /**
+     * adds an email only to the memory without making a disk access
+     *
+     * @param arg0
+     * @return
+     */
+    public synchronized boolean loadFromDisk(Email arg0) {
         synchronized (dbHelper) {
             boolean arraySuccess = super.add(arg0);
 
-            return  arraySuccess;
+            return arraySuccess;
         }
     }
+
+    /**
+     * adds an email both to the disk and memory
+     *
+     * @param arg0
+     * @return
+     */
     @Override
     public synchronized boolean add(Email arg0) {
 
@@ -35,6 +51,8 @@ public class EmailArrayList<E> extends ArrayList<Email> {
     }
 
     /**
+     * returns a referance the email whose id is given
+     *
      * @param id
      * @return The email with the specifed id, or null if not found
      */
@@ -47,6 +65,12 @@ public class EmailArrayList<E> extends ArrayList<Email> {
         return null;
     }
 
+    /**
+     * removes the email from the list and deletes from the memory
+     *
+     * @param arg0
+     * @return
+     */
     @Override
     public synchronized boolean remove(Object arg0) {
         synchronized (dbHelper) {

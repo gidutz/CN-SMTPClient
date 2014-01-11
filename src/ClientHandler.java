@@ -16,7 +16,7 @@ public class ClientHandler implements Runnable {
     volatile EmailArrayList tasks;
     volatile EmailArrayList reminders;
     volatile EmailArrayList polls;
-
+    private int responseCode;
     public ClientHandler(Socket clientSocket, EmailArrayList tasks, EmailArrayList reminders, EmailArrayList polls) {
 
         this.clientSocket = clientSocket;
@@ -41,11 +41,8 @@ public class ClientHandler implements Runnable {
              * if the user logs in, then generate cookie
 			 */
             String path = redirect(request);
-            int responseCode = 200;
-//            if (!request.getRequestURL().equalsIgnoreCase(path)) {
-//                responseCode = 301;
-//
-//            }
+             responseCode = 200;
+
             HttpResponder responder = new HttpResponder(path, responseCode,
                     clientSocket.getOutputStream());
             // make HTTP response

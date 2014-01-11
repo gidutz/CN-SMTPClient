@@ -54,6 +54,7 @@ public abstract class Email {
 
     /**
      * Called without completed value, defaults completed is false
+     *
      * @param owner
      * @param creation_date
      * @param due_date
@@ -74,6 +75,13 @@ public abstract class Email {
         }
     }
 
+    /**
+     * Creates id using the fields: owner, creation date and title
+     *
+     * @param owner
+     * @param creation_date
+     * @return
+     */
     int hash2id(String owner, Calendar creation_date) {
         int hash = 7;
         for (int i = 0; i < owner.length(); i++) {
@@ -82,6 +90,8 @@ public abstract class Email {
         hash += 3 * creation_date.get(Calendar.DAY_OF_YEAR) + 11
                 * creation_date.get(Calendar.HOUR_OF_DAY) + 13
                 * creation_date.get(Calendar.MINUTE) + 17;
+
+        hash += Math.random() * 13 * 17;
         return hash;
     }
 
@@ -109,15 +119,26 @@ public abstract class Email {
         return title;
     }
 
-    public String getData() {
-        return data;
-    }
+    /**
+     * Gets the content of the email, sh
+     *
+     * @return
+     */
+    public abstract String getData();
 
+    /**
+     * if the due date is past the current date returns true
+     *
+     * @return
+     */
     public boolean isExpired() {
         Calendar currentDate = Calendar.getInstance();
         return currentDate.after(this.due_date);
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getRecipients() {
         return recipients;
     }
@@ -150,8 +171,13 @@ public abstract class Email {
 
         return null;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public abstract void setCompleted(boolean status);
 
-    public abstract  boolean wasSent ();
+    public abstract boolean wasSent();
 
 }

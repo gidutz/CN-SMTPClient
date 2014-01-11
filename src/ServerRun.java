@@ -48,6 +48,7 @@ public class ServerRun {
     public static String DB_PATH = "./test.db";
     public static SQLiteDBHelper db;
     public  static String SERVER_NAME = "localhost";
+
     /**
      * @param args
      */
@@ -96,4 +97,6 @@ public class ServerRun {
         }
 
     }
+
+
 }

@@ -31,13 +31,29 @@ public class Reminder extends Email {
 		return this.completed;
 	}
 
+    /**
+     * Sets the complete status of the email
+     * @param status
+     */
     public void setCompleted(boolean status) {
         this.completed = status;
+
     }
 
+    /**
+     * A reminder is completed only iff it was sent
+     * @return
+     */
     @Override
     public boolean wasSent() {
-        return false;
+        return this.completed;
     }
 
+    /**
+     * returns the content of the reminder
+     * @return
+     */
+    public String getData(){
+        return this.data;
+    }
 }

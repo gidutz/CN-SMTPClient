@@ -65,7 +65,8 @@ public class TasksHandler extends EmailHandler<Task> {
     protected void loadFromDatabase() {
         EmailArrayList<Task> tasksList = new EmailArrayList<Task>(db);
         tasksList = db.getAllTasks(tasksList);
-        emails.clear();
+        emails= new EmailArrayList<Email>(db);
+
         for (Email email : tasksList) {
             emails.loadFromDisk(email);
         }

@@ -69,6 +69,8 @@ public class Task extends Email {
             dataBuilder.append(CRLF +"To mark Completion click here:");
             dataBuilder.append(CRLF);
             dataBuilder.append("http://" + ServerRun.SERVER_NAME + ":" + ServerRun.port);
+            dataBuilder.append("/task_reply?id="+id);
+
         }
 
         return dataBuilder == null ? data : dataBuilder.toString();

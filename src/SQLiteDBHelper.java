@@ -285,6 +285,7 @@ public class SQLiteDBHelper {
             ResultSet rs = stmt.executeQuery("SELECT * FROM tasks;");
             while (rs.next()) {
                 try {
+                    int id = Integer.parseInt(rs.getString(FIELD_ID));
                     String owner = rs.getString(FIELD_OWNER);
                     String[] recipients = rs.getString(FIELD_RECP).split(";");
                     Calendar creationDate = Calendar.getInstance();
@@ -298,6 +299,7 @@ public class SQLiteDBHelper {
                     boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
                     boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
                     Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed, sent);
+                    task.setId(id);
                     tasksList.loadFromDisk(task);
                 } catch (Exception e) {
                     System.err.println("cannot add task");
@@ -337,6 +339,7 @@ public class SQLiteDBHelper {
             Reminder reminder;
             while (rs.next()) {
                 try {
+                    int id = Integer.parseInt(rs.getString(FIELD_ID));
                     String owner = rs.getString(FIELD_OWNER);
                     Calendar creationDate = Calendar.getInstance();
                     Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
@@ -350,6 +353,7 @@ public class SQLiteDBHelper {
                     reminder = new Reminder(owner, creationDate, dueDate,
                             owner, title,
                             data, completed);
+                    reminder.setId(id);
                     reminderList.loadFromDisk(reminder);
                 } catch (Exception e) {
                     System.err.println("cannot add reminder");
@@ -387,6 +391,7 @@ public class SQLiteDBHelper {
             ResultSet rs = stmt.executeQuery("SELECT * FROM polls;");
             while (rs.next()) {
                 try {
+                    int id = Integer.parseInt(rs.getString(FIELD_ID));
                     String owner = rs.getString(FIELD_OWNER);
                     String[] recipients = rs.getString(FIELD_RECP).split(";");
                     Calendar creationDate = Calendar.getInstance();
@@ -407,6 +412,7 @@ public class SQLiteDBHelper {
                     }
 
                     Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, results, sent);
+                    poll.setId(id);
                     pollList.loadFromDisk(poll);
                 } catch (Exception e) {
                     System.err.println("cannot add poll");
