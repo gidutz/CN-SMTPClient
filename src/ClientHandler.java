@@ -198,13 +198,11 @@ public class ClientHandler implements Runnable {
 
                     path = generateTasksPage(user);
 
-                } catch (ParseException e) {
-                    System.err.println("cannot parse date correctly");
+                } catch (Exception e) {
+                    System.err.println("Error creating Task");
+                    System.err.println(e);
+                    path= ServerRun.root+"/submit_reminder.html";
 
-                } catch (SMTPException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
 
             } else if (path.endsWith("submit_poll.html")) {
@@ -218,12 +216,12 @@ public class ClientHandler implements Runnable {
 
         }
 
-        if (page.getAbsoluteFile().isAbsolute()) {
-            // TODO:check if the server root path is the start of
+        if (!page.getPath().startsWith(ServerRun.root)) {
 
-            return path;
-        } else if (!(new File(path)).exists()) {
-            path = path + ServerRun.$404page;
+            return ServerRun.root+ServerRun.$403page;
+        }
+        if (!(new File(path)).exists()) {
+            path =  ServerRun.root+ServerRun.$404page;;
         }
 
         return path;

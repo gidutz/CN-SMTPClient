@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -10,32 +11,34 @@ public class ServerRun {
     /**
      * Maximum number of Threads allowed on this server
      */
-    protected static int maxThreads;
+
+    static int maxThreads;
 
     /**
      * Port to listen on
      */
-    protected static int port;
+    public static int port;
 
     /**
      * semaphore to handle connections queuing
      */
-    protected static Semaphore connectionLimiter;
+    public static Semaphore connectionLimiter;
 
     /**
      * the default page name
      */
-    protected static String defaultPage;
+    public static String defaultPage;
 
     /**
      * the root directory
      */
-    protected static String root;
+    public static String root;
 
     /**
      * 404 page
      */
-    protected static String $404page = "404.html";
+    public static String $404page = "404page.html";
+    public static String $403page = "403page.html";
 
 
     public static String mainPage = "main.html";
@@ -46,8 +49,7 @@ public class ServerRun {
     public static int SMTP_PORT = 25;
     public static boolean AUTHENTICATE = true;
     public static String DB_PATH = "./test.db";
-    public static SQLiteDBHelper db;
-    public  static String SERVER_NAME = "localhost";
+    public static String SERVER_NAME = "localhost";
 
     /**
      * @param args
@@ -61,7 +63,25 @@ public class ServerRun {
             System.err.println("Cannot find config.ini. Server must shut down");
             System.exit(2);
         }
+
         connectionLimiter = new Semaphore(maxThreads);
+
+        Field[] declaredFields = ServerRun.class.getDeclaredFields();
+        for (Field field : declaredFields) {
+            Object obj = null;
+            try {
+                obj = field.get(field.getType());
+                if (Modifier.isStatic(field.getModifiers()) && Modifier.isPublic(field.getModifiers()) && obj == null) {
+                    System.err.println("Cannot obtain value for required field!");
+                    System.err.println(field.getName() + " is missing");
+                    System.exit(1);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+
+        }
         Thread serverRun = new Thread(new Runner());
         serverRun.start();
 
@@ -91,10 +111,28 @@ public class ServerRun {
             if (!root.endsWith("/")) {
                 root = root + "/";
             }
+            $404page = "404page.html";
+            $403page = "403page.html";
+
+
+            mainPage = "main.html";
+
+            SMTP_USER_NAME = "tasker@cscidc.ac.il";
+            SMTP_PASSWORD = "password";
+            SMTP_SEVER = "compnet.idc.ac.il";
+            SMTP_PORT = 25;
+            AUTHENTICATE = true;
+            DB_PATH = "./test.db";
+            SQLiteDBHelper db;
+            String SERVER_NAME = "localhost";
+
         } catch (IOException e) {
+            System.err.println("problem loading settings");
             System.err.println(e);
+
             System.exit(1);
         }
+
 
     }
 
