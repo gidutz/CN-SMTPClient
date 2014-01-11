@@ -15,6 +15,15 @@
     alert("WELOCOME:"+u+" ID:"+id+"."); //Dialog with the text you put on the textbox
   }	
   processForm();
+	
+function logout()
+	{
+			var cookies = document.cookie.split(";");
+			for (var i = 0; i < cookies.length; i++)
+				eraseCookie(cookies[i].split("=")[0]);‏
+    }
+ }
+  // FROM LOGOUT: target="inner" onclick="alert("fds");"
 </script>
 
 
@@ -22,12 +31,24 @@
 
 <body>
     <div id="page">
-        <div class="topNaviagationLink"><a href="main.html">Home</a></div>
+        <div class="topNaviagationLink"><a href="main.html">Home :)</a></div>
         <div class="topNaviagationLink"><a href="reminders.html" target="inner">Reminders</a></div>
 		<div class="topNaviagationLink"><a href="tasks.html" target="inner">Tasks</a></div>
 		<div class="topNaviagationLink"><a href="polls.html" target="inner">Polls</a></div>
         <div class="topNaviagationLink"><a href="index.html" target="inner">Chat Room</a></div>
-		<div class="topNaviagationLink"><a href="index.html" target="inner">New Mail</a></div>
+		<div class="topNaviagationLink"><a id="logout" href='javascript:
+			alert(document.cookie);
+			var cookies = document.cookie.split(";");
+			alert("1");
+			for (var i = 0; i < cookies.length; i++){
+				alert(cookies.length);
+				name=cookies[i].split("=")[0];
+				alert(name);
+				createCookie(name,"",-1);
+				}
+			alert("2")
+		'>Logout :(</a>
+		</div>
 	</div>
     <div id="mainPicture">
     	<div class="picture">
