@@ -13,13 +13,44 @@
   
   function submitfunc()
   {
+	//alert("submitfunc");
+	var reps = document.getElementById('rep');
+	filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	ok=0;
+	var mails = reps.value.split("\n");
+	for (i=0; i<mails.length; i++)
+	{
+		ok=ok+filter.test(mails[i]);
+	}
+	
+	//alert("here1 email = "+email.value);
+	
 	var parameters = location.search.substring(1).split("&");
 	var temp = parameters[0].split("=");
 	id = unescape(temp[1]);
 	var hiddenField = document.getElementById('idid');
-	alert("id="+id);
+	//alert("here id="+id);
+	//alert("here 3");
 	hiddenField.setAttribute("value", id);
-	document.body.appendChild(form); // inject the form object into the body section
+	//alert("here 4");
+	//document.body.appendChild(form); // inject the form object into the body section
+	//alert("here 5");
+	
+	var frm = document.getElementById('thisFormID');
+	//test="sub";
+	if (!(ok==mails.length))
+	{
+		alert("Please enter a valid email for recipients.");
+		frm.setAttribute("action","poll_editor.html");
+		//test="edit";
+	}
+	else
+	{
+		//alert("3");
+		frm.setAttribute("action","submit_poll.html");
+	}
+	//alert("going to "+test);
+	frm.submit();
 	thisForm.submit();
   }
   
@@ -27,14 +58,15 @@
 </head>
 <body>
 <center><h3>Enter poll values:</h3></center>
-<form name="thisForm" action="submit_poll.html" method="get" onsubmit="submitfunc()" id="thisFormID">
+<form name="thisForm" method="get" onsubmit="submitfunc()" id="thisFormID">
 <input type="hidden" name="id" id="idid">
 Poll subject: <input type="text" name="user"> <br>
 Poll content: <input type="text" name="user"><br>
-Poll recipient: <br>
-<textarea name="user" cols="25" rows="5">
+Poll recipients: <br>
+<textarea name="user" cols="25" rows="5" id="rep">
 Enter your recipient here...
 </textarea><br>
+Enter poll answer options:<br>
 <textarea name="user" cols="25" rows="5">
 Enter poll optional answers here...
 </textarea><br>

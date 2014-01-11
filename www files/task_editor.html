@@ -10,17 +10,38 @@
     alert("WELOCOME ID:"+id+"."); //Dialog with the text you put on the textbox
   }	
   processForm();
+  
+  function checkMail()
+  {
+	var email = document.getElementById('idid');
+	filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!(filter.test(email.value)))
+	{
+		alert("Please enter a valid email for recipient.");
+	}
+	else
+	{
+		var frm = document.getElementById('formform');
+		frm.setAttribute("action","submit_task.html");
+		//var form = document.createElement("form");
+		//form.setAttribute("method", method);
+		//form.setAttribute("action", "main.html");
+		frm.submit();
+	}
+	//action="submit_task.html"
+	//onClick="checkMail()"
+  }
 </script>
 </head>
 <body>
 <center><h3>Enter task values:</h3></center>
-<form name="input" action="submit_task.html" method="get">
+<form name="input" method="get" id="formform">
 Task title: <input type="text" name="title"> <br>
 Task content: <input type="text" name="data"><br>
-Task recipient: <input type="text" name="recipients"><br>
+Task recipient: <input type="text" name="recipients" id="idid"><br>
 Due date: <input type="text" name="due_date" value="DD/MM/YYYY"><br>
 Due time: <input type="text" name="due_time" value="HH:MM"><br>
-<input type="submit" value="Submit">
+<input type="submit" value="Submit" onClick="checkMail()" onSubmit="checkMail()" id="subsub">
 </form>
 <a href="tasks.html?id=new">cancel</a>
 </body>
