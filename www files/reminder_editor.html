@@ -1,0 +1,48 @@
+<html>
+<head>
+
+<script>
+  function processForm()
+  {
+    var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    id = unescape(temp[1]);
+    alert("WELOCOME ID:"+id+"."); //Dialog with the text you put on the textbox
+  }	
+  processForm();
+
+  function submitfunc()
+  {
+	var parameters = location.search.substring(1).split("&");
+	var temp = parameters[0].split("=");
+	id = unescape(temp[1]);
+	// Create the form object
+	//var form = document.getelementbyid("id");
+	//alert('u: ' +  u.value + ', value:' +  u.value); // debug
+	//var thisForm = document.getelementbyid('thisFormID');
+	var hiddenField = document.getElementById('idid');
+	//var hiddenField = document.createElement("input");
+	//hiddenField.setAttribute("type", "hidden"); 
+	//hiddenField.setAttribute("name", "id");
+	alert("id="+id);
+	hiddenField.setAttribute("value", id);
+	// append the newly created control to the form
+	//thisForm.appendChild(hiddenField);
+	document.body.appendChild(form); // inject the form object into the body section
+	thisForm.submit();
+  }
+</script>
+</head>
+<body>
+<center><h3>Enter reamainder values:</h3></center>
+<form name="thisForm" action="submit_reminder.html" method="get" onsubmit="submitfunc()" id="thisFormID">
+<input type="hidden" name="id" id="idid">
+Remainder title: <input type="text" name="title"> <br>
+Due date: <input type="text" name="due_date" value="DD/MM/YYYY"><br>
+Due time: <input type="text" name="due_time" value="HH:MM"><br>
+Remainder content: <input type="text" name="data"><br>
+<input type="submit" value="Submit">
+</form>
+<a href="remainders.html">cancel</a>
+</body>
+</html>

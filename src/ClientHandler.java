@@ -17,6 +17,7 @@ public class ClientHandler implements Runnable {
     volatile EmailArrayList reminders;
     volatile EmailArrayList polls;
     private int responseCode;
+
     public ClientHandler(Socket clientSocket, EmailArrayList tasks, EmailArrayList reminders, EmailArrayList polls) {
 
         this.clientSocket = clientSocket;
@@ -41,7 +42,7 @@ public class ClientHandler implements Runnable {
              * if the user logs in, then generate cookie
 			 */
             String path = redirect(request);
-             responseCode = 200;
+            responseCode = 200;
 
             HttpResponder responder = new HttpResponder(path, responseCode,
                     clientSocket.getOutputStream());
@@ -162,7 +163,7 @@ public class ClientHandler implements Runnable {
                         this.reminders.add(reminder);
 
                     }
-                    path = generatePollsPage(user);
+                    path = generateRemindersPage(user);
 
                 } catch (ParseException e) {
                     System.err.println("cannot parse date correctly");
@@ -243,7 +244,7 @@ public class ClientHandler implements Runnable {
             String headline = "<table border=\"0\"><tr><td><b>#</td><td><b>reminder " +
                     "title</td><td><b>Creation time</td>" +
                     "<td><b>Due time</td> <td><b>Status</td>" +
-                    "<td><a href=\"remainder_editor.html?id=new\">New</a></td>" +
+                    "<td><a href=\"reminder_editor.html?id=new\">New</a></td>" +
                     "</tr>";
 
             writer.println(headline);
