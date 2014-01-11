@@ -103,12 +103,21 @@ public class EmailArrayList<E> extends ArrayList<Email> {
 
     }
 
+    /**
+     * updates the email by removing it from the memory and re putting it,
+     * in addition to making the necessary disk changes
+     *
+     * @param arg0
+     * @return true if the update was successful
+     */
     public synchronized boolean update(Object arg0) {
+        boolean arraySuccess = false;
         synchronized (dbHelper) {
-            boolean arraySuccess = super.remove(arg0);
+            super.remove(arg0);
             int dbSuccess = 0;
             if (arg0 instanceof Email) {
                 Email email = (Email) arg0;
+                arraySuccess = this.loadFromDisk(email);
                 dbSuccess = dbHelper.updateEmail(email);
             }
             return ((dbSuccess == 1) && arraySuccess);

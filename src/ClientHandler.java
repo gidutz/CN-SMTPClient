@@ -159,8 +159,7 @@ public class ClientHandler implements Runnable {
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.reminders.add(reminder);
                     } else {
-                        this.reminders.remove(Integer.parseInt(request.getParam("id")));
-                        this.reminders.add(reminder);
+                        this.reminders.update(reminder);
 
                     }
                     path = generateRemindersPage(user);
@@ -191,8 +190,7 @@ public class ClientHandler implements Runnable {
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.tasks.add(task);
                     } else {
-                        this.tasks.remove(Integer.parseInt(request.getParam("id")));
-                        this.tasks.add(task);
+                       this.tasks.update(task);
 
                     }
 
@@ -296,10 +294,10 @@ public class ClientHandler implements Runnable {
             page.getParentFile().mkdirs();
             page.createNewFile();
             PrintWriter writer = new PrintWriter(path, "UTF-8");
-            String headline = "<table border=\"0\"><tr><td><b>#</td><td><b>task " +
+            String headline = "<table border=\"0\"><tr><td><b>#</td><td><b>poll " +
                     "title</td><td><b>Creation time</td>" +
                     "<td><b>Due time</td> <td><b>Status</td>" +
-                    "<td><a href=\"task_editor.html?id=new\">New</a></td>" +
+                    "<td><a href=\"poll_editor.html?id=new\">New</a></td>" +
                     "</tr>";
 
             writer.println(headline);
