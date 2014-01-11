@@ -81,11 +81,13 @@ public class Poll extends Email {
     public String getData() {
         StringBuilder dataBuilder = new StringBuilder();
         dataBuilder.append(this.data);
-        dataBuilder.append("\n");
+        dataBuilder.append(CRLF);
+        dataBuilder.append("to answer please click on the following link (ONLY VOTE ONCE!!!)");
+
         for (int i = 1; i <= 10; i++) {
 
             dataBuilder.append("http://" + ServerRun.SERVER_NAME + "/polly_reply?id=" + id + "&ans=" + i);
-            dataBuilder.append("\n");
+            dataBuilder.append(CRLF);
 
         }
         return dataBuilder.toString();

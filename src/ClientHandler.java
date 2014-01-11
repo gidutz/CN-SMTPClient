@@ -128,7 +128,7 @@ public class ClientHandler implements Runnable {
                 } else {
                     path = generateTasksPage(user);
                 }
-            } else if (path.endsWith("remainders.html")) {
+            } else if (path.endsWith("reminders.html")) {
                 if ((id = request.getParam("id")) != null) {
                     deleteReminder(id);
                     path = generateRemindersPage(user);
