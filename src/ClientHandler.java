@@ -190,7 +190,7 @@ public class ClientHandler implements Runnable {
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.tasks.add(task);
                     } else {
-                       this.tasks.update(task);
+                        this.tasks.update(task);
 
                     }
 
@@ -199,15 +199,40 @@ public class ClientHandler implements Runnable {
                 } catch (Exception e) {
                     System.err.println("Error creating Task");
                     System.err.println(e);
-                    path= ServerRun.root+"/submit_reminder.html";
+                    path = ServerRun.root + "/submit_reminder.html";
 
                 }
 
             } else if (path.endsWith("submit_poll.html")) {
-                if (request.getParam("id").equalsIgnoreCase("new")) {
-                    //TODO: create new reminder and redirect to the list;
-                } else {
-                    //TODO: update the reminder whose id = getParam("id")
+                Poll poll = null;
+                try {
+                    String owner = user;
+                    String rec = request.getParam("recipients").trim().replaceAll("(\\\\r)?\\\\n", System.getProperty(";"));
+                    String[] recipients = request.getParam("recipients").trim().split(";");
+                    Calendar creationDate = Calendar.getInstance();
+
+                    Calendar dueDate = Calendar.getInstance();
+                    Date date = (Email.DATE_FORMAT).parse(request.getParam("due_date") + " " + request.getParam("due_time"));
+                    dueDate.setTime(date);
+                    String title = request.getParam("title");
+                    String data = request.getParam("data");
+                    String options = request.getParam("results");
+                    poll = new Poll(owner, creationDate, dueDate, recipients, title, data, false, false);
+
+                    //Send the Task Immediately!
+                    SMTPSession session = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
+                    session.sendMessage(poll);
+
+                    if (request.getParam("id").equalsIgnoreCase("new")) {
+                        this.polls.add(poll);
+                    }
+                    path = generatePollsPage(user);
+
+                } catch (Exception e) {
+                    System.err.println("Error creating Task");
+                    System.err.println(e);
+                    path = ServerRun.root + "/submit_reminder.html";
+
                 }
             }
 
@@ -216,10 +241,11 @@ public class ClientHandler implements Runnable {
 
         if (!page.getPath().startsWith(ServerRun.root)) {
 
-            return ServerRun.root+ServerRun.$403page;
+            return ServerRun.root + ServerRun.$403page;
         }
         if (!(new File(path)).exists()) {
-            path =  ServerRun.root+ServerRun.$404page;;
+            path = ServerRun.root + ServerRun.$404page;
+            ;
         }
 
         return path;

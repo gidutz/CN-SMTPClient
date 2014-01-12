@@ -59,15 +59,15 @@
 <body>
 <center><h3>Enter poll values:</h3></center>
 <form name="thisForm" method="get" onsubmit="submitfunc()" id="thisFormID">
-<input type="hidden" name="id" id="idid">
-Poll subject: <input type="text" name="user"> <br>
-Poll content: <input type="text" name="user"><br>
+<input type="hidden" name="id" id="idid" value ="new">
+Poll subject: <input type="text" name="title"> <br>
+Poll content: <input type="text" name="data"><br>
 Poll recipients: <br>
-<textarea name="user" cols="25" rows="5" id="rep">
+<textarea name="recipients" cols="25" rows="5" id="rep">
 Enter your recipient here...
 </textarea><br>
 Enter poll answer options:<br>
-<textarea name="user" cols="25" rows="5">
+<textarea name="options" cols="25" rows="5">
 Enter poll optional answers here...
 </textarea><br>
 <input type="submit" value="Submit">

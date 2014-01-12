@@ -61,6 +61,9 @@ public class TasksHandler extends EmailHandler<Task> {
 
     }
 
+    /**
+     * loads an email from the database to the main memory
+     */
     @Override
     protected void loadFromDatabase() {
         EmailArrayList<Task> tasksList = new EmailArrayList<Task>(db);

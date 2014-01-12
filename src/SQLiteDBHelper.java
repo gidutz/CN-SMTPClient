@@ -12,17 +12,8 @@ public class SQLiteDBHelper {
     private final String FIELD_DATA = "data";
     private final String FIELD_COMPLETED = "completed";
     private final String FIELD_SENT = "sent";
-    private final String FIELD_ANSWER = "ans_";
-    private final String FIELD_ANSWER_1 = "ans_1";
-    private final String FIELD_ANSWER_2 = "ans_2";
-    private final String FIELD_ANSWER_3 = "ans_3";
-    private final String FIELD_ANSWER_4 = "ans_4";
-    private final String FIELD_ANSWER_5 = "ans_5";
-    private final String FIELD_ANSWER_6 = "ans_6";
-    private final String FIELD_ANSWER_7 = "ans_7";
-    private final String FIELD_ANSWER_8 = "ans_8";
-    private final String FIELD_ANSWER_9 = "ans_9";
-    private final String FIELD_ANSWER_10 = "ans_10";
+    private final String FIELD_ANSWERS = "ans";
+    private final String FIELD_POLL_OPTS = "opll_options";
     Connection c;
     private static Object myLock;
 
@@ -51,16 +42,8 @@ public class SQLiteDBHelper {
             fields.put(FIELD_DATA, "TEXT");
             fields.put(FIELD_SENT, "TEXT");
             fields.put(FIELD_COMPLETED, "TEXT");
-            fields.put(FIELD_ANSWER_1, "TEXT");
-            fields.put(FIELD_ANSWER_2, "TEXT");
-            fields.put(FIELD_ANSWER_3, "TEXT");
-            fields.put(FIELD_ANSWER_4, "TEXT");
-            fields.put(FIELD_ANSWER_5, "TEXT");
-            fields.put(FIELD_ANSWER_6, "TEXT");
-            fields.put(FIELD_ANSWER_7, "TEXT");
-            fields.put(FIELD_ANSWER_8, "TEXT");
-            fields.put(FIELD_ANSWER_9, "TEXT");
-            fields.put(FIELD_ANSWER_10, "TEXT");
+            fields.put(FIELD_ANSWERS, "TEXT");
+            fields.put(FIELD_POLL_OPTS, "TEXT");
 
             createTable("reminders", fields);
             createTable("tasks", fields);
@@ -140,6 +123,9 @@ public class SQLiteDBHelper {
             sql.append(FIELD_TITLE + ",");
             sql.append(FIELD_COMPLETED + ",");
             sql.append(FIELD_SENT + ",");
+            if (table.equals("polls")) {
+                sql.append(FIELD_ANSWERS + ",");
+            }
             sql.append(FIELD_DATA + ")");
             sql.append("VALUES (");
             sql.append("\"" + email.getId() + "\",");
@@ -152,6 +138,10 @@ public class SQLiteDBHelper {
             sql.append("\"" + email.getTitle() + "\",");
             sql.append("\"" + email.isComplete() + "\",");
             sql.append("\"" + email.wasSent() + "\",");
+            if (table.equals("polls")) {
+                Poll poll = (Poll) email;
+                sql.append("\"" + poll + "\",");
+            }
             sql.append("\"" + email.getData() + "\")");
 
             sql.append(";");
@@ -249,6 +239,13 @@ public class SQLiteDBHelper {
             sql.append(FIELD_SENT + "=");
             sql.append("\"" + email.wasSent() + "\",");
 
+            if (table.equals("polls")) {
+                Poll poll = (Poll) email;
+                sql.append(FIELD_ANSWERS + "=");
+                sql.append("\"" + poll.getPollResults() + "\",");
+            }
+
+
             sql.append(FIELD_DATA + "= ");
             sql.append("\"" + email.getData() + "\" ");
             sql.append("WHERE id = " + email.getId());
@@ -267,6 +264,7 @@ public class SQLiteDBHelper {
 
         return 1;
     }
+
     /**
      * Returns an array of all the Tasks
      *
@@ -312,7 +310,7 @@ public class SQLiteDBHelper {
             c.close();
         } catch (Exception e) {
         }
-       // System.out.println("Tasks loaded successfully");
+        // System.out.println("Tasks loaded successfully");
 
         return tasksList;
     }
@@ -404,14 +402,9 @@ public class SQLiteDBHelper {
                     String data = rs.getString(FIELD_DATA);
                     boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
                     boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
+                    PollArray pollArray = PollArray.parsePollArray(rs.getString(FIELD_ANSWERS));
 
-                    int[] results = new int[10];
-                    for (int i = 1; i <= 10; i++) {
-                        int result = Integer.parseInt(rs.getString(FIELD_ANSWER + i));
-                        results[i] = result;
-                    }
-
-                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, results, sent);
+                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, pollArray, sent);
                     poll.setId(id);
                     pollList.loadFromDisk(poll);
                 } catch (Exception e) {
