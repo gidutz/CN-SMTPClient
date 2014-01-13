@@ -203,7 +203,9 @@ public class ClientHandler implements Runnable {
 
                 }
 
-            } else if (path.endsWith("submit_poll.html")) {
+
+            }//Trying to submit a poll
+            else if (path.endsWith("submit_poll.html")) {
                 Poll poll = null;
                 try {
                     String owner = user;
@@ -242,14 +244,17 @@ public class ClientHandler implements Runnable {
                     db.addChatMessage(message);
                     path = generateChat(db.getChatQueue());
                 } catch (Exception e) {
-e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
 
 
         }
-
-        if (!page.getPath().startsWith(ServerRun.root)) {
+        /*
+         *checks if the client is trying to surf outside the root directory :/
+         */
+        File serverDir = new File(ServerRun.root);
+        if (!page.getPath().startsWith(serverDir.getAbsolutePath())) {
 
             return ServerRun.root + ServerRun.$403page;
         }
@@ -276,7 +281,7 @@ e.printStackTrace();
             e.printStackTrace();
 
         }
-        return ServerRun.root+"chat.html";
+        return ServerRun.root + "chat.html";
     }
 
     /**
@@ -372,7 +377,7 @@ e.printStackTrace();
                     sb.append("<td><a href=\"polls.html?id=");
                     sb.append(email.getId());
                     sb.append("\">Delete</a></td>");
-                    sb.append("<tr>");
+                    sb.append("</tr>");
                     writer.println(sb.toString());
                 }
 
