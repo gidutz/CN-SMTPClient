@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="" />
+    <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="CN-SMTPClient.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -114,7 +117,7 @@
       <file leaf-file-name="ServerRun.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="2145">
+            <state line="35" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="2190">
               <folding />
             </state>
           </provider>
@@ -123,10 +126,8 @@
       <file leaf-file-name="Runner.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Runner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1515">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state line="17" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1545">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -134,7 +135,7 @@
       <file leaf-file-name="ChatQueue.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ChatQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="32" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.7241379" vertical-offset="300" max-vertical-offset="810">
+            <state line="42" column="32" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.76661515" vertical-offset="119" max-vertical-offset="810">
               <folding />
             </state>
           </provider>
@@ -143,7 +144,7 @@
       <file leaf-file-name="ClientHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="244" column="0" selection-start="9666" selection-end="9666" vertical-scroll-proportion="0.0" vertical-offset="3493" max-vertical-offset="7065">
+            <state line="244" column="0" selection-start="9666" selection-end="9666" vertical-scroll-proportion="0.0" vertical-offset="3660" max-vertical-offset="7110">
               <folding />
             </state>
           </provider>
@@ -152,7 +153,7 @@
       <file leaf-file-name="StringBuilder.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/StringBuilder.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="35" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0" vertical-offset="148" max-vertical-offset="1455">
+            <state line="19" column="35" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1470">
               <folding />
             </state>
           </provider>
@@ -161,7 +162,7 @@
       <file leaf-file-name="NativeDB.java" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/NativeDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="209" column="0" selection-start="6113" selection-end="6113" vertical-scroll-proportion="0.0" vertical-offset="2625" max-vertical-offset="3060">
+            <state line="209" column="0" selection-start="6113" selection-end="6113" vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="3270">
               <folding />
             </state>
           </provider>
@@ -170,21 +171,8 @@
       <file leaf-file-name="Stmt.java" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/Stmt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="0" selection-start="4378" selection-end="4378" vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="4650">
-              <folding>
-                <element signature="e#0#9796#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#7333#7334#0" expanded="false" />
-                <element signature="e#7360#7361#0" expanded="false" />
-                <element signature="e#7839#7840#0" expanded="false" />
-                <element signature="e#7895#7896#0" expanded="false" />
-                <element signature="e#9516#9517#0" expanded="false" />
-                <element signature="e#9565#9566#0" expanded="false" />
-                <element signature="e#9629#9630#0" expanded="false" />
-                <element signature="e#9685#9686#0" expanded="false" />
-                <element signature="e#9742#9743#0" expanded="false" />
-                <element signature="e#9792#9793#0" expanded="false" />
-              </folding>
+            <state line="151" column="0" selection-start="4378" selection-end="4378" vertical-scroll-proportion="0.0" vertical-offset="2265" max-vertical-offset="5145">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -193,9 +181,7 @@
         <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="31" column="35" selection-start="1288" selection-end="1293" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="885">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -203,11 +189,8 @@
       <file leaf-file-name="Poll.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Poll.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="25" selection-start="2848" selection-end="2848" vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="1635">
-              <folding>
-                <element signature="e#2821#2822#0" expanded="true" />
-                <element signature="e#2853#2854#0" expanded="true" />
-              </folding>
+            <state line="102" column="25" selection-start="2848" selection-end="2848" vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="1665">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -215,7 +198,7 @@
       <file leaf-file-name="SQLiteDBHelper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="479" column="0" selection-start="16637" selection-end="16637" vertical-scroll-proportion="0.0" vertical-offset="7033" max-vertical-offset="7800">
+            <state line="479" column="0" selection-start="16637" selection-end="16637" vertical-scroll-proportion="0.0" vertical-offset="7185" max-vertical-offset="7830">
               <folding />
             </state>
           </provider>
@@ -285,7 +268,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -320,7 +303,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -383,6 +366,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -408,19 +404,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -534,7 +517,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="788" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -546,19 +529,19 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16237482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30172414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16237482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30172414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962447" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -577,13 +560,13 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16237482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30172414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30172414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -855,9 +838,7 @@
     <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="35" selection-start="1288" selection-end="1293" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="885">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -871,19 +852,14 @@
     <entry file="file://$PROJECT_DIR$/src/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1515">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Poll.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="102" column="25" selection-start="2848" selection-end="2848" vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="1635">
-          <folding>
-            <element signature="e#2821#2822#0" expanded="true" />
-            <element signature="e#2853#2854#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -897,20 +873,7 @@
     <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/Stmt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="151" column="0" selection-start="4378" selection-end="4378" vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="4650">
-          <folding>
-            <element signature="e#0#9796#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#7333#7334#0" expanded="false" />
-            <element signature="e#7360#7361#0" expanded="false" />
-            <element signature="e#7839#7840#0" expanded="false" />
-            <element signature="e#7895#7896#0" expanded="false" />
-            <element signature="e#9516#9517#0" expanded="false" />
-            <element signature="e#9565#9566#0" expanded="false" />
-            <element signature="e#9629#9630#0" expanded="false" />
-            <element signature="e#9685#9686#0" expanded="false" />
-            <element signature="e#9742#9743#0" expanded="false" />
-            <element signature="e#9792#9793#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -937,7 +900,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ChatQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="32" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.7241379" vertical-offset="300" max-vertical-offset="810">
+        <state line="42" column="32" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.76661515" vertical-offset="119" max-vertical-offset="810">
           <folding />
         </state>
       </provider>
