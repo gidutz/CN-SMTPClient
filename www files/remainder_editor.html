@@ -7,7 +7,6 @@
     var parameters = location.search.substring(1).split("&");
     var temp = parameters[0].split("=");
     id = unescape(temp[1]);
-    alert("WELOCOME ID:"+id+"."); //Dialog with the text you put on the textbox
   }	
   processForm();
 
@@ -24,7 +23,6 @@
 	//var hiddenField = document.createElement("input");
 	//hiddenField.setAttribute("type", "hidden"); 
 	//hiddenField.setAttribute("name", "id");
-	alert("id="+id);
 	hiddenField.setAttribute("value", id);
 	// append the newly created control to the form
 	//thisForm.appendChild(hiddenField);
