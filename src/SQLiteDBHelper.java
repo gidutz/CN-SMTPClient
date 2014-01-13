@@ -14,6 +14,11 @@ public class SQLiteDBHelper {
     private final String FIELD_SENT = "sent";
     private final String FIELD_ANSWERS = "ans";
     private final String FIELD_POLL_OPTS = "opll_options";
+
+    private final String CHAT_USER = "user";
+    private final String CHAT_MESSAGE = "message";
+    private final String CHAT_TIME = "time";
+
     Connection c;
     private static Object myLock;
 
@@ -422,5 +427,90 @@ public class SQLiteDBHelper {
 
 
         return pollList;
+    }
+
+    public void initializeChatTable() {
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+            Statement stmt = c.createStatement();
+            String update = "CREATE TABLE IF NOT EXISTS chats (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + CHAT_MESSAGE + " TEXT, " + CHAT_USER + " TEXT);";
+            stmt.executeUpdate(update);
+
+            stmt.close();
+            c.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int addChatMessage(ChatMessage message) {
+
+
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+
+            Statement stmt = c.createStatement();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("INSERT INTO chats (");
+            sql.append(CHAT_MESSAGE + ",");
+            sql.append(CHAT_USER + ") ");
+            sql.append("VALUES (");
+            sql.append("\"" + message.getMessage() + "\",");
+            sql.append("\"" + message.getUser() + "\")");
+
+            sql.append(";");
+
+            stmt.executeUpdate(sql.toString());
+
+            stmt.close();
+            c.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            return 0;
+        }
+
+        return 1;
+
+    }
+
+    public ChatQueue getChatQueue() {
+        ChatQueue queue = new ChatQueue();
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:./test.db");
+            c.setAutoCommit(false);
+            //System.out.println("Loading reminders... (this may take a while)");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM chats;");
+            ChatMessage message;
+            while (rs.next()) {
+                try {
+                    String user = rs.getString(CHAT_USER);
+                    String text = rs.getString(CHAT_MESSAGE);
+                    message = new ChatMessage(user, text);
+                    queue.addMessage(message);
+
+                } catch (Exception e) {
+                    System.err.println("cannot add reminder");
+                }
+
+
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+        }
+        //System.out.println("Loaded reminders successfully");
+
+        return queue;
+
+
     }
 }

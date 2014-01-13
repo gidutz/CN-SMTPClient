@@ -234,6 +234,16 @@ public class ClientHandler implements Runnable {
                     path = ServerRun.root + "/submit_reminder.html";
 
                 }
+            } else if (path.endsWith("submit_chat_message.html")) {
+                try {
+                    String text = request.getParam("message");
+                    ChatMessage message = new ChatMessage(user, text);
+                    SQLiteDBHelper db = new SQLiteDBHelper();
+                    db.addChatMessage(message);
+                    path = generateChat(db.getChatQueue());
+                } catch (Exception e) {
+e.printStackTrace();
+                }
             }
 
 
@@ -245,10 +255,28 @@ public class ClientHandler implements Runnable {
         }
         if (!(new File(path)).exists()) {
             path = ServerRun.root + ServerRun.$404page;
-            ;
+
         }
 
         return path;
+    }
+
+    private String generateChat(ChatQueue queue) {
+        String path = null;
+        try {
+            path = ServerRun.root + "chat_messages.html";
+            File page = new File(path);
+            page.getParentFile().mkdirs();
+            page.createNewFile();
+            PrintWriter writer = new PrintWriter(path, "UTF-8");
+            writer.println(queue.echoMessagesHTML());
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return ServerRun.root+"chat.html";
     }
 
     /**

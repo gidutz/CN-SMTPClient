@@ -14,6 +14,7 @@ public class Runner implements Runnable {
     public void run() {
         db = new SQLiteDBHelper();
         ServerSocket serverSocket = null;
+        db.openDatabase("", "emails");
 
         loadDB();
         try {
@@ -74,7 +75,6 @@ public class Runner implements Runnable {
 
     private void loadDB() {
 
-        db.openDatabase("", "emails");
         tasksList = new EmailArrayList<Task>(db);
         reminderList = new EmailArrayList<Reminder>(db);
         pollList = new EmailArrayList<Poll>(db);
@@ -82,6 +82,7 @@ public class Runner implements Runnable {
         tasksList = db.getAllTasks(tasksList);
         pollList = db.getAllPolls(pollList);
         reminderList = db.getAllReminders(reminderList);
+        db.initializeChatTable();
     }
 
     private void startHandlingEmails() {
