@@ -130,6 +130,8 @@ public class SQLiteDBHelper {
             sql.append(FIELD_SENT + ",");
             if (table.equals("polls")) {
                 sql.append(FIELD_ANSWERS + ",");
+                sql.append(FIELD_POLL_OPTS + ",");
+
             }
             sql.append(FIELD_DATA + ")");
             sql.append("VALUES (");
@@ -146,6 +148,8 @@ public class SQLiteDBHelper {
             if (table.equals("polls")) {
                 Poll poll = (Poll) email;
                 sql.append("\"" + poll + "\",");
+                sql.append("\"" + poll.getOptions() + "\",");
+
             }
             sql.append("\"" + email.getData() + "\")");
 
@@ -408,8 +412,8 @@ public class SQLiteDBHelper {
                     boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
                     boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
                     PollArray pollArray = PollArray.parsePollArray(rs.getString(FIELD_ANSWERS));
-
-                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, pollArray, sent);
+                    String[] options = rs.getString(FIELD_POLL_OPTS).split(";");
+                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, pollArray, options, sent);
                     poll.setId(id);
                     pollList.loadFromDisk(poll);
                 } catch (Exception e) {

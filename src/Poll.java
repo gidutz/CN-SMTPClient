@@ -4,25 +4,11 @@ public class Poll extends Email {
     private boolean sent;
     ArrayList<String> recipients;
     PollArray results;
+    String[] options;
 
 
     public Poll(String owner, Calendar creation_date, Calendar due_date,
-                String[] recipients, String title, String data, boolean completed, boolean sent) {
-        super(owner, creation_date, due_date, recipients[0], title, data);
-        this.completed = completed;
-        this.recipients = new ArrayList<String>();
-        for (String recipient : recipients) {
-            String validated = this.validateEmail(recipient);
-            if (validated != null)
-                this.recipients.add(validated);
-        }
-        this.results = new PollArray(10);
-
-        this.sent = sent;
-    }
-
-    public Poll(String owner, Calendar creation_date, Calendar due_date,
-                String[] recipients, String title, String data, boolean completed, PollArray results, boolean sent) {
+                String[] recipients, String title, String data, boolean completed, PollArray results, String[] options, boolean sent) {
         super(owner, creation_date, due_date, recipients, title, data, completed);
         this.recipients = new ArrayList<String>();
         for (String recipient : recipients) {
@@ -30,6 +16,7 @@ public class Poll extends Email {
             if (validated != null)
                 this.recipients.add(validated);
         }
+        this.options = options;
         this.results = results;
         this.sent = sent;
 
@@ -99,7 +86,18 @@ public class Poll extends Email {
         return this.results.toString();
     }
 
-    public void setSendStatus (boolean stat){
+    public void setSendStatus(boolean stat) {
         this.sent = stat;
+    }
+
+    public String getOptions() {
+        StringBuilder sb = new StringBuilder();
+        for (String option : this.options) {
+            sb.append(option);
+            sb.append(";");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return  sb.toString();
+
     }
 }

@@ -28,7 +28,7 @@ public class ClientHandler implements Runnable {
     }
 
     /**
-     * Starts handling the client
+     * Starts handling the client request
      */
     @Override
     public void run() {
@@ -94,6 +94,10 @@ public class ClientHandler implements Runnable {
         }
 
 
+        /*
+        *This block handles requests, if the request contains a cookie the request is handled
+        * if the request doesn't contain a cookie the request is redirected to the login page.
+         */
         if (request.getHeader("Cookie") == null) {
             if (!path.contains("/images/") && !path.contains("/css/")) {
                 path = ServerRun.root + ServerRun.defaultPage;
@@ -210,7 +214,10 @@ public class ClientHandler implements Runnable {
                 try {
                     String owner = user;
                     String rec = request.getParam("recipients").trim().replaceAll("(\\\\r)?\\\\n", System.getProperty(";"));
-                    String[] recipients = request.getParam("recipients").trim().split(";");
+                    String[] recipients = rec.split(";");
+                    String opts = request.getParam("options").trim().replaceAll("(\\\\r)?\\\\n", System.getProperty(";"));
+
+                    String[] options = opts.split(";");
                     Calendar creationDate = Calendar.getInstance();
 
                     Calendar dueDate = Calendar.getInstance();
@@ -218,8 +225,8 @@ public class ClientHandler implements Runnable {
                     dueDate.setTime(date);
                     String title = request.getParam("title");
                     String data = request.getParam("data");
-                    String options = request.getParam("results");
-                    poll = new Poll(owner, creationDate, dueDate, recipients, title, data, false, false);
+                    PollArray results = new PollArray(options.length);
+                    poll = new Poll(owner, creationDate, dueDate, recipients, title, data, false, results, options, false);
 
                     //Send the Task Immediately!
                     SMTPSession session = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
@@ -255,7 +262,6 @@ public class ClientHandler implements Runnable {
          */
         File serverDir = new File(ServerRun.root);
         if (!page.getPath().startsWith(serverDir.getAbsolutePath())) {
-
             return ServerRun.root + ServerRun.$403page;
         }
         if (!(new File(path)).exists()) {
@@ -319,10 +325,12 @@ public class ClientHandler implements Runnable {
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
 
-                    //TODO: only enable deletion if in progress
-                    sb.append("<td><a href=\"reminders.html?id=");
-                    sb.append(email.getId());
-                    sb.append("\">Delete</a></td>");
+                    if (!email.isComplete()){
+                        sb.append("<td><a href=\"reminders.html?id=");
+                        sb.append(email.getId());
+                        sb.append("\">Delete</a></td>");
+                    }
+
                     sb.append("</tr>");
                     writer.println(sb.toString());
                 }
@@ -367,13 +375,13 @@ public class ClientHandler implements Runnable {
                     StringBuilder sb = new StringBuilder();
 
                     sb.append("<tr><td>");
-                    sb.append(email.getId() + "<td>");
-                    sb.append("<td>" + email.getTitle() + "<td>");
+                    sb.append(email.getId() + "</td>");
+                    sb.append("<td>" + email.getTitle() + "</td>");
                     Date date = email.getCreation_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     date = email.getDue_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
-                    sb.append("<td>" + (email.completed ? "completed" : "in progress") + "<td>");
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
+                    sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
                     sb.append("<td><a href=\"polls.html?id=");
                     sb.append(email.getId());
                     sb.append("\">Delete</a></td>");
@@ -423,12 +431,12 @@ public class ClientHandler implements Runnable {
                     StringBuilder sb = new StringBuilder();
 
                     sb.append("<tr><td>");
-                    sb.append(email.getId() + "<td>");
-                    sb.append("<td>" + email.getTitle() + "<td>");
+                    sb.append(email.getId() + "</td>");
+                    sb.append("<td>" + email.getTitle() + "</td>");
                     Date date = email.getCreation_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     date = email.getDue_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "<td>");
+                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     String status;
                     if (email.isComplete()) {
                         status = "completed";
@@ -437,11 +445,11 @@ public class ClientHandler implements Runnable {
                     } else {
                         status = "in progress...";
                     }
-                    sb.append("<td>" + status + "<td>");
+                    sb.append("<td>" + status + "</td>");
                     sb.append("<td><a href=\"tasks.html?id=");
                     sb.append(email.getId());
                     sb.append("\">Delete</a></td>");
-                    sb.append("<tr>");
+                    sb.append("</tr>");
                     writer.println(sb.toString());
                 }
 
