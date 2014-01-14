@@ -67,15 +67,16 @@ public class Poll extends Email {
         dataBuilder.append(this.data);
         dataBuilder.append(CRLF);
         dataBuilder.append("to answer please click on the following link (ONLY VOTE ONCE!!!)");
+        dataBuilder.append(CRLF);
 
         for (int i = 0; i < this.options.length; i++) {
-            dataBuilder.append("<a href=");
+            dataBuilder.append(" click here ");
 
             dataBuilder.append("http://" + ServerRun.SERVER_NAME + ":" + ServerRun.port);
             dataBuilder.append("/poll_reply.html?id=" + id + "&ans=" + i);
-            dataBuilder.append(">");
+            dataBuilder.append(" to vote for ");
+
             dataBuilder.append(options[i]);
-            dataBuilder.append("</a>");
 
             dataBuilder.append(CRLF);
 

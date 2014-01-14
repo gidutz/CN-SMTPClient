@@ -8,20 +8,7 @@ public class Reminder extends Email {
 		this.recipients.add(owner);
 	}
 
-    /**
-     * Constructs a Reminder
-     * @param owner
-     * @param creation_date
-     * @param due_date
-     * @param recipients
-     * @param title
-     * @param data
-     */
-	public Reminder(String owner, Calendar creation_date, Calendar due_date,
-			String[] recipients, String title, String data, boolean completed) {
-		super(owner, creation_date, due_date, recipients, title, data, completed);
-		this.recipients.add(owner);
-	}
+
 
     /**
      * Returns the completion status of the reminder

@@ -115,16 +115,9 @@ public class ClientHandler implements Runnable {
 
 
             } else if (path.endsWith("poll_reply.html")) {
-                Poll poll = (Poll) polls.get(Integer.parseInt(request.getParam("id")));
-                synchronized (SQLiteDBHelper.lock) {
-                    if (poll.isComplete()) {
-                        path = ServerRun.root + "poll_completed.html";
-                    } else {
-                        poll.addVote(Integer.parseInt(request.getParam("ans")));
-                        polls.update(poll);
-                        path = ServerRun.root + "poll_reply.html";
-                    }
-                }
+
+                path = pollReply(Integer.parseInt(request.getParam("id")), Integer.parseInt(request.getParam("ans")));
+
             }
             page = new File(path);
 
@@ -273,15 +266,7 @@ public class ClientHandler implements Runnable {
 
 
             } else if (path.endsWith("poll_reply.html")) {
-                Poll poll = (Poll) polls.getId(Integer.parseInt(request.getParam("id")));
-
-                if (poll.isComplete()) {
-                    path = ServerRun.root + "poll_completed.html";
-                } else {
-                    poll.addVote(Integer.parseInt(request.getParam("ans")));
-                    polls.update(poll);
-                    path = ServerRun.root + "poll_reply.html";
-                }
+                path = pollReply(Integer.parseInt(request.getParam("id")), Integer.parseInt(request.getParam("ans")));
             }
 
 
@@ -413,7 +398,7 @@ public class ClientHandler implements Runnable {
             PrintWriter writer = new PrintWriter(path, "UTF-8");
             String headline = "<table border=\"0\"><tr><td><b>#</td><td><b>poll " +
                     "title</td><td><b>Creation time</td>" +
-                    "<td><b>Due time</td> <td><b>Status</td>" +
+                    "<td><b>Status</td>" +
                     "<td><b>results</td>" +
                     "<td><a href=\"poll_editor.html?id=new\">New</a></td>" +
                     "</tr>";
@@ -429,8 +414,6 @@ public class ClientHandler implements Runnable {
                     sb.append(email.getId() + "</td>");
                     sb.append("<td>" + email.getTitle() + "</td>");
                     Date date = email.getCreation_date().getTime();
-                    sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
-                    date = email.getDue_date().getTime();
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
                     sb.append("<td>");
@@ -542,4 +525,29 @@ public class ClientHandler implements Runnable {
         polls.remove(Integer.parseInt(id));
 
     }
+
+    public String pollReply(int id, int option) {
+        Poll poll = (Poll) polls.getId(id);
+        String path = null;
+        if (poll.isComplete()) {
+            path = ServerRun.root + "poll_completed.html";
+        } else {
+            poll.addVote(option);
+            polls.update(poll);
+            path = ServerRun.root + "poll_reply.html";
+            //String owner, Calendar creation_date, Calendar due_date,
+            // String recipient, String title, String data,boolean completed
+            String data = "Option " + poll.getOption(option);
+            String title = poll.getTitle() + " new vote recieved!";
+            Reminder reminder = new Reminder(poll.getOwner(), Calendar.getInstance(),
+                    Calendar.getInstance(), poll.owner, title, data, false);
+            path = ServerRun.root + "poll_reply.html";
+        }
+
+
+        return path;
+
+
+    }
+
 }
