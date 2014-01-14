@@ -24,9 +24,8 @@ public class PollsHandler extends EmailHandler<Poll> {
                     data.append("\r\n");
 
                 }
-
                 Reminder taskCompleteNotice = new Reminder(poll.owner, Calendar.getInstance(),
-                        Calendar.getInstance(), poll.owner, "Task out of fate!", data.toString(), true);
+                        Calendar.getInstance(), poll.owner, "The poll you sent is complete!", data.toString(), true);
                 smtpSession.sendMessage(taskCompleteNotice);
                 poll.setSendStatus(true);
                 emails.update(email);

@@ -53,7 +53,7 @@ public class PollArray {
      * @param option
      */
     public void addVote(int option) {
-        this.array[option] = this.array[option]++;
+        this.array[option] = this.array[option]+1;
     }
 
     /**

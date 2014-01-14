@@ -162,11 +162,15 @@ public abstract class Email {
      * @return
      */
     public String getRecipientsString() {
+
         if (this.recipients != null) {
             StringBuilder recString = new StringBuilder();
             for (String recipient : this.recipients) {
                 recString.append(recipient + ";");
             }
+            recString.deleteCharAt(recString.length()-1);
+            return recString.toString();
+
         }
 
         return null;

@@ -68,9 +68,15 @@ public class Poll extends Email {
         dataBuilder.append(CRLF);
         dataBuilder.append("to answer please click on the following link (ONLY VOTE ONCE!!!)");
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 0; i < this.options.length; i++) {
+            dataBuilder.append("<a href=");
 
-            dataBuilder.append("http://" + ServerRun.SERVER_NAME + "/polly_reply?id=" + id + "&ans=" + i);
+            dataBuilder.append("http://" + ServerRun.SERVER_NAME + ":" + ServerRun.port);
+            dataBuilder.append("/poll_reply.html?id=" + id + "&ans=" + i);
+            dataBuilder.append(">");
+            dataBuilder.append(options[i]);
+            dataBuilder.append("</a>");
+
             dataBuilder.append(CRLF);
 
         }
@@ -97,7 +103,47 @@ public class Poll extends Email {
             sb.append(";");
         }
         sb.deleteCharAt(sb.length() - 1);
-        return  sb.toString();
+        return sb.toString();
 
+    }
+
+    /**
+     * returns the option an index = option
+     *
+     * @param option
+     * @return
+     */
+    public String getOption(int option) {
+        return this.options[option];
+    }
+
+    /**
+     * retutns the total number of options
+     *
+     * @return
+     */
+    public int getOptionsCount() {
+        return this.options.length;
+    }
+
+    /**
+     * returns the option an index = option
+     *
+     * @param option
+     * @return
+     */
+    public int getVotesForOption(int option) {
+        return this.results.getVoteForOption(option);
+    }
+
+    /**
+     * poll is never expired since it is not given a due date
+     * instead this method refers to isComplete(), stating if the poll has got the expected number of votes.
+     *
+     * @return
+     */
+    @Override
+    public boolean isExpired() {
+        return this.isComplete();
     }
 }

@@ -25,16 +25,7 @@ public class Runner implements Runnable {
 
             startHandlingEmails();
 
-			/*
-             *
-			 * For Debug! Email task = new Reminder("blabla",
-			 * Calendar.getInstance(), Calendar.getInstance(), new String[] {
-			 * "Alon239@gmail.com", "gidutz@gmail.com" }, "",
-			 * "if u can read this, lab 2 is almost done", "gidutz@gmail.com");
-			 * SMTPClient client = new SMTPClient(SMTP_SEVER, SMTP_PORT, true);
-			 * try { client.sendMessage(task); } catch (SMTPException e) { //
-			 * TODO Auto-generated catch block e.printStackTrace(); }
-			 */
+
             while (true) {
                 ServerRun.connectionLimiter.acquire();
                 Socket clientSocket = serverSocket.accept();

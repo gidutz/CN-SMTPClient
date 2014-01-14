@@ -12,7 +12,7 @@ public class ClientHandler implements Runnable {
 
     /* --! connection time out for the socket -- */
     private static final int CONNECTION_TIMEOUT = 30 * 1000;
-
+    private final String CRLF = "\r\n";
     volatile EmailArrayList tasks;
     volatile EmailArrayList reminders;
     volatile EmailArrayList polls;
@@ -90,7 +90,6 @@ public class ClientHandler implements Runnable {
         File page = new File(path);
         if (page.isDirectory()) {
             path = path + ServerRun.defaultPage;
-            page = new File(path);
         }
 
 
@@ -116,7 +115,16 @@ public class ClientHandler implements Runnable {
 
 
             } else if (path.endsWith("poll_reply.html")) {
-                //TODO:handle poll reply
+                Poll poll = (Poll) polls.get(Integer.parseInt(request.getParam("id")));
+                synchronized (SQLiteDBHelper.lock) {
+                    if (poll.isComplete()) {
+                        path = ServerRun.root + "poll_completed.html";
+                    } else {
+                        poll.addVote(Integer.parseInt(request.getParam("ans")));
+                        polls.update(poll);
+                        path = ServerRun.root + "poll_reply.html";
+                    }
+                }
             }
             page = new File(path);
 
@@ -213,36 +221,35 @@ public class ClientHandler implements Runnable {
                 Poll poll = null;
                 try {
                     String owner = user;
-                    String rec = request.getParam("recipients").trim().replaceAll("(\\\\r)?\\\\n", System.getProperty(";"));
-                    String[] recipients = rec.split(";");
-                    String opts = request.getParam("options").trim().replaceAll("(\\\\r)?\\\\n", System.getProperty(";"));
+                    String rec = request.getParam("recipients").trim();
+                    String[] recipients = rec.split(CRLF);
+                    rec = null;
+                    String opts = request.getParam("options").trim();
 
-                    String[] options = opts.split(";");
+                    String[] options = opts.split(CRLF);
+                    opts = null;
                     Calendar creationDate = Calendar.getInstance();
 
-                    Calendar dueDate = Calendar.getInstance();
-                    Date date = (Email.DATE_FORMAT).parse(request.getParam("due_date") + " " + request.getParam("due_time"));
-                    dueDate.setTime(date);
                     String title = request.getParam("title");
                     String data = request.getParam("data");
                     PollArray results = new PollArray(options.length);
-                    poll = new Poll(owner, creationDate, dueDate, recipients, title, data, false, results, options, false);
+                    poll = new Poll(owner, creationDate, creationDate, recipients, title, data, false, results, options, false);
 
-                    //Send the Task Immediately!
+                    //Send the Poll Immediately!
                     SMTPSession session = new SMTPSession(ServerRun.SMTP_SEVER, ServerRun.SMTP_PORT, ServerRun.AUTHENTICATE);
                     session.sendMessage(poll);
 
-                    if (request.getParam("id").equalsIgnoreCase("new")) {
-                        this.polls.add(poll);
-                    }
+                    this.polls.add(poll);//always adds polls (not only when id=new)
+
                     path = generatePollsPage(user);
 
                 } catch (Exception e) {
-                    System.err.println("Error creating Task");
-                    System.err.println(e);
-                    path = ServerRun.root + "/submit_reminder.html";
+                    System.err.println("Error creating poll");
+                    e.printStackTrace();
+                    path = ServerRun.root + "/submit_polls.html";
 
                 }
+
             } else if (path.endsWith("submit_chat_message.html")) {
                 try {
                     String text = request.getParam("message");
@@ -253,6 +260,28 @@ public class ClientHandler implements Runnable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else if (path.endsWith("task_reply.html")) {
+                try {
+                    Task task = (Task) tasks.getId(Integer.parseInt(request.getParam("id")));
+                    task.setCompleted(true);
+                } catch (NumberFormatException e) {
+                    System.err.println("Cannot mark task as complete");
+                } catch (Exception e) {
+                    System.err.println("Probably the task was not found");
+
+                }
+
+
+            } else if (path.endsWith("poll_reply.html")) {
+                Poll poll = (Poll) polls.getId(Integer.parseInt(request.getParam("id")));
+
+                if (poll.isComplete()) {
+                    path = ServerRun.root + "poll_completed.html";
+                } else {
+                    poll.addVote(Integer.parseInt(request.getParam("ans")));
+                    polls.update(poll);
+                    path = ServerRun.root + "poll_reply.html";
+                }
             }
 
 
@@ -260,11 +289,32 @@ public class ClientHandler implements Runnable {
         /*
          *checks if the client is trying to surf outside the root directory :/
          */
+        page = new
+
+                File(path);
+
         File serverDir = new File(ServerRun.root);
-        if (!page.getPath().startsWith(serverDir.getAbsolutePath())) {
+        if (!page.getPath().
+
+                startsWith(serverDir.getAbsolutePath()
+
+                ))
+
+        {
             return ServerRun.root + ServerRun.$403page;
         }
-        if (!(new File(path)).exists()) {
+
+        if (!(new
+
+                File(path)
+
+        ).
+
+                exists()
+
+                )
+
+        {
             path = ServerRun.root + ServerRun.$404page;
 
         }
@@ -325,7 +375,7 @@ public class ClientHandler implements Runnable {
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
 
-                    if (!email.isComplete()){
+                    if (!email.isComplete()) {
                         sb.append("<td><a href=\"reminders.html?id=");
                         sb.append(email.getId());
                         sb.append("\">Delete</a></td>");
@@ -364,6 +414,7 @@ public class ClientHandler implements Runnable {
             String headline = "<table border=\"0\"><tr><td><b>#</td><td><b>poll " +
                     "title</td><td><b>Creation time</td>" +
                     "<td><b>Due time</td> <td><b>Status</td>" +
+                    "<td><b>results</td>" +
                     "<td><a href=\"poll_editor.html?id=new\">New</a></td>" +
                     "</tr>";
 
@@ -382,6 +433,18 @@ public class ClientHandler implements Runnable {
                     date = email.getDue_date().getTime();
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
+                    sb.append("<td>");
+                    sb.append("<table>");
+                    for (int i = 0; i < email.getOptionsCount(); i++) {
+                        sb.append("<tr>" + email.getOption(i));
+                        sb.append("=" + email.getVotesForOption(i));
+                        sb.append(" </tr>");
+
+                    }
+                    sb.append("</table>");
+
+                    sb.append("</td>");
+
                     sb.append("<td><a href=\"polls.html?id=");
                     sb.append(email.getId());
                     sb.append("\">Delete</a></td>");

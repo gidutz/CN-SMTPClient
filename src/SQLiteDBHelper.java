@@ -19,47 +19,51 @@ public class SQLiteDBHelper {
     private final String CHAT_MESSAGE = "message";
     private final String CHAT_TIME = "time";
 
+
+    public static Object lock = new Object();
+
+
     Connection c;
-    private static Object myLock;
 
     public SQLiteDBHelper() {
-        myLock = new Object();
     }
 
-    public synchronized void openDatabase(String dbPath, String dbName) {
+    public void openDatabase(String dbPath, String dbName) {
 
+        synchronized (lock) {
+            Connection c = null;
+            Statement stmt = null;
+            try {
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                System.out.println("Opened database successfully");
 
-        Connection c = null;
-        Statement stmt = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-            System.out.println("Opened database successfully");
+                HashMap<String, String> fields = new HashMap<String, String>();
 
-            HashMap<String, String> fields = new HashMap<String, String>();
+                fields.put(FIELD_ID, "TEXT");
+                fields.put(FIELD_OWNER, "TEXT");
+                fields.put(FIELD_RECP, "TEXT");
+                fields.put(FIELD_CREATION, "TEXT");
+                fields.put(FIELD_DUE, "TEXT");
+                fields.put(FIELD_TITLE, "TEXT");
+                fields.put(FIELD_DATA, "TEXT");
+                fields.put(FIELD_SENT, "TEXT");
+                fields.put(FIELD_COMPLETED, "TEXT");
+                fields.put(FIELD_ANSWERS, "TEXT");
+                fields.put(FIELD_POLL_OPTS, "TEXT");
 
-            fields.put(FIELD_ID, "TEXT");
-            fields.put(FIELD_OWNER, "TEXT");
-            fields.put(FIELD_RECP, "TEXT");
-            fields.put(FIELD_CREATION, "TEXT");
-            fields.put(FIELD_DUE, "TEXT");
-            fields.put(FIELD_TITLE, "TEXT");
-            fields.put(FIELD_DATA, "TEXT");
-            fields.put(FIELD_SENT, "TEXT");
-            fields.put(FIELD_COMPLETED, "TEXT");
-            fields.put(FIELD_ANSWERS, "TEXT");
-            fields.put(FIELD_POLL_OPTS, "TEXT");
+                createTable("reminders", fields);
+                createTable("tasks", fields);
+                createTable("polls", fields);
 
-            createTable("reminders", fields);
-            createTable("tasks", fields);
-            createTable("polls", fields);
-
-            c.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+                c.close();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
+            System.out.println("Table created successfully");
         }
-        System.out.println("Table created successfully");
+
     }
 
     /**
@@ -68,30 +72,32 @@ public class SQLiteDBHelper {
      * @param tableName
      * @param fields
      */
-    public synchronized void createTable(String tableName, HashMap<String, String> fields) {
+    public void createTable(String tableName, HashMap<String, String> fields) {
+        synchronized (lock) {
+            Statement stmt = null;
+            try {
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
 
-        Statement stmt = null;
-        try {
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                stmt = c.createStatement();
+                StringBuilder sql = new StringBuilder();
+                sql.append("CREATE TABLE IF NOT EXISTS " + tableName);
+                sql.append("(");
+                for (Map.Entry<String, String> entry : fields.entrySet()) {
+                    sql.append(entry.getKey() + " " + entry.getValue() + ", ");
+                }
+                sql.deleteCharAt(sql.lastIndexOf(","));
+                sql.append(");");
 
-            stmt = c.createStatement();
-            StringBuilder sql = new StringBuilder();
-            sql.append("CREATE TABLE IF NOT EXISTS " + tableName);
-            sql.append("(");
-            for (Map.Entry<String, String> entry : fields.entrySet()) {
-                sql.append(entry.getKey() + " " + entry.getValue() + ", ");
+                stmt.executeUpdate(sql.toString());
+                stmt.close();
+                c.close();
+                System.out.println("Table Created!");
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
             }
-            sql.deleteCharAt(sql.lastIndexOf(","));
-            sql.append(");");
-
-            stmt.executeUpdate(sql.toString());
-            stmt.close();
-            c.close();
-            System.out.println("Table Created!");
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
+
 
     }
 
@@ -102,70 +108,73 @@ public class SQLiteDBHelper {
      * @param email
      * @return
      */
-    public synchronized int add(Email email) {
-        String table = null;
-        if (email instanceof Task) {
-            table = "tasks";
-        } else if (email instanceof Reminder) {
-            table = "reminders";
-        } else if (email instanceof Poll) {
-            table = "polls";
-        } else {
-            return 0;
+    public int add(Email email) {
+
+        synchronized (lock) {
+            String table = null;
+            if (email instanceof Task) {
+                table = "tasks";
+            } else if (email instanceof Reminder) {
+                table = "reminders";
+            } else if (email instanceof Poll) {
+                table = "polls";
+            } else {
+                return 0;
+            }
+
+            try {
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+
+                Statement stmt = c.createStatement();
+                StringBuilder sql = new StringBuilder();
+                sql.append("INSERT INTO " + table + "(");
+                sql.append(FIELD_ID + ",");
+                sql.append(FIELD_OWNER + ",");
+                sql.append(FIELD_RECP + ",");
+                sql.append(FIELD_CREATION + ",");
+                sql.append(FIELD_DUE + ",");
+                sql.append(FIELD_TITLE + ",");
+                sql.append(FIELD_COMPLETED + ",");
+                sql.append(FIELD_SENT + ",");
+                if (table.equals("polls")) {
+                    sql.append(FIELD_ANSWERS + ",");
+                    sql.append(FIELD_POLL_OPTS + ",");
+
+                }
+                sql.append(FIELD_DATA + ")");
+                sql.append("VALUES (");
+                sql.append("\"" + email.getId() + "\",");
+                sql.append("\"" + email.getOwner() + "\",");
+                sql.append("\"" + email.getRecipientsString() + "\",");
+                Date date = email.getCreation_date().getTime();
+                sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
+                date = email.getDue_date().getTime();
+                sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
+                sql.append("\"" + email.getTitle() + "\",");
+                sql.append("\"" + email.isComplete() + "\",");
+                sql.append("\"" + email.wasSent() + "\",");
+                if (table.equals("polls")) {
+                    Poll poll = (Poll) email;
+                    sql.append("\"" + poll.getPollResults() + "\",");
+                    sql.append("\"" + poll.getOptions() + "\",");
+
+                }
+                sql.append("\"" + email.getData() + "\")");
+
+                sql.append(";");
+
+                stmt.executeUpdate(sql.toString());
+                System.out.println("Record Inserted!");
+
+                stmt.close();
+                c.close();
+            } catch (SQLException e) {
+                return 0;
+            }
+
+            return 1;
         }
 
-        try {
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-
-            Statement stmt = c.createStatement();
-            StringBuilder sql = new StringBuilder();
-            sql.append("INSERT INTO " + table + "(");
-            sql.append(FIELD_ID + ",");
-            sql.append(FIELD_OWNER + ",");
-            sql.append(FIELD_RECP + ",");
-            sql.append(FIELD_CREATION + ",");
-            sql.append(FIELD_DUE + ",");
-            sql.append(FIELD_TITLE + ",");
-            sql.append(FIELD_COMPLETED + ",");
-            sql.append(FIELD_SENT + ",");
-            if (table.equals("polls")) {
-                sql.append(FIELD_ANSWERS + ",");
-                sql.append(FIELD_POLL_OPTS + ",");
-
-            }
-            sql.append(FIELD_DATA + ")");
-            sql.append("VALUES (");
-            sql.append("\"" + email.getId() + "\",");
-            sql.append("\"" + email.getOwner() + "\",");
-            sql.append("\"" + email.getRecipientsString() + "\",");
-            Date date = email.getCreation_date().getTime();
-            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
-            date = email.getDue_date().getTime();
-            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
-            sql.append("\"" + email.getTitle() + "\",");
-            sql.append("\"" + email.isComplete() + "\",");
-            sql.append("\"" + email.wasSent() + "\",");
-            if (table.equals("polls")) {
-                Poll poll = (Poll) email;
-                sql.append("\"" + poll + "\",");
-                sql.append("\"" + poll.getOptions() + "\",");
-
-            }
-            sql.append("\"" + email.getData() + "\")");
-
-            sql.append(";");
-
-            stmt.executeUpdate(sql.toString());
-            System.out.println("Record Inserted!");
-
-            stmt.close();
-            c.close();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            return 0;
-        }
-
-        return 1;
     }
 
     /**
@@ -174,104 +183,111 @@ public class SQLiteDBHelper {
      * @param email
      * @return
      */
-    public synchronized int remove(Email email) {
-        String table = null;
-        if (email instanceof Task) {
-            table = "tasks";
-        } else if (email instanceof Reminder) {
-            table = "reminders";
-        } else if (email instanceof Poll) {
-            table = "polls";
+    public int remove(Email email) {
+
+        synchronized (lock) {
+
+
+            String table = null;
+            if (email instanceof Task) {
+                table = "tasks";
+            } else if (email instanceof Reminder) {
+                table = "reminders";
+            } else if (email instanceof Poll) {
+                table = "polls";
+            }
+
+            try {
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+
+                Statement stmt = c.createStatement();
+                StringBuilder sql = new StringBuilder();
+                sql.append("DELETE FROM " + table + " WHERE id=\"");
+
+                sql.append(email.getId());
+                sql.append("\";");
+
+                stmt.executeUpdate(sql.toString());
+                System.out.println("Record Inserted!");
+
+                stmt.close();
+                c.close();
+            } catch (SQLException e) {
+
+                return 0;
+            }
+
+            return 1;
         }
-
-        try {
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-
-            Statement stmt = c.createStatement();
-            StringBuilder sql = new StringBuilder();
-            sql.append("DELETE FROM " + table + " WHERE id=\"");
-
-            sql.append(email.getId());
-            sql.append("\";");
-
-            stmt.executeUpdate(sql.toString());
-            System.out.println("Record Inserted!");
-
-            stmt.close();
-            c.close();
-        } catch (SQLException e) {
-
-            return 0;
-        }
-
-        return 1;
     }
 
     public int updateEmail(Email email) {
-        String table = null;
-        if (email instanceof Task) {
-            table = "tasks";
-        } else if (email instanceof Reminder) {
-            table = "reminders";
-        } else if (email instanceof Poll) {
-            table = "polls";
-        } else {
-            return 0;
-        }
-
-        try {
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-
-            Statement stmt = c.createStatement();
-            StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE " + table + " SET ");
-            sql.append(FIELD_OWNER + "=");
-            sql.append("\"" + email.getOwner() + "\",");
-
-            sql.append(FIELD_RECP + "=");
-            sql.append("\"" + email.getRecipientsString() + "\",");
-
-            sql.append(FIELD_CREATION + "=");
-            Date date = email.getCreation_date().getTime();
-            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
-
-            sql.append(FIELD_DUE + "=");
-            date = email.getDue_date().getTime();
-            sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
-
-            sql.append(FIELD_TITLE + "=");
-            sql.append("\"" + email.getTitle() + "\",");
-
-            sql.append(FIELD_COMPLETED + "=");
-            sql.append("\"" + email.isComplete() + "\",");
-
-            sql.append(FIELD_SENT + "=");
-            sql.append("\"" + email.wasSent() + "\",");
-
-            if (table.equals("polls")) {
-                Poll poll = (Poll) email;
-                sql.append(FIELD_ANSWERS + "=");
-                sql.append("\"" + poll.getPollResults() + "\",");
+        synchronized (lock) {
+            String table = null;
+            if (email instanceof Task) {
+                table = "tasks";
+            } else if (email instanceof Reminder) {
+                table = "reminders";
+            } else if (email instanceof Poll) {
+                table = "polls";
+            } else {
+                return 0;
             }
 
+            try {
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
 
-            sql.append(FIELD_DATA + "= ");
-            sql.append("\"" + email.getData() + "\" ");
-            sql.append("WHERE id = " + email.getId());
+                Statement stmt = c.createStatement();
+                StringBuilder sql = new StringBuilder();
+                sql.append("UPDATE " + table + " SET ");
+                sql.append(FIELD_OWNER + "=");
+                sql.append("\"" + email.getOwner() + "\",");
 
-            sql.append(";");
+                sql.append(FIELD_RECP + "=");
+                sql.append("\"" + email.getRecipientsString() + "\",");
 
-            stmt.executeUpdate(sql.toString());
-            System.out.println("Record Updated!");
+                sql.append(FIELD_CREATION + "=");
+                Date date = email.getCreation_date().getTime();
+                sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
 
-            stmt.close();
-            c.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
+                sql.append(FIELD_DUE + "=");
+                date = email.getDue_date().getTime();
+                sql.append("\"" + Email.DATE_FORMAT.format(date) + "\",");
+
+                sql.append(FIELD_TITLE + "=");
+                sql.append("\"" + email.getTitle() + "\",");
+
+                sql.append(FIELD_COMPLETED + "=");
+                sql.append("\"" + email.isComplete() + "\",");
+
+                sql.append(FIELD_SENT + "=");
+                sql.append("\"" + email.wasSent() + "\",");
+
+                if (table.equals("polls")) {
+                    Poll poll = (Poll) email;
+                    sql.append(FIELD_ANSWERS + "=");
+                    sql.append("\"" + poll.getPollResults() + "\",");
+                }
+
+
+                sql.append(FIELD_DATA + "= ");
+                sql.append("\"" + email.getData() + "\" ");
+                sql.append("WHERE id = " + email.getId());
+
+                sql.append(";");
+
+                stmt.executeUpdate(sql.toString());
+                System.out.println("Record Updated!");
+
+                stmt.close();
+                c.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return 0;
+            }
+
+            return 1;
         }
-
-        return 1;
     }
 
     /**
@@ -279,49 +295,52 @@ public class SQLiteDBHelper {
      *
      * @param tasksList@return
      */
-    public synchronized EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
-        Connection c = null;
-        Statement stmt = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-            c.setAutoCommit(false);
-            //System.out.println("Loading tasks... (this may take a while)");
+    public EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
+        synchronized (lock) {
+            Connection c = null;
+            Statement stmt = null;
+            try {
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c.setAutoCommit(false);
+                //System.out.println("Loading tasks... (this may take a while)");
 
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tasks;");
-            while (rs.next()) {
-                try {
-                    int id = Integer.parseInt(rs.getString(FIELD_ID));
-                    String owner = rs.getString(FIELD_OWNER);
-                    String[] recipients = rs.getString(FIELD_RECP).split(";");
-                    Calendar creationDate = Calendar.getInstance();
-                    Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
-                    creationDate.setTime(date);
-                    Calendar dueDate = Calendar.getInstance();
-                    date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
-                    dueDate.setTime(date);
-                    String title = rs.getString(FIELD_TITLE);
-                    String data = rs.getString(FIELD_DATA);
-                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
-                    boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
-                    Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed, sent);
-                    task.setId(id);
-                    tasksList.loadFromDisk(task);
-                } catch (Exception e) {
-                    System.err.println("cannot add task");
+                stmt = c.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM tasks;");
+                while (rs.next()) {
+                    try {
+                        int id = Integer.parseInt(rs.getString(FIELD_ID));
+                        String owner = rs.getString(FIELD_OWNER);
+                        String[] recipients = rs.getString(FIELD_RECP).split(";");
+                        Calendar creationDate = Calendar.getInstance();
+                        Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
+                        creationDate.setTime(date);
+                        Calendar dueDate = Calendar.getInstance();
+                        date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
+                        dueDate.setTime(date);
+                        String title = rs.getString(FIELD_TITLE);
+                        String data = rs.getString(FIELD_DATA);
+                        boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                        boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
+                        Task task = new Task(owner, creationDate, dueDate, recipients[0], title, data, completed, sent);
+                        task.setId(id);
+                        tasksList.loadFromDisk(task);
+                    } catch (Exception e) {
+                        System.err.println("cannot add task");
+                    }
+
+
                 }
-
-
+                rs.close();
+                stmt.close();
+                c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
-        }
-        // System.out.println("Tasks loaded successfully");
+            // System.out.println("Tasks loaded successfully");
 
-        return tasksList;
+            return tasksList;
+        }
     }
 
 
@@ -332,50 +351,51 @@ public class SQLiteDBHelper {
      * @return
      */
     public synchronized EmailArrayList<Reminder> getAllReminders(EmailArrayList<Reminder> reminderList) {
+        synchronized (lock) {
+            Connection c = null;
+            Statement stmt = null;
+            try {
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:./test.db");
+                c.setAutoCommit(false);
+                //System.out.println("Loading reminders... (this may take a while)");
 
-        Connection c = null;
-        Statement stmt = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:./test.db");
-            c.setAutoCommit(false);
-            //System.out.println("Loading reminders... (this may take a while)");
+                stmt = c.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM reminders;");
+                Reminder reminder;
+                while (rs.next()) {
+                    try {
+                        int id = Integer.parseInt(rs.getString(FIELD_ID));
+                        String owner = rs.getString(FIELD_OWNER);
+                        Calendar creationDate = Calendar.getInstance();
+                        Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
+                        creationDate.setTime(date);
+                        Calendar dueDate = Calendar.getInstance();
+                        date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
+                        dueDate.setTime(date);
+                        String title = rs.getString(FIELD_TITLE);
+                        String data = rs.getString(FIELD_DATA);
+                        boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                        reminder = new Reminder(owner, creationDate, dueDate,
+                                owner, title,
+                                data, completed);
+                        reminder.setId(id);
+                        reminderList.loadFromDisk(reminder);
+                    } catch (Exception e) {
+                        System.err.println("cannot add reminder");
+                    }
 
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM reminders;");
-            Reminder reminder;
-            while (rs.next()) {
-                try {
-                    int id = Integer.parseInt(rs.getString(FIELD_ID));
-                    String owner = rs.getString(FIELD_OWNER);
-                    Calendar creationDate = Calendar.getInstance();
-                    Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
-                    creationDate.setTime(date);
-                    Calendar dueDate = Calendar.getInstance();
-                    date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
-                    dueDate.setTime(date);
-                    String title = rs.getString(FIELD_TITLE);
-                    String data = rs.getString(FIELD_DATA);
-                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
-                    reminder = new Reminder(owner, creationDate, dueDate,
-                            owner, title,
-                            data, completed);
-                    reminder.setId(id);
-                    reminderList.loadFromDisk(reminder);
-                } catch (Exception e) {
-                    System.err.println("cannot add reminder");
+
                 }
-
-
+                rs.close();
+                stmt.close();
+                c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
-        }
-        //System.out.println("Loaded reminders successfully");
 
-        return reminderList;
+            return reminderList;
+        }
     }
 
     /**
@@ -385,67 +405,73 @@ public class SQLiteDBHelper {
      */
     public synchronized EmailArrayList<Poll> getAllPolls(EmailArrayList<Poll> pollList) {
 
+        synchronized (lock) {
 
-        Connection c = null;
-        Statement stmt = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-            c.setAutoCommit(false);
-            //System.out.println("Loading polls... (This may take a while) ");
+            Connection c = null;
+            Statement stmt = null;
+            try {
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c.setAutoCommit(false);
+                //System.out.println("Loading polls... (This may take a while) ");
 
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM polls;");
-            while (rs.next()) {
-                try {
-                    int id = Integer.parseInt(rs.getString(FIELD_ID));
-                    String owner = rs.getString(FIELD_OWNER);
-                    String[] recipients = rs.getString(FIELD_RECP).split(";");
-                    Calendar creationDate = Calendar.getInstance();
-                    Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
-                    creationDate.setTime(date);
-                    Calendar dueDate = Calendar.getInstance();
-                    date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
-                    dueDate.setTime(date);
-                    String title = rs.getString(FIELD_TITLE);
-                    String data = rs.getString(FIELD_DATA);
-                    boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
-                    boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
-                    PollArray pollArray = PollArray.parsePollArray(rs.getString(FIELD_ANSWERS));
-                    String[] options = rs.getString(FIELD_POLL_OPTS).split(";");
-                    Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, pollArray, options, sent);
-                    poll.setId(id);
-                    pollList.loadFromDisk(poll);
-                } catch (Exception e) {
-                    System.err.println("cannot add poll");
+                stmt = c.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM polls;");
+                while (rs.next()) {
+                    try {
+                        int id = Integer.parseInt(rs.getString(FIELD_ID));
+                        String owner = rs.getString(FIELD_OWNER);
+                        String str = rs.getString(FIELD_RECP);
+                        String[] recipients = str.split(";");
+                        Calendar creationDate = Calendar.getInstance();
+                        Date date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_CREATION));
+                        creationDate.setTime(date);
+                        Calendar dueDate = Calendar.getInstance();
+                        date = (Email.DATE_FORMAT).parse(rs.getString(FIELD_DUE));
+                        dueDate.setTime(date);
+                        String title = rs.getString(FIELD_TITLE);
+                        String data = rs.getString(FIELD_DATA);
+                        boolean completed = rs.getString(FIELD_COMPLETED).equalsIgnoreCase("true");
+                        boolean sent = rs.getString(FIELD_SENT).equalsIgnoreCase("true");
+                        PollArray pollArray = PollArray.parsePollArray(rs.getString(FIELD_ANSWERS));
+                        String[] options = rs.getString(FIELD_POLL_OPTS).split(";");
+                        Poll poll = new Poll(owner, creationDate, dueDate, recipients, title, data, completed, pollArray, options, sent);
+                        poll.setId(id);
+                        pollList.loadFromDisk(poll);
+                    } catch (Exception e) {
+                        System.err.println("cannot add poll");
+                    }
+
+
                 }
-
-
+                rs.close();
+                stmt.close();
+                c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
+
+
+            return pollList;
         }
-        //System.out.println("Polls loaded successfully");
-
-
-        return pollList;
     }
 
     public void initializeChatTable() {
-        try {
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
-            Statement stmt = c.createStatement();
-            String update = "CREATE TABLE IF NOT EXISTS chats (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + CHAT_MESSAGE + " TEXT, " + CHAT_USER + " TEXT);";
-            stmt.executeUpdate(update);
+        synchronized (lock) {
 
-            stmt.close();
-            c.close();
+            try {
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                Statement stmt = c.createStatement();
+                String update = "CREATE TABLE IF NOT EXISTS chats (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + CHAT_MESSAGE + " TEXT, " + CHAT_USER + " TEXT);";
+                stmt.executeUpdate(update);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+                stmt.close();
+                c.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -472,7 +498,7 @@ public class SQLiteDBHelper {
             stmt.close();
             c.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
             return 0;
         }
 
