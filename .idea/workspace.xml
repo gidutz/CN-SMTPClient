@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientHandler.java" afterPath="$PROJECT_DIR$/src/ClientHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Poll.java" afterPath="$PROJECT_DIR$/src/Poll.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Reminder.java" afterPath="$PROJECT_DIR$/src/Reminder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerRun.java" afterPath="$PROJECT_DIR$/src/ServerRun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.ini" afterPath="$PROJECT_DIR$/src/config.ini" />
     </list>
     <ignored path="CN-SMTPClient.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,6 +69,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="ServerRun.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="123" column="11" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.7224771" vertical-offset="1485" max-vertical-offset="2175">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.ini" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/config.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="66" selection-end="219" vertical-scroll-proportion="-2.4" vertical-offset="0" max-vertical-offset="255">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PollsHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -84,17 +101,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="10" column="0" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="417" column="0" selection-start="15296" selection-end="15296" vertical-scroll-proportion="-11.769231" vertical-offset="6783" max-vertical-offset="9486">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -126,10 +132,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Poll.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Poll.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Poll.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="0" selection-start="2229" selection-end="2229" vertical-scroll-proportion="1.8279817" vertical-offset="388" max-vertical-offset="2340">
+            <state line="79" column="0" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.0" vertical-offset="388" max-vertical-offset="2340">
               <folding>
                 <element signature="e#1108#1109#0" expanded="true" />
                 <element signature="e#1147#1148#0" expanded="true" />
@@ -146,15 +152,6 @@
         <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/ArrayList.class">
           <provider selected="true" editor-type-id="text-editor">
             <state line="64" column="0" selection-start="2297" selection-end="2297" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1035">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Email.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Email.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="34" selection-start="5068" selection-end="5071" vertical-scroll-proportion="-10.576923" vertical-offset="2245" max-vertical-offset="2655">
               <folding />
             </state>
           </provider>
@@ -190,7 +187,6 @@
         <option value="$PROJECT_DIR$/src/RemindersHandler.java" />
         <option value="$PROJECT_DIR$/src/EmailHandler.java" />
         <option value="$PROJECT_DIR$/src/Task.java" />
-        <option value="$PROJECT_DIR$/src/ServerRun.java" />
         <option value="$PROJECT_DIR$/src/TasksHandler.java" />
         <option value="$PROJECT_DIR$/src/ChatQueue.java" />
         <option value="$PROJECT_DIR$/src/Runner.java" />
@@ -202,6 +198,8 @@
         <option value="$PROJECT_DIR$/src/Reminder.java" />
         <option value="$PROJECT_DIR$/src/ClientHandler.java" />
         <option value="$PROJECT_DIR$/src/Poll.java" />
+        <option value="$PROJECT_DIR$/src/config.ini" />
+        <option value="$PROJECT_DIR$/src/ServerRun.java" />
       </list>
     </option>
   </component>
@@ -525,7 +523,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16237482" sideWeight="0.75154006" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30028737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30028737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -631,11 +629,6 @@
         <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="750">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="76" selection-end="76" vertical-scroll-proportion="0.09911894" vertical-offset="0" max-vertical-offset="454" />
       </provider>
     </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/Locale.class">
@@ -781,13 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="2145">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ChatQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="38" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
@@ -897,7 +883,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Poll.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="0" selection-start="2229" selection-end="2229" vertical-scroll-proportion="1.8279817" vertical-offset="388" max-vertical-offset="2340">
+        <state line="79" column="0" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.0" vertical-offset="388" max-vertical-offset="2340">
           <folding>
             <element signature="e#1108#1109#0" expanded="true" />
             <element signature="e#1147#1148#0" expanded="true" />
@@ -906,6 +892,20 @@
             <element signature="e#3146#3147#0" expanded="true" />
             <element signature="e#3188#3189#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="66" selection-end="219" vertical-scroll-proportion="-2.4" vertical-offset="0" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="11" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.7224771" vertical-offset="1485" max-vertical-offset="2175">
+          <folding />
         </state>
       </provider>
     </entry>

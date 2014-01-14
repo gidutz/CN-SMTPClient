@@ -117,14 +117,16 @@ public class ServerRun {
 
             mainPage = "main.html";
 
-            SMTP_USER_NAME = "tasker@cscidc.ac.il";
-            SMTP_PASSWORD = "password";
-            SMTP_SEVER = "compnet.idc.ac.il";
-            SMTP_PORT = 25;
-            AUTHENTICATE = true;
-            DB_PATH = "./test.db";
-            SQLiteDBHelper db;
-            String SERVER_NAME = "localhost";
+            SMTP_USER_NAME = prop.getProperty("SMTPUsername");
+            SMTP_PASSWORD = prop.getProperty("SMTPPassword");
+            SMTP_SEVER = prop.getProperty("SMTPName");
+            SMTP_PORT = Integer.parseInt(prop.getProperty("SMTPPort"));
+           
+
+            AUTHENTICATE = prop.getProperty("SMTPIsAuthLogin").equalsIgnoreCase("true");
+            DB_PATH = prop.getProperty("DB_PATH");
+
+            String SERVER_NAME = prop.getProperty("ServerName");
 
         } catch (IOException e) {
             System.err.println("problem loading settings");
