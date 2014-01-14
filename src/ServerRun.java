@@ -121,7 +121,7 @@ public class ServerRun {
             SMTP_PASSWORD = prop.getProperty("SMTPPassword");
             SMTP_SEVER = prop.getProperty("SMTPName");
             SMTP_PORT = Integer.parseInt(prop.getProperty("SMTPPort"));
-           
+
 
             AUTHENTICATE = prop.getProperty("SMTPIsAuthLogin").equalsIgnoreCase("true");
             DB_PATH = prop.getProperty("DB_PATH");

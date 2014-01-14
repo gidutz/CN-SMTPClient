@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerRun.java" afterPath="$PROJECT_DIR$/src/ServerRun.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.ini" afterPath="$PROJECT_DIR$/src/config.ini" />
     </list>
@@ -69,19 +68,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ServerRun.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ServerRun.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="11" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.7224771" vertical-offset="1485" max-vertical-offset="2175">
+            <state line="123" column="0" selection-start="3316" selection-end="3316" vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="2175">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.ini" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="config.ini" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/config.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="66" selection-end="219" vertical-scroll-proportion="-2.4" vertical-offset="0" max-vertical-offset="255">
+            <state line="11" column="0" selection-start="230" selection-end="230" vertical-scroll-proportion="0.40145984" vertical-offset="0" max-vertical-offset="411">
               <folding />
             </state>
           </provider>
@@ -198,8 +197,8 @@
         <option value="$PROJECT_DIR$/src/Reminder.java" />
         <option value="$PROJECT_DIR$/src/ClientHandler.java" />
         <option value="$PROJECT_DIR$/src/Poll.java" />
-        <option value="$PROJECT_DIR$/src/config.ini" />
         <option value="$PROJECT_DIR$/src/ServerRun.java" />
+        <option value="$PROJECT_DIR$/src/config.ini" />
       </list>
     </option>
   </component>
@@ -523,7 +522,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16237482" sideWeight="0.75154006" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30028737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30028737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -895,16 +894,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.ini">
+    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="66" selection-end="219" vertical-scroll-proportion="-2.4" vertical-offset="0" max-vertical-offset="255">
+        <state line="123" column="0" selection-start="3316" selection-end="3316" vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="2175">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+    <entry file="file://$PROJECT_DIR$/src/config.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="11" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.7224771" vertical-offset="1485" max-vertical-offset="2175">
+        <state line="11" column="0" selection-start="230" selection-end="230" vertical-scroll-proportion="0.40145984" vertical-offset="0" max-vertical-offset="411">
           <folding />
         </state>
       </provider>
