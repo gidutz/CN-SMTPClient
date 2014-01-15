@@ -45,7 +45,7 @@ public class ClientHandler implements Runnable {
             responseCode = 200;
 
             HttpResponder responder = new HttpResponder(path, responseCode,
-                    clientSocket.getOutputStream());
+                    clientSocket.getOutputStream(), request);
             // make HTTP response
             responder.echoResponse();
 
@@ -98,7 +98,9 @@ public class ClientHandler implements Runnable {
         * if the request doesn't contain a cookie the request is redirected to the login page.
          */
         if (request.getHeader("Cookie") == null) {
-            if (!path.contains("/images/") && !path.contains("/css/")) {
+            if (!path.contains("/images/") &&
+                    !path.contains("/css/") &&
+                    !path.contains("/js/")) {
                 path = ServerRun.root + ServerRun.defaultPage;
 
             } else if (path.endsWith("task_reply.html")) {
@@ -258,21 +260,14 @@ public class ClientHandler implements Runnable {
         /*
          *checks if the client is trying to surf outside the root directory :/
          */
-        page = new
+        page = new File(path);
 
-                File(path);
-
-        File serverDir = new File(ServerRun.root);
-        if (!page.getPath().startsWith(serverDir.getAbsolutePath()))
-
-        {
-            return ServerRun.root + ServerRun.$403page;
-        }
 
         if (!(new File(path)).exists())
 
         {
             path = ServerRun.root + ServerRun.$404page;
+            responseCode = 404;
 
         }
 
@@ -424,6 +419,8 @@ public class ClientHandler implements Runnable {
     }
 
     /**
+     * Generates a specific user task page
+     *
      * @param user
      * @return
      */
@@ -513,10 +510,8 @@ public class ClientHandler implements Runnable {
             poll.addVote(option);
             polls.update(poll);
             path = ServerRun.root + "poll_reply.html";
-            //String owner, Calendar creation_date, Calendar due_date,
-            // String recipient, String title, String data,boolean completed
             String data = "Option " + poll.getOption(option);
-            String title = poll.getTitle() + " new vote recieved!";
+            String title = poll.getTitle() + " new vote received!";
             Reminder reminder = new Reminder(poll.getOwner(), Calendar.getInstance(),
                     Calendar.getInstance(), poll.owner, title, data, false);
             path = ServerRun.root + "poll_reply.html";

@@ -25,7 +25,6 @@ public abstract class EmailHandler<E> implements Runnable {
                 try {
                     Thread.sleep(PAUSE);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 

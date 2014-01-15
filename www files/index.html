@@ -85,7 +85,6 @@ function post(u,p) {
 	form.setAttribute("method", method);
 	form.setAttribute("action", "main.html");
 
-	//alert('u: ' +  u.value + ', value:' +  u.value); // debug
 	var hiddenField = document.createElement("input");	
 	hiddenField.setAttribute("type", "hidden"); 
 	hiddenField.setAttribute("name", "user");
@@ -94,7 +93,6 @@ function post(u,p) {
 	form.appendChild(hiddenField);
 	
 
-	//alert('p: ' +  p.value + ', value:' +  p.value); // debug
 	var hiddenField = document.createElement("input");	
 	hiddenField.setAttribute("type", "hidden"); 
 	hiddenField.setAttribute("name", "password");
