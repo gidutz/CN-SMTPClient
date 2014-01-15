@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test.db" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientHandler.java" afterPath="$PROJECT_DIR$/src/ClientHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Runner.java" afterPath="$PROJECT_DIR$/src/Runner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SMTPSession.java" afterPath="$PROJECT_DIR$/src/SMTPSession.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQLiteDBHelper.java" afterPath="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerRun.java" afterPath="$PROJECT_DIR$/src/ServerRun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Task.java" afterPath="$PROJECT_DIR$/src/Task.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.ini" afterPath="$PROJECT_DIR$/src/config.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EmailHandler.java" afterPath="$PROJECT_DIR$/src/EmailHandler.java" />
     </list>
     <ignored path="CN-SMTPClient.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,15 +85,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PollsHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="12" selection-start="268" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="870">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Reminder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Reminder.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -156,13 +139,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientHandler.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <file leaf-file-name="TasksHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TasksHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="524" column="51" selection-start="19201" selection-end="19201" vertical-scroll-proportion="0.33333334" vertical-offset="7746" max-vertical-offset="8295">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="45" column="0" selection-start="1763" selection-end="1763" vertical-scroll-proportion="0.0" vertical-offset="538" max-vertical-offset="1230">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailHandler.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.33152175" vertical-offset="478" max-vertical-offset="975">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -182,7 +172,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/HttpResponder.java" />
         <option value="$PROJECT_DIR$/src/RemindersHandler.java" />
-        <option value="$PROJECT_DIR$/src/EmailHandler.java" />
         <option value="$PROJECT_DIR$/src/TasksHandler.java" />
         <option value="$PROJECT_DIR$/src/ChatQueue.java" />
         <option value="$PROJECT_DIR$/src/Email.java" />
@@ -198,6 +187,7 @@
         <option value="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
         <option value="$PROJECT_DIR$/src/Task.java" />
         <option value="$PROJECT_DIR$/src/ClientHandler.java" />
+        <option value="$PROJECT_DIR$/src/EmailHandler.java" />
       </list>
     </option>
   </component>
@@ -737,13 +727,6 @@
         <state line="147" column="0" selection-start="6106" selection-end="6106" vertical-scroll-proportion="4.555056" vertical-offset="163" max-vertical-offset="2280" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TasksHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="347" selection-end="2431" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1230">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.7.2.jar!/org/sqlite/NativeDB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="209" column="0" selection-start="6113" selection-end="6113" vertical-scroll-proportion="0.0" vertical-offset="2625" max-vertical-offset="3060" />
@@ -758,15 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="38" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1045" selection-end="1045" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="975">
-          <folding>
-            <element signature="e#155#185#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -886,6 +860,20 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TasksHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1763" selection-end="1763" vertical-scroll-proportion="0.0" vertical-offset="538" max-vertical-offset="1230">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.33152175" vertical-offset="478" max-vertical-offset="975">
+          <folding />
         </state>
       </provider>
     </entry>

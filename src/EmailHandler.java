@@ -41,7 +41,7 @@ public abstract class EmailHandler<E> implements Runnable {
         loadFromDatabase();
         synchronized (emails) {
             for (Email email : emails) {
-                if (email.isExpired()) {
+                if (email.isExpired()||email.isComplete()) {
                     try {
                         handelEmail(email);
                     } catch (Exception e) {
