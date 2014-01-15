@@ -125,7 +125,7 @@ public class HttpResponder {
         headers.append("content-length: " + page.length() + CRLF);
         headers.append("Content-Type:" + getContentType() + CRLF);
 
-        headers.append("Host: " +ServerRun.SERVER_NAME+":"+ServerRun.port+ CRLF);
+        headers.append("Host: " + ServerRun.SERVER_NAME + ":" + ServerRun.port + CRLF);
         headers.append(CRLF);
         System.out.println(headers.toString());
         out.print(headers.toString());
@@ -141,7 +141,7 @@ public class HttpResponder {
         headers.append("charset:utf-8" + CRLF);
         headers.append("Transfer-Encoding: chunked " + CRLF);
         headers.append("Content-Type:" + getContentType() + CRLF);
-        headers.append("Host: " +ServerRun.SERVER_NAME+":"+ServerRun.port+ CRLF);
+        headers.append("Host: " + ServerRun.SERVER_NAME + ":" + ServerRun.port + CRLF);
         headers.append(CRLF);
         System.out.print(headers.toString());
         out.print(headers.toString());
@@ -191,6 +191,11 @@ public class HttpResponder {
 
     }
 
+    /**
+     * determines the content type of the response according to the extension of the file path
+     *
+     * @return
+     */
     public String getContentType() {
         if (path == null) {
             return null;

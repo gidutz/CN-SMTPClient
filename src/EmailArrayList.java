@@ -84,6 +84,11 @@ public class EmailArrayList<E> extends ArrayList<Email> {
         }
     }
 
+    /**
+     * removes an email from the data structure and deletes it form the databse
+     * @param id
+     * @return
+     */
     public synchronized Email remove(int id) {
         int dbSuccess = 0;
         boolean arraySuccess = false;

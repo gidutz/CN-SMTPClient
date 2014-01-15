@@ -1,4 +1,6 @@
-
+/**
+ * An exception that is thrown when unexpected event occurs during SMTP Session
+ */
 public class SMTPException extends Exception {
 
 	public SMTPException(String string) {

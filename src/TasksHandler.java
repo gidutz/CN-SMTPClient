@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class handles tasks, when a task is complete or expired, an appropriate message is sent to the owner
+ */
 public class TasksHandler extends EmailHandler<Task> {
 
     /**
@@ -11,6 +14,8 @@ public class TasksHandler extends EmailHandler<Task> {
     }
 
     /**
+     * Handles a Task by sending a message to the owner.
+     * only expired or completed tasks should be here.
      * @param email
      */
     @Override
@@ -68,7 +73,7 @@ public class TasksHandler extends EmailHandler<Task> {
     protected void loadFromDatabase() {
         EmailArrayList<Task> tasksList = new EmailArrayList<Task>(db);
         tasksList = db.getAllTasks(tasksList);
-        emails= new EmailArrayList<Email>(db);
+        emails = new EmailArrayList<Email>(db);
 
         for (Email email : tasksList) {
             emails.loadFromDisk(email);

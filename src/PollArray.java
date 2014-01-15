@@ -1,7 +1,7 @@
 import java.util.regex.*;
 
 /**
- * Created by gidutz on 1/12/14.
+ * The poll array folds the options of the array and provides helper methods
  */
 public class PollArray {
     private int[] array;
@@ -53,7 +53,7 @@ public class PollArray {
      * @param option
      */
     public void addVote(int option) {
-        this.array[option] = this.array[option]+1;
+        this.array[option] = this.array[option] + 1;
     }
 
     /**
@@ -81,7 +81,7 @@ public class PollArray {
         int[] result = null;
         try {
             Pattern pattern = Pattern.compile("[()\"\']");
-            input = input.replaceAll(pattern.toString(),"");
+            input = input.replaceAll(pattern.toString(), "");
             String[] arr = input.split(";");
             result = new int[arr.length];
 

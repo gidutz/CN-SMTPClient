@@ -25,6 +25,10 @@ public class ChatQueue {
 
     }
 
+    /**
+     * Prints the chat messages in HTML format
+     * @return
+     */
     public String echoMessagesHTML() {
         Object[] messages_array;
         synchronized (messages_queue) {

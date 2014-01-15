@@ -1,11 +1,19 @@
 import java.io.*;
 
+/**
+ * Extends EmailHandler/
+ * Checks when if there exists a reminder that should be sent, sends it and updates its fields
+ */
 public class RemindersHandler extends EmailHandler<Reminder> {
 
     public RemindersHandler(EmailArrayList<Reminder> emails, SQLiteDBHelper db) {
         super(emails, db);
     }
 
+    /**
+     * Handles an expired Reminder by sending it
+     * @param email
+     */
     @Override
     public synchronized void handelEmail(Email email) {
         Reminder reminder = (Reminder) email;
@@ -25,6 +33,9 @@ public class RemindersHandler extends EmailHandler<Reminder> {
 
     }
 
+    /**
+     * Loads the reminders from the database
+     */
     @Override
     protected void loadFromDatabase() {
         EmailArrayList<Reminder> remindersList = new EmailArrayList<Reminder>(db);

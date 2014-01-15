@@ -7,6 +7,10 @@ public class PollsHandler extends EmailHandler<Poll> {
         super(emails, db);
     }
 
+    /**
+     * Handles polls that are either completed or expired by sending an appropriate message to the poll owner
+     * @param email
+     */
     @Override
     public void handelEmail(Email email) {
         Poll poll = (Poll) email;

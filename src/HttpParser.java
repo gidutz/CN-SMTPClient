@@ -168,6 +168,10 @@ public class HttpParser {
 		}
 	}
 
+    /**
+     * Parses the post variables of the request
+     * @throws IOException
+     */
 	private void parsePostVars() throws IOException {
 		String line, prms[], temp[];
 		int length = Integer.parseInt(getHeader("content-length"));

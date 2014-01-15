@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
+ * This is the started class of the project
+ * it loads settings from config.ini file located in the current folder and starts the server
+ *
  * @author Alon Jackson and Gad Benram
  */
 public class ServerRun {
@@ -58,37 +61,43 @@ public class ServerRun {
      * @param args
      */
     public static void main(String[] args) {
-
         try {
-
-            loadSettigs();
-        } catch (NullPointerException e) {
-            System.err.println("Cannot find config.ini. Server must shut down");
-            System.exit(2);
-        }
-
-        connectionLimiter = new Semaphore(maxThreads);
-
-        Field[] declaredFields = ServerRun.class.getDeclaredFields();
-        for (Field field : declaredFields) {
-            Object obj = null;
             try {
-                obj = field.get(field.getType());
-                if (Modifier.isStatic(field.getModifiers()) && Modifier.isPublic(field.getModifiers()) && obj == null) {
-                    System.err.println("Cannot obtain value for required field!");
-                    System.err.println(field.getName() + " is missing");
-                    System.exit(1);
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+
+                loadSettigs();
+            } catch (NullPointerException e) {
+                System.err.println("Cannot find config.ini. Server must shut down");
+                System.exit(2);
             }
 
+            connectionLimiter = new Semaphore(maxThreads);
 
+            Field[] declaredFields = ServerRun.class.getDeclaredFields();
+            for (Field field : declaredFields) {
+                Object obj = null;
+                try {
+                    obj = field.get(field.getType());
+                    if (Modifier.isStatic(field.getModifiers()) && Modifier.isPublic(field.getModifiers()) && obj == null) {
+                        System.err.println("Cannot obtain value for required field!");
+                        System.err.println(field.getName() + " is missing");
+                        System.exit(1);
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+            Thread serverRun = new Thread(new Runner());
+            serverRun.start();
+
+        } catch (Exception e) {
+            System.err.println(e);
+            System.out
+                    .println("\r\nOh no, the server is down, please call Shraga "
+                            + "\nhttp://www.youtube.com/watch?v=BaMTbN6Iz3g");
+            System.exit(1);
         }
-        Thread serverRun = new Thread(new Runner());
-        serverRun.start();
-
-
     }
 
 
@@ -124,14 +133,14 @@ public class ServerRun {
             SMTP_PASSWORD = prop.getProperty("SMTPPassword");
             SMTP_SEVER = prop.getProperty("SMTPName");
             SMTP_PORT = Integer.parseInt(prop.getProperty("SMTPPort"));
-            TASK_DB=prop.getProperty("taskFilePath");
-            REM_DB= prop.getProperty("reminderFilePath");
-            POLL_DB= prop.getProperty("pollFilePath");
+            TASK_DB = prop.getProperty("taskFilePath");
+            REM_DB = prop.getProperty("reminderFilePath");
+            POLL_DB = prop.getProperty("pollFilePath");
             CHAT_DB = prop.getProperty("chatFilePath");
 
             AUTHENTICATE = prop.getProperty("SMTPIsAuthLogin").equalsIgnoreCase("true");
 
-             SERVER_NAME = prop.getProperty("ServerName");
+            SERVER_NAME = prop.getProperty("ServerName");
 
         } catch (IOException e) {
             System.err.println("problem loading settings");

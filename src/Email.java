@@ -176,10 +176,18 @@ public abstract class Email {
         return null;
     }
 
+    /**
+     * Sets the id of the email
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Sets the completed status of the email
+     * @param status
+     */
     public abstract void setCompleted(boolean status);
 
     public abstract boolean wasSent();

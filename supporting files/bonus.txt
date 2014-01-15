@@ -1,0 +1,4 @@
+We Implemented two extensions to this lab
+
+1. a logout button that clears the cookie
+2. chat room that enables all logged in users to chat freely

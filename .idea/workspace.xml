@@ -2,12 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e92f8b96-8a7a-4eb7-aeed-2dd7ea5a83f6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reminder.data" afterPath="$PROJECT_DIR$/reminder.data" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChatQueue.java" afterPath="$PROJECT_DIR$/src/ChatQueue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientHandler.java" afterPath="$PROJECT_DIR$/src/ClientHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Email.java" afterPath="$PROJECT_DIR$/src/Email.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EmailArrayList.java" afterPath="$PROJECT_DIR$/src/EmailArrayList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EmailHandler.java" afterPath="$PROJECT_DIR$/src/EmailHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HttpParser.java" afterPath="$PROJECT_DIR$/src/HttpParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HttpResponder.java" afterPath="$PROJECT_DIR$/src/HttpResponder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www files/index.html" afterPath="$PROJECT_DIR$/www files/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Poll.java" afterPath="$PROJECT_DIR$/src/Poll.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PollArray.java" afterPath="$PROJECT_DIR$/src/PollArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PollsHandler.java" afterPath="$PROJECT_DIR$/src/PollsHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RemindersHandler.java" afterPath="$PROJECT_DIR$/src/RemindersHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Runner.java" afterPath="$PROJECT_DIR$/src/Runner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SMTPException.java" afterPath="$PROJECT_DIR$/src/SMTPException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SMTPSession.java" afterPath="$PROJECT_DIR$/src/SMTPSession.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerRun.java" afterPath="$PROJECT_DIR$/src/ServerRun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TasksHandler.java" afterPath="$PROJECT_DIR$/src/TasksHandler.java" />
     </list>
     <ignored path="CN-SMTPClient.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,22 +98,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EmailHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
+      <file leaf-file-name="Reminder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Reminder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0" vertical-offset="313" max-vertical-offset="960">
+            <state line="10" column="0" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientHandler.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
+      <file leaf-file-name="PollsHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="0" selection-start="3374" selection-end="3374" vertical-scroll-proportion="0.49891067" vertical-offset="1331" max-vertical-offset="8355">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="4" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PollArray.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PollArray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="76" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="1665">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Poll.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Poll.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="45" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0" vertical-offset="1860" max-vertical-offset="2475">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="78" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="1080">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChatQueue.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ChatQueue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="46" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChatMessage.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ChatMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.4472477" vertical-offset="0" max-vertical-offset="436">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Email.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Email.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="187" column="45" selection-start="5099" selection-end="5099" vertical-scroll-proportion="0.0" vertical-offset="1034" max-vertical-offset="2775">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,10 +173,19 @@
       <file leaf-file-name="HttpResponder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HttpResponder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="7" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="3270">
+            <state line="175" column="0" selection-start="5628" selection-end="5628" vertical-scroll-proportion="0.0" vertical-offset="2279" max-vertical-offset="3345">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HttpParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HttpParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="171" column="47" selection-start="4458" selection-end="4458" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="4200">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,23 +203,25 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/RemindersHandler.java" />
-        <option value="$PROJECT_DIR$/src/TasksHandler.java" />
-        <option value="$PROJECT_DIR$/src/ChatQueue.java" />
-        <option value="$PROJECT_DIR$/src/Email.java" />
-        <option value="$PROJECT_DIR$/src/PollArray.java" />
-        <option value="$PROJECT_DIR$/src/PollsHandler.java" />
         <option value="$PROJECT_DIR$/src/Reminder.java" />
-        <option value="$PROJECT_DIR$/src/Poll.java" />
-        <option value="$PROJECT_DIR$/src/SMTPSession.java" />
-        <option value="$PROJECT_DIR$/src/ServerRun.java" />
-        <option value="$PROJECT_DIR$/src/Runner.java" />
         <option value="$PROJECT_DIR$/src/config.ini" />
         <option value="$PROJECT_DIR$/src/SQLiteDBHelper.java" />
         <option value="$PROJECT_DIR$/src/Task.java" />
-        <option value="$PROJECT_DIR$/src/EmailArrayList.java" />
-        <option value="$PROJECT_DIR$/src/EmailHandler.java" />
+        <option value="$PROJECT_DIR$/src/ChatQueue.java" />
+        <option value="$PROJECT_DIR$/src/TasksHandler.java" />
+        <option value="$PROJECT_DIR$/src/SMTPSession.java" />
+        <option value="$PROJECT_DIR$/src/SMTPException.java" />
+        <option value="$PROJECT_DIR$/src/ServerRun.java" />
+        <option value="$PROJECT_DIR$/src/Runner.java" />
+        <option value="$PROJECT_DIR$/src/RemindersHandler.java" />
+        <option value="$PROJECT_DIR$/src/PollsHandler.java" />
+        <option value="$PROJECT_DIR$/src/PollArray.java" />
+        <option value="$PROJECT_DIR$/src/Poll.java" />
         <option value="$PROJECT_DIR$/src/HttpResponder.java" />
+        <option value="$PROJECT_DIR$/src/HttpParser.java" />
+        <option value="$PROJECT_DIR$/src/EmailHandler.java" />
+        <option value="$PROJECT_DIR$/src/EmailArrayList.java" />
+        <option value="$PROJECT_DIR$/src/Email.java" />
         <option value="$PROJECT_DIR$/src/ClientHandler.java" />
       </list>
     </option>
@@ -552,17 +625,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750" />
+        <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="38" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3435" />
+        <state line="6" column="38" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3435">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="750" />
+        <state line="2" column="13" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="750">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/Locale.class">
@@ -620,11 +699,6 @@
         <state line="33" column="41" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.2660754" vertical-offset="0" max-vertical-offset="7635" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SMTPException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="13" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="19" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="555" />
@@ -638,11 +712,6 @@
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/AbstractList.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="33" selection-start="912" selection-end="912" vertical-scroll-proportion="0.27937916" vertical-offset="294" max-vertical-offset="1185" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="5" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
       </provider>
     </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/net/PlainSocketImpl.class">
@@ -665,21 +734,9 @@
         <state line="151" column="0" selection-start="4378" selection-end="4378" vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="4650" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="38" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/StringBuilder.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="92" column="0" selection-start="4018" selection-end="4018" vertical-scroll-proportion="0.0" vertical-offset="1019" max-vertical-offset="1455" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Email.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="34" selection-start="5068" selection-end="5071" vertical-scroll-proportion="-10.576923" vertical-offset="2245" max-vertical-offset="2655">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/ArrayList.class">
@@ -687,74 +744,9 @@
         <state line="64" column="0" selection-start="2297" selection-end="2297" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1035" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HttpParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="0" selection-start="5815" selection-end="5815" vertical-scroll-proportion="0.0" vertical-offset="3234" max-vertical-offset="4170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PollArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0" vertical-offset="688" max-vertical-offset="1665" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="12" selection-start="268" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="44" selection-start="6839" selection-end="6839" vertical-scroll-proportion="0.0" vertical-offset="2848" max-vertical-offset="3525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="53" selection-start="3545" selection-end="3545" vertical-scroll-proportion="0.0" vertical-offset="1833" max-vertical-offset="2250">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Reminder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Poll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="0" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.0" vertical-offset="388" max-vertical-offset="2340" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="2376" selection-end="2376" vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="8610" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="41" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="1425">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Task.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="48" selection-start="1827" selection-end="1827" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="1155">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TasksHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1763" selection-end="1763" vertical-scroll-proportion="0.0" vertical-offset="538" max-vertical-offset="1230">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RemindersHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="36" selection-start="629" selection-end="629" vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="675">
           <folding />
         </state>
       </provider>
@@ -780,18 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="18" selection-start="2915" selection-end="2915" vertical-scroll-proportion="0.6331522" vertical-offset="1462" max-vertical-offset="2040" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0" vertical-offset="243" max-vertical-offset="960">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www files/js/rainbows.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="15" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3330">
@@ -799,21 +779,142 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TasksHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="33" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SQLiteDBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="2376" selection-end="2376" vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="8610">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SMTPSession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="43" selection-start="1925" selection-end="1925" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="4080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SMTPException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="59" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="25" selection-start="2773" selection-end="2773" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="2385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Runner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="50" selection-start="2916" selection-end="2916" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RemindersHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="48" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="840">
+          <folding>
+            <element signature="e#1235#1245#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Reminder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PollsHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PollArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="76" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="1665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Poll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="45" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0" vertical-offset="1860" max-vertical-offset="2475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/HttpResponder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="7" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="3270">
+        <state line="175" column="0" selection-start="5628" selection-end="5628" vertical-scroll-proportion="0.0" vertical-offset="2279" max-vertical-offset="3345">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/HttpParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="47" selection-start="4458" selection-end="4458" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="4200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EmailHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="78" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EmailArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="9" selection-start="2043" selection-end="2043" vertical-scroll-proportion="2.7866971" vertical-offset="0" max-vertical-offset="2115">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Email.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="187" column="45" selection-start="5099" selection-end="5099" vertical-scroll-proportion="0.0" vertical-offset="1034" max-vertical-offset="2775">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="0" selection-start="3374" selection-end="3374" vertical-scroll-proportion="0.49891067" vertical-offset="1331" max-vertical-offset="8355">
+        <state line="13" column="52" selection-start="365" selection-end="365" vertical-scroll-proportion="0.27522936" vertical-offset="75" max-vertical-offset="8520">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="46" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.4472477" vertical-offset="0" max-vertical-offset="436">
+          <folding />
         </state>
       </provider>
     </entry>

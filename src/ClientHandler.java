@@ -11,13 +11,20 @@ public class ClientHandler implements Runnable {
     private Socket clientSocket;
 
     /* --! connection time out for the socket -- */
-    private static final int CONNECTION_TIMEOUT = 30 * 1000;
+    private static final int CONNECTION_TIMEOUT = 60 * 1000;
     private final String CRLF = "\r\n";
     volatile EmailArrayList tasks;
     volatile EmailArrayList reminders;
     volatile EmailArrayList polls;
     private int responseCode;
 
+    /**
+     * Construts an ClientHandler
+     * @param clientSocket The socket of the connecting client
+     * @param tasks A list of the existing Tasks
+     * @param reminders A list of the existing reminder
+     * @param polls A List of the existing polls
+     */
     public ClientHandler(Socket clientSocket, EmailArrayList tasks, EmailArrayList reminders, EmailArrayList polls) {
 
         this.clientSocket = clientSocket;
@@ -66,6 +73,10 @@ public class ClientHandler implements Runnable {
         System.out.println("Connection eliminated with " + clientSocket);
     }
 
+    /**
+     * prints to the screen the request params
+     * @param parser
+     */
     private void logRequest(HttpParser parser) {
         System.out.println("method=" + parser.getMethod());
         System.out.println("url=" + parser.getRequestURL());

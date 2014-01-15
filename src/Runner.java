@@ -3,7 +3,8 @@ import java.net.*;
 import java.util.concurrent.*;
 
 /**
- * Created by gidutz on 1/10/14.
+ * This file is used to run the server
+ * it constructs a ServerSocket and waits for incoming connections
  */
 public class Runner implements Runnable {
     public static volatile EmailArrayList<Task> tasksList;
@@ -15,11 +16,15 @@ public class Runner implements Runnable {
         db = new SQLiteDBHelper();
         ServerSocket serverSocket = null;
 
+        /**
+         * creates or opens the database
+         */
         db.openDatabase(ServerRun.POLL_DB);
         db.openDatabase(ServerRun.REM_DB);
         db.openDatabase(ServerRun.TASK_DB);
 
-        loadDB();
+        loadDB(); //loads the data from the disk database
+
         try {
             ServerRun.connectionLimiter = new Semaphore(ServerRun.maxThreads);
 
@@ -28,14 +33,17 @@ public class Runner implements Runnable {
 
             startHandlingEmails();
 
-
+            /*
+            * wait for connection. the connections are limited by a semaphore
+             */
             while (true) {
                 ServerRun.connectionLimiter.acquire();
                 Socket clientSocket = serverSocket.accept();
 
 
-                loadDB();
+                loadDB();//reloads the data from the dist
 
+                //Handles the incoming connection
                 Thread handleConnection = new Thread(new ClientHandler(clientSocket, tasksList, reminderList, pollList));
                 System.out
                         .println("Connection established, total connections = "
@@ -48,7 +56,7 @@ public class Runner implements Runnable {
         } catch (IOException e) {
             System.err.println(e);
             System.out
-                    .println("\r\nOh no, the server is down, please to call Shraga "
+                    .println("\r\nOh no, the server is down, please call Shraga "
                             + "\nhttp://www.youtube.com/watch?v=BaMTbN6Iz3g");
 
             System.exit(2);
@@ -67,6 +75,9 @@ public class Runner implements Runnable {
     }
 
 
+    /**
+     * loads the emails from the database
+     */
     private void loadDB() {
 
         tasksList = new EmailArrayList<Task>(db);
@@ -79,10 +90,13 @@ public class Runner implements Runnable {
         db.initializeChatTable();
     }
 
+    /**
+     * starts Three threads that handle the emails
+     */
     private void startHandlingEmails() {
-        Thread tasksHandler = new Thread(new TasksHandler(tasksList,db));
-        Thread pollsHandler = new Thread(new PollsHandler(pollList,db));
-        Thread remindersHandler = new Thread(new RemindersHandler(reminderList,db));
+        Thread tasksHandler = new Thread(new TasksHandler(tasksList, db));
+        Thread pollsHandler = new Thread(new PollsHandler(pollList, db));
+        Thread remindersHandler = new Thread(new RemindersHandler(reminderList, db));
         tasksHandler.start();
         pollsHandler.start();
         remindersHandler.start();

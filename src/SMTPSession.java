@@ -24,12 +24,22 @@ public class SMTPSession {
     private final int QUIT = 4;
     private final boolean AUTH_REQUIRED;
 
+    /**
+     * Constructs a new SMTPSession object
+     *
+     * @param host         The address of the SMTP server
+     * @param port         the port to connect on the SMTP server
+     * @param authRequired is Authentication Required?
+     */
     public SMTPSession(String host, int port, boolean authRequired) {
         this.host = host;
         this.port = port;
         this.AUTH_REQUIRED = authRequired;
     }
 
+    /**
+     * Connects to the SMTP server
+     */
     private synchronized void connect() {
         try {
             socket = new Socket(host, port);
@@ -41,6 +51,9 @@ public class SMTPSession {
         }
     }
 
+    /**
+     * closes the connection with the socket
+     */
     public void close() {
         try {
             in.close();
@@ -51,6 +64,10 @@ public class SMTPSession {
         }
     }
 
+    /**
+     * waits for a response from the server
+     * @return
+     */
     private String getResponse() {
         String response = null;
         try {
@@ -61,6 +78,12 @@ public class SMTPSession {
         return response;
     }
 
+    /**
+     * Sends the email by implementing SMTP protocol
+     * @param email the email to be sent
+     * @throws IOException
+     * @throws SMTPException
+     */
     public synchronized void sendMessage(Email email) throws IOException, SMTPException {
         if (this.socket == null) {
             connect();
@@ -76,6 +99,8 @@ public class SMTPSession {
         }
 
         doCommand(SAY_HELLO, this.USER_NAMES);
+
+        //only if the authentication is required according to config.ini
         if (AUTH_REQUIRED) {
             doCommand(AUTH_LOGIN, null);
         }
@@ -100,6 +125,8 @@ public class SMTPSession {
     }
 
     /**
+     * Sends command to the server and waits for a response
+     * Echoes the response to the Standard output (System.out)
      * @param command
      * @return
      * @throws IOException
@@ -202,6 +229,11 @@ public class SMTPSession {
         return -1;
     }
 
+    /**
+     * Prepares the mail body
+     * @param email
+     * @return a string that represents the mail body
+     */
     private String prepareMail(Email email) {
         StringBuilder message = new StringBuilder();
         message.append("FROM:" + "Mr. Tasker" + CRLF);
@@ -213,8 +245,8 @@ public class SMTPSession {
         message.append(CRLF);
         message.append("Date: " + Email.DATE_FORMAT.format(email.getCreation_date().getTime()) + CRLF);
         message.append("Subject: " + email.getTitle() + CRLF);
-        Scanner scanner= new Scanner(email.getData());
-        while (scanner.hasNextLine()){
+        Scanner scanner = new Scanner(email.getData());
+        while (scanner.hasNextLine()) {
             message.append(scanner.nextLine());
             message.append(CRLF);
 
@@ -224,6 +256,11 @@ public class SMTPSession {
         return message.toString();
     }
 
+    /**
+     * Used to send the SMTP statement to the server and echo is to the screen
+     * @param statement
+     * @throws IOException
+     */
     private void sendStatement(String statement) throws IOException {
         System.out.println(statement);
         out.write(statement);

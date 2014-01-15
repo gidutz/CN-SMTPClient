@@ -1,12 +1,27 @@
 import java.util.*;
 
+/**
+ * Represents a poll that extends Email object
+ */
 public class Poll extends Email {
     private boolean sent;
     ArrayList<String> recipients;
     PollArray results;
     String[] options;
 
-
+    /**
+     * Constructs a new poll
+     * @param owner the creator of this poll (retrieved from the HTTP cookie)
+     * @param creation_date The date of creation (usually current date)
+     * @param due_date The specified due date - irrelevant to polls
+     * @param recipients An Array of recipients of this poll
+     * @param title the title of the poll
+     * @param data The question asked by the owner
+     * @param completed A status of completion
+     * @param results An array of counted results
+     * @param options An Array that holds the options provided by the user
+     * @param sent True only if a summarizing reminder was sent to the owner upon completion
+     */
     public Poll(String owner, Calendar creation_date, Calendar due_date,
                 String[] recipients, String title, String data, boolean completed, PollArray results, String[] options, boolean sent) {
         super(owner, creation_date, due_date, recipients, title, data, completed);

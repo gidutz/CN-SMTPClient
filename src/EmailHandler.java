@@ -32,15 +32,23 @@ public abstract class EmailHandler<E> implements Runnable {
         }
     }
 
+    /**
+     * Handles Emails
+     *
+     * @param email
+     */
     public abstract void handelEmail(Email email);
 
 
+    /**
+     * looks for expired or completed emails. They probably need to be handled
+     */
     private void checkStatus() {
 
         loadFromDatabase();
         synchronized (emails) {
             for (Email email : emails) {
-                if (email.isExpired()||email.isComplete()) {
+                if (email.isExpired() || email.isComplete()) {
                     try {
                         handelEmail(email);
                     } catch (Exception e) {
