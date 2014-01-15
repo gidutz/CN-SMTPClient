@@ -204,7 +204,7 @@ public class SMTPSession {
 
     private String prepareMail(Email email) {
         StringBuilder message = new StringBuilder();
-        message.append("FROM:" + "<" + email.getOwner() + ">" + CRLF);
+        message.append("FROM:" + "Mr. Tasker" + CRLF);
         message.append("To:");
 
         for (String recipient : email.getRecipients()) {

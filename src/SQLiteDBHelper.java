@@ -17,8 +17,9 @@ public class SQLiteDBHelper {
 
     private final String CHAT_USER = "user";
     private final String CHAT_MESSAGE = "message";
-    private final String CHAT_TIME = "time";
-
+    private  final String TABLE_REMS = "reminders";
+    private final  String TABLE_TASKS = "tasks";
+    private final  String TABLE_POLLS = "polls";
 
     public static Object lock = new Object();
 
@@ -28,14 +29,13 @@ public class SQLiteDBHelper {
     public SQLiteDBHelper() {
     }
 
-    public void openDatabase(String dbPath, String dbName) {
+    public synchronized void openDatabase(String databaseName) {
 
-        synchronized (lock) {
             Connection c = null;
             Statement stmt = null;
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
                 System.out.println("Opened database successfully");
 
                 HashMap<String, String> fields = new HashMap<String, String>();
@@ -51,18 +51,18 @@ public class SQLiteDBHelper {
                 fields.put(FIELD_COMPLETED, "TEXT");
                 fields.put(FIELD_ANSWERS, "TEXT");
                 fields.put(FIELD_POLL_OPTS, "TEXT");
-
-                createTable("reminders", fields);
-                createTable("tasks", fields);
-                createTable("polls", fields);
-
                 c.close();
+
+                createTable(TABLE_REMS, fields);
+                createTable(TABLE_TASKS, fields);
+                createTable(TABLE_POLLS, fields);
+
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
             System.out.println("Table created successfully");
-        }
+
 
     }
 
@@ -72,11 +72,22 @@ public class SQLiteDBHelper {
      * @param tableName
      * @param fields
      */
-    public void createTable(String tableName, HashMap<String, String> fields) {
-        synchronized (lock) {
+    public synchronized void createTable(String tableName, HashMap<String, String> fields) {
+        String databaseName = null;
+        if (tableName.equalsIgnoreCase(TABLE_TASKS)){
+            databaseName = ServerRun.TASK_DB;
+        }else if (tableName.equalsIgnoreCase(TABLE_REMS)){
+            databaseName = ServerRun.REM_DB;
+
+        }else if (tableName.equalsIgnoreCase(TABLE_POLLS)){
+            databaseName = ServerRun.POLL_DB;
+
+        }
+
+
             Statement stmt = null;
             try {
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
 
                 stmt = c.createStatement();
                 StringBuilder sql = new StringBuilder();
@@ -96,7 +107,7 @@ public class SQLiteDBHelper {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
-        }
+
 
 
     }
@@ -108,22 +119,26 @@ public class SQLiteDBHelper {
      * @param email
      * @return
      */
-    public int add(Email email) {
+    public synchronized int add(Email email) {
 
-        synchronized (lock) {
             String table = null;
+            String databaseName = null;
             if (email instanceof Task) {
-                table = "tasks";
+                table = TABLE_TASKS;
+                databaseName = ServerRun.TASK_DB;
             } else if (email instanceof Reminder) {
-                table = "reminders";
+                table = TABLE_REMS;
+                databaseName = ServerRun.REM_DB;
             } else if (email instanceof Poll) {
-                table = "polls";
+                table = TABLE_POLLS;
+                databaseName = ServerRun.POLL_DB;
+
             } else {
                 return 0;
             }
 
             try {
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
 
                 Statement stmt = c.createStatement();
                 StringBuilder sql = new StringBuilder();
@@ -136,7 +151,7 @@ public class SQLiteDBHelper {
                 sql.append(FIELD_TITLE + ",");
                 sql.append(FIELD_COMPLETED + ",");
                 sql.append(FIELD_SENT + ",");
-                if (table.equals("polls")) {
+                if (table.equals(TABLE_POLLS)) {
                     sql.append(FIELD_ANSWERS + ",");
                     sql.append(FIELD_POLL_OPTS + ",");
 
@@ -153,7 +168,7 @@ public class SQLiteDBHelper {
                 sql.append("\"" + email.getTitle() + "\",");
                 sql.append("\"" + email.isComplete() + "\",");
                 sql.append("\"" + email.wasSent() + "\",");
-                if (table.equals("polls")) {
+                if (table.equals(TABLE_POLLS)) {
                     Poll poll = (Poll) email;
                     sql.append("\"" + poll.getPollResults() + "\",");
                     sql.append("\"" + poll.getOptions() + "\",");
@@ -173,7 +188,7 @@ public class SQLiteDBHelper {
             }
 
             return 1;
-        }
+
 
     }
 
@@ -183,22 +198,28 @@ public class SQLiteDBHelper {
      * @param email
      * @return
      */
-    public int remove(Email email) {
+    public synchronized int remove(Email email) {
 
-        synchronized (lock) {
 
 
             String table = null;
+            String databaseName = null;
             if (email instanceof Task) {
-                table = "tasks";
+                table = TABLE_TASKS;
+                databaseName = ServerRun.TASK_DB;
             } else if (email instanceof Reminder) {
-                table = "reminders";
+                table = TABLE_REMS;
+                databaseName = ServerRun.REM_DB;
             } else if (email instanceof Poll) {
-                table = "polls";
+                table = TABLE_POLLS;
+                databaseName = ServerRun.POLL_DB;
+
+            } else {
+                return 0;
             }
 
             try {
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
 
                 Statement stmt = c.createStatement();
                 StringBuilder sql = new StringBuilder();
@@ -218,24 +239,28 @@ public class SQLiteDBHelper {
             }
 
             return 1;
-        }
+
     }
 
-    public int updateEmail(Email email) {
-        synchronized (lock) {
+    public synchronized int updateEmail(Email email) {
             String table = null;
+            String databaseName = null;
             if (email instanceof Task) {
-                table = "tasks";
+                table = TABLE_TASKS;
+                databaseName = ServerRun.TASK_DB;
             } else if (email instanceof Reminder) {
-                table = "reminders";
+                table = TABLE_REMS;
+                databaseName = ServerRun.REM_DB;
             } else if (email instanceof Poll) {
-                table = "polls";
+                table = TABLE_POLLS;
+                databaseName = ServerRun.POLL_DB;
+
             } else {
                 return 0;
             }
 
             try {
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
 
                 Statement stmt = c.createStatement();
                 StringBuilder sql = new StringBuilder();
@@ -263,7 +288,7 @@ public class SQLiteDBHelper {
                 sql.append(FIELD_SENT + "=");
                 sql.append("\"" + email.wasSent() + "\",");
 
-                if (table.equals("polls")) {
+                if (table.equals(TABLE_POLLS)) {
                     Poll poll = (Poll) email;
                     sql.append(FIELD_ANSWERS + "=");
                     sql.append("\"" + poll.getPollResults() + "\",");
@@ -287,7 +312,7 @@ public class SQLiteDBHelper {
             }
 
             return 1;
-        }
+
     }
 
     /**
@@ -295,13 +320,14 @@ public class SQLiteDBHelper {
      *
      * @param tasksList@return
      */
-    public EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
-        synchronized (lock) {
+    public synchronized EmailArrayList<Task> getAllTasks(EmailArrayList<Task> tasksList) {
+
+
             Connection c = null;
             Statement stmt = null;
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.TASK_DB);
                 c.setAutoCommit(false);
                 //System.out.println("Loading tasks... (this may take a while)");
 
@@ -340,7 +366,7 @@ public class SQLiteDBHelper {
             // System.out.println("Tasks loaded successfully");
 
             return tasksList;
-        }
+
     }
 
 
@@ -351,12 +377,11 @@ public class SQLiteDBHelper {
      * @return
      */
     public synchronized EmailArrayList<Reminder> getAllReminders(EmailArrayList<Reminder> reminderList) {
-        synchronized (lock) {
             Connection c = null;
             Statement stmt = null;
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:./test.db");
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.REM_DB);
                 c.setAutoCommit(false);
                 //System.out.println("Loading reminders... (this may take a while)");
 
@@ -395,7 +420,7 @@ public class SQLiteDBHelper {
             }
 
             return reminderList;
-        }
+
     }
 
     /**
@@ -405,15 +430,13 @@ public class SQLiteDBHelper {
      */
     public synchronized EmailArrayList<Poll> getAllPolls(EmailArrayList<Poll> pollList) {
 
-        synchronized (lock) {
 
             Connection c = null;
             Statement stmt = null;
             try {
                 Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.POLL_DB);
                 c.setAutoCommit(false);
-                //System.out.println("Loading polls... (This may take a while) ");
 
                 stmt = c.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM polls;");
@@ -453,14 +476,13 @@ public class SQLiteDBHelper {
 
 
             return pollList;
-        }
+
     }
 
-    public void initializeChatTable() {
-        synchronized (lock) {
+    public synchronized void initializeChatTable() {
 
             try {
-                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+                c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.CHAT_DB);
                 Statement stmt = c.createStatement();
                 String update = "CREATE TABLE IF NOT EXISTS chats (id INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + CHAT_MESSAGE + " TEXT, " + CHAT_USER + " TEXT);";
@@ -472,14 +494,14 @@ public class SQLiteDBHelper {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 
-    public int addChatMessage(ChatMessage message) {
+    public synchronized  int addChatMessage(ChatMessage message) {
 
 
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.DB_PATH);
+            c = DriverManager.getConnection("jdbc:sqlite:" + ServerRun.CHAT_DB);
 
             Statement stmt = c.createStatement();
 
@@ -506,13 +528,13 @@ public class SQLiteDBHelper {
 
     }
 
-    public ChatQueue getChatQueue() {
+    public synchronized  ChatQueue getChatQueue() {
         ChatQueue queue = new ChatQueue();
         Connection c = null;
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:./test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:"+ServerRun.CHAT_DB);
             c.setAutoCommit(false);
             //System.out.println("Loading reminders... (this may take a while)");
 

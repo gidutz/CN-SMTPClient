@@ -14,7 +14,10 @@ public class Runner implements Runnable {
     public void run() {
         db = new SQLiteDBHelper();
         ServerSocket serverSocket = null;
-        db.openDatabase("", "emails");
+
+        db.openDatabase(ServerRun.POLL_DB);
+        db.openDatabase(ServerRun.REM_DB);
+        db.openDatabase(ServerRun.TASK_DB);
 
         loadDB();
         try {

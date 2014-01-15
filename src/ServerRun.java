@@ -43,13 +43,16 @@ public class ServerRun {
 
     public static String mainPage = "main.html";
 
-    public static String SMTP_USER_NAME = "tasker@cscidc.ac.il";
-    public static String SMTP_PASSWORD = "password";
-    public static String SMTP_SEVER = "compnet.idc.ac.il";
-    public static int SMTP_PORT = 25;
+    public static String SMTP_USER_NAME;
+    public static String SMTP_PASSWORD;
+    public static String SMTP_SEVER;
+    public static int SMTP_PORT;
     public static boolean AUTHENTICATE = true;
-    public static String DB_PATH = "./test.db";
-    public static String SERVER_NAME = "localhost";
+    public static String SERVER_NAME;
+    public static String TASK_DB;
+    public static String REM_DB;
+    public static String POLL_DB;
+    public static Object CHAT_DB;
 
     /**
      * @param args
@@ -121,12 +124,14 @@ public class ServerRun {
             SMTP_PASSWORD = prop.getProperty("SMTPPassword");
             SMTP_SEVER = prop.getProperty("SMTPName");
             SMTP_PORT = Integer.parseInt(prop.getProperty("SMTPPort"));
-
+            TASK_DB=prop.getProperty("taskFilePath");
+            REM_DB= prop.getProperty("reminderFilePath");
+            POLL_DB= prop.getProperty("pollFilePath");
+            CHAT_DB = prop.getProperty("chatFilePath");
 
             AUTHENTICATE = prop.getProperty("SMTPIsAuthLogin").equalsIgnoreCase("true");
-            DB_PATH = prop.getProperty("DB_PATH");
 
-            String SERVER_NAME = prop.getProperty("ServerName");
+             SERVER_NAME = prop.getProperty("ServerName");
 
         } catch (IOException e) {
             System.err.println("problem loading settings");

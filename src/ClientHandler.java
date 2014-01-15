@@ -102,16 +102,7 @@ public class ClientHandler implements Runnable {
                 path = ServerRun.root + ServerRun.defaultPage;
 
             } else if (path.endsWith("task_reply.html")) {
-                try {
-                    int id = Integer.parseInt(request.getParam("id"));
-                    Task task = (Task) tasks.getId(id);
-                    task.setCompleted(true);
-                } catch (NumberFormatException e) {
-                    System.err.println("Cannot mark task as complete");
-                } catch (Exception e) {
-                    System.err.println("Probably the task was not found");
-
-                }
+                path = completeTask(Integer.parseInt(request.getParam("id")));
 
 
             } else if (path.endsWith("poll_reply.html")) {
@@ -254,16 +245,7 @@ public class ClientHandler implements Runnable {
                     e.printStackTrace();
                 }
             } else if (path.endsWith("task_reply.html")) {
-                try {
-                    Task task = (Task) tasks.getId(Integer.parseInt(request.getParam("id")));
-                    task.setCompleted(true);
-                } catch (NumberFormatException e) {
-                    System.err.println("Cannot mark task as complete");
-                } catch (Exception e) {
-                    System.err.println("Probably the task was not found");
-
-                }
-
+                path = completeTask(Integer.parseInt(request.getParam("id")));
 
             } else if (path.endsWith("poll_reply.html")) {
                 path = pollReply(Integer.parseInt(request.getParam("id")), Integer.parseInt(request.getParam("ans")));
@@ -279,25 +261,13 @@ public class ClientHandler implements Runnable {
                 File(path);
 
         File serverDir = new File(ServerRun.root);
-        if (!page.getPath().
-
-                startsWith(serverDir.getAbsolutePath()
-
-                ))
+        if (!page.getPath().startsWith(serverDir.getAbsolutePath()))
 
         {
             return ServerRun.root + ServerRun.$403page;
         }
 
-        if (!(new
-
-                File(path)
-
-        ).
-
-                exists()
-
-                )
+        if (!(new File(path)).exists())
 
         {
             path = ServerRun.root + ServerRun.$404page;
@@ -548,6 +518,31 @@ public class ClientHandler implements Runnable {
         return path;
 
 
+    }
+
+    /**
+     * handles task reply
+     * @param id the id of the task to be announced as complete
+     * @return
+     */
+    private String completeTask(int id) {
+        try {
+
+            Task task = (Task) tasks.getId(id);
+            if (!task.isExpired()) {
+                task.setCompleted(true);
+                tasks.update(task);
+            } else {
+               return ServerRun.root+"task_over_due.html";
+            }
+
+        } catch (NumberFormatException e) {
+            System.err.println("Cannot mark task as complete");
+        } catch (Exception e) {
+            System.err.println("Probably the task was not found");
+
+        }
+        return ServerRun.root + "task_reply.html";
     }
 
 }
