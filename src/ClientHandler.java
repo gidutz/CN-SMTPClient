@@ -152,9 +152,11 @@ public class ClientHandler implements Runnable {
                     String title = request.getParam("title");
                     String data = request.getParam("data");
                     reminder = new Reminder(owner, creationDate, dueDate, recipient, title, data, false);
+
                     if (request.getParam("id").equalsIgnoreCase("new")) {
                         this.reminders.add(reminder);
                     } else {
+                        reminder.setId(Integer.parseInt(request.getParam("id")));
                         this.reminders.update(reminder);
 
                     }
@@ -302,6 +304,9 @@ public class ClientHandler implements Runnable {
     private String generateRemindersPage(String user) {
         String path = null;
         try {
+            SQLiteDBHelper db = new SQLiteDBHelper();
+            this.reminders.clear();
+            this.reminders = db.getAllReminders(reminders);
             path = ServerRun.root + "/" + user + "/reminders.html";
             File page = new File(path);
             page.getParentFile().mkdirs();
@@ -330,11 +335,12 @@ public class ClientHandler implements Runnable {
                     sb.append("<td>" + Email.DATE_FORMAT.format(date) + "</td>");
                     sb.append("<td>" + (email.completed ? "completed" : "in progress") + "</td>");
 
-                    if (!email.isComplete()) {
-                        sb.append("<td><a href=\"reminders.html?id=");
-                        sb.append(email.getId());
-                        sb.append("\">Delete</a></td>");
-                    }
+                    sb.append("<td><a href=\"reminders.html?id=");
+                    sb.append(email.getId());
+                    sb.append("\">Delete</a> ");
+                    sb.append("<a href=\"reminder_editor.html?id=");
+                    sb.append(email.getId() + "\">");
+                    sb.append("Edit</a></td>");
 
                     sb.append("</tr>");
                     writer.println(sb.toString());
@@ -422,7 +428,6 @@ public class ClientHandler implements Runnable {
      * @return
      */
     private String generateTasksPage(String user) {
-        //TODO: make sure only uncompleted tasks may be edited
 
         String path = null;
         try {
@@ -462,9 +467,12 @@ public class ClientHandler implements Runnable {
                         status = "in progress...";
                     }
                     sb.append("<td>" + status + "</td>");
-                    sb.append("<td><a href=\"tasks.html?id=");
-                    sb.append(email.getId());
-                    sb.append("\">Delete</a></td>");
+                    if (!email.isComplete()) {
+
+                        sb.append("<td><a href=\"tasks.html?id=");
+                        sb.append(email.getId());
+                        sb.append("\">Delete</a></td>");
+                    }
                     sb.append("</tr>");
                     writer.println(sb.toString());
                 }
@@ -522,6 +530,7 @@ public class ClientHandler implements Runnable {
 
     /**
      * handles task reply
+     *
      * @param id the id of the task to be announced as complete
      * @return
      */
@@ -533,7 +542,7 @@ public class ClientHandler implements Runnable {
                 task.setCompleted(true);
                 tasks.update(task);
             } else {
-               return ServerRun.root+"task_over_due.html";
+                return ServerRun.root + "task_over_due.html";
             }
 
         } catch (NumberFormatException e) {
